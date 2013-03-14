@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CEAddCircleViewController : UIViewController
+@interface CEAddCircleViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *name;
-@property (strong, nonatomic) IBOutlet UITextField *numberOfFriends;
+@property (strong, nonatomic) IBOutlet UITextField *friendName;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)add:(id)sender;
+- (IBAction)createCircle:(id)sender;
 
 @end
