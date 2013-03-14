@@ -18,6 +18,32 @@
 		F20B327616D0094C00B70559 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20B327516D0094C00B70559 /* Default@2x.png */; };
 		F20B327816D0094C00B70559 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20B327716D0094C00B70559 /* Default-568h@2x.png */; };
 		F20B327B16D0094C00B70559 /* CommonExpensesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F20B327916D0094C00B70559 /* CommonExpensesApp.xcdatamodeld */; };
+		F25E136416DFAB1E0086DE2B /* CELogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136316DFAB1E0086DE2B /* CELogin.m */; };
+		F25E136716DFB15C0086DE2B /* CERequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136616DFB15C0086DE2B /* CERequestHandler.m */; };
+		F25E136A16DFCFDC0086DE2B /* CEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136916DFCFDC0086DE2B /* CEConstants.m */; };
+		F286CE1B16EE35FA00E7FBEC /* MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE1816EE35FA00E7FBEC /* MFSideMenu.m */; };
+		F286CE1C16EE35FA00E7FBEC /* UINavigationController+MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE1A16EE35FA00E7FBEC /* UINavigationController+MFSideMenu.m */; };
+		F286CE1F16EE366400E7FBEC /* CEHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */; };
+		F286CE2216F0ED3E00E7FBEC /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE2116F0ED3E00E7FBEC /* SideMenuViewController.m */; };
+		F286CE6016F111E600E7FBEC /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5B16F111E600E7FBEC /* back-arrow.png */; };
+		F286CE6116F111E600E7FBEC /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5C16F111E600E7FBEC /* back-arrow@2x.png */; };
+		F286CE6216F111E600E7FBEC /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5D16F111E600E7FBEC /* Default-568h@2x.png */; };
+		F286CE6316F111E600E7FBEC /* menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5E16F111E600E7FBEC /* menu-icon.png */; };
+		F286CE6416F111E600E7FBEC /* menu-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5F16F111E600E7FBEC /* menu-icon@2x.png */; };
+		F286CE7D16F1E29400E7FBEC /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE7C16F1E29400E7FBEC /* UserSettings.m */; };
+		F286CE8016F1E29400E7FBEC /* StartupInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE7F16F1E29400E7FBEC /* StartupInfo.m */; };
+		F286CE8316F1E29400E7FBEC /* HistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8216F1E29400E7FBEC /* HistoryRecord.m */; };
+		F286CE8616F1E29400E7FBEC /* Circle.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8516F1E29400E7FBEC /* Circle.m */; };
+		F286CE8916F1E29400E7FBEC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8816F1E29400E7FBEC /* User.m */; };
+		F286CE8C16F1E29400E7FBEC /* CircleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */; };
+		F286CE8F16F20E0E00E7FBEC /* CEAddCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */; };
+		F286CE9316F20E3A00E7FBEC /* CEAddFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE9216F20E3A00E7FBEC /* CEAddFriendsViewController.m */; };
+		F286CE9A16F2291000E7FBEC /* CECircle.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE9916F2291000E7FBEC /* CECircle.m */; };
+		F286CEA016F22B1A00E7FBEC /* CEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE9F16F22B1A00E7FBEC /* CEUser.m */; };
+		F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */; };
+		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
+		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
+		F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F422E916E3B49900D55906 /* KeyboardBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +62,52 @@
 		F20B327516D0094C00B70559 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		F20B327716D0094C00B70559 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F20B327A16D0094C00B70559 /* CommonExpensesApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CommonExpensesApp.xcdatamodel; sourceTree = "<group>"; };
+		F25E136216DFAB1E0086DE2B /* CELogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELogin.h; sourceTree = "<group>"; };
+		F25E136316DFAB1E0086DE2B /* CELogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CELogin.m; sourceTree = "<group>"; };
+		F25E136516DFB15C0086DE2B /* CERequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CERequestHandler.h; sourceTree = "<group>"; };
+		F25E136616DFB15C0086DE2B /* CERequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CERequestHandler.m; sourceTree = "<group>"; };
+		F25E136816DFCFDC0086DE2B /* CEConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEConstants.h; sourceTree = "<group>"; };
+		F25E136916DFCFDC0086DE2B /* CEConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEConstants.m; sourceTree = "<group>"; };
+		F286CE1716EE35FA00E7FBEC /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		F286CE1816EE35FA00E7FBEC /* MFSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenu.m; sourceTree = "<group>"; };
+		F286CE1916EE35FA00E7FBEC /* UINavigationController+MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+MFSideMenu.h"; sourceTree = "<group>"; };
+		F286CE1A16EE35FA00E7FBEC /* UINavigationController+MFSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+MFSideMenu.m"; sourceTree = "<group>"; };
+		F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEHomeViewController.h; sourceTree = "<group>"; };
+		F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEHomeViewController.m; sourceTree = "<group>"; };
+		F286CE2016F0ED3E00E7FBEC /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuViewController.h; path = ../SideMenuViewController.h; sourceTree = "<group>"; };
+		F286CE2116F0ED3E00E7FBEC /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SideMenuViewController.m; path = ../SideMenuViewController.m; sourceTree = "<group>"; };
+		F286CE5B16F111E600E7FBEC /* back-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow.png"; sourceTree = "<group>"; };
+		F286CE5C16F111E600E7FBEC /* back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@2x.png"; sourceTree = "<group>"; };
+		F286CE5D16F111E600E7FBEC /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		F286CE5E16F111E600E7FBEC /* menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon.png"; sourceTree = "<group>"; };
+		F286CE5F16F111E600E7FBEC /* menu-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu-icon@2x.png"; sourceTree = "<group>"; };
+		F286CE7B16F1E29400E7FBEC /* UserSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSettings.h; sourceTree = "<group>"; };
+		F286CE7C16F1E29400E7FBEC /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
+		F286CE7E16F1E29400E7FBEC /* StartupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupInfo.h; sourceTree = "<group>"; };
+		F286CE7F16F1E29400E7FBEC /* StartupInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupInfo.m; sourceTree = "<group>"; };
+		F286CE8116F1E29400E7FBEC /* HistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecord.h; sourceTree = "<group>"; };
+		F286CE8216F1E29400E7FBEC /* HistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecord.m; sourceTree = "<group>"; };
+		F286CE8416F1E29400E7FBEC /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
+		F286CE8516F1E29400E7FBEC /* Circle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Circle.m; sourceTree = "<group>"; };
+		F286CE8716F1E29400E7FBEC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		F286CE8816F1E29400E7FBEC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		F286CE8A16F1E29400E7FBEC /* CircleDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDefinition.h; sourceTree = "<group>"; };
+		F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleDefinition.m; sourceTree = "<group>"; };
+		F286CE8D16F20E0D00E7FBEC /* CEAddCircleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEAddCircleViewController.h; sourceTree = "<group>"; };
+		F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEAddCircleViewController.m; sourceTree = "<group>"; };
+		F286CE9116F20E3A00E7FBEC /* CEAddFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEAddFriendsViewController.h; sourceTree = "<group>"; };
+		F286CE9216F20E3A00E7FBEC /* CEAddFriendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEAddFriendsViewController.m; sourceTree = "<group>"; };
+		F286CE9816F2291000E7FBEC /* CECircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CECircle.h; sourceTree = "<group>"; };
+		F286CE9916F2291000E7FBEC /* CECircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CECircle.m; sourceTree = "<group>"; };
+		F286CE9E16F22B1A00E7FBEC /* CEUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEUser.h; sourceTree = "<group>"; };
+		F286CE9F16F22B1A00E7FBEC /* CEUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEUser.m; sourceTree = "<group>"; };
+		F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		F291EAD216D2B5C9006C3BD6 /* CESignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESignUp.h; sourceTree = "<group>"; };
+		F291EAD316D2B5C9006C3BD6 /* CESignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESignUp.m; sourceTree = "<group>"; };
+		F2956A5C16E535E8002128E6 /* CEDBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEDBConnector.h; sourceTree = "<group>"; };
+		F2956A5D16E535E8002128E6 /* CEDBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEDBConnector.m; sourceTree = "<group>"; };
+		F2F422E816E3B49900D55906 /* KeyboardBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardBar.h; path = ../KeyboardBar.h; sourceTree = "<group>"; };
+		F2F422E916E3B49900D55906 /* KeyboardBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardBar.m; path = ../KeyboardBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +156,20 @@
 		F20B326716D0094C00B70559 /* CommonExpensesApp */ = {
 			isa = PBXGroup;
 			children = (
+				F286CE9416F228DD00E7FBEC /* helpers */,
+				F286CE9016F20E1200E7FBEC /* circleManagement */,
+				F286CE6516F1E00300E7FBEC /* DAO */,
 				F20B327016D0094C00B70559 /* CEAppDelegate.h */,
 				F20B327116D0094C00B70559 /* CEAppDelegate.m */,
+				F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */,
 				F20B327916D0094C00B70559 /* CommonExpensesApp.xcdatamodeld */,
+				F2BD8EF516EA02B9008DEF8A /* common */,
+				F2BD8EF616EA02E1008DEF8A /* usrManagement */,
 				F20B326816D0094C00B70559 /* Supporting Files */,
+				F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */,
+				F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */,
+				F286CE2016F0ED3E00E7FBEC /* SideMenuViewController.h */,
+				F286CE2116F0ED3E00E7FBEC /* SideMenuViewController.m */,
 			);
 			path = CommonExpensesApp;
 			sourceTree = "<group>";
@@ -95,6 +177,7 @@
 		F20B326816D0094C00B70559 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F286CE5A16F111E600E7FBEC /* Images */,
 				F20B326916D0094C00B70559 /* CommonExpensesApp-Info.plist */,
 				F20B326A16D0094C00B70559 /* InfoPlist.strings */,
 				F20B326D16D0094C00B70559 /* main.m */,
@@ -104,6 +187,97 @@
 				F20B327716D0094C00B70559 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F286CE1616EE35FA00E7FBEC /* MFSideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE1716EE35FA00E7FBEC /* MFSideMenu.h */,
+				F286CE1816EE35FA00E7FBEC /* MFSideMenu.m */,
+				F286CE1916EE35FA00E7FBEC /* UINavigationController+MFSideMenu.h */,
+				F286CE1A16EE35FA00E7FBEC /* UINavigationController+MFSideMenu.m */,
+			);
+			path = MFSideMenu;
+			sourceTree = "<group>";
+		};
+		F286CE5A16F111E600E7FBEC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE5B16F111E600E7FBEC /* back-arrow.png */,
+				F286CE5C16F111E600E7FBEC /* back-arrow@2x.png */,
+				F286CE5D16F111E600E7FBEC /* Default-568h@2x.png */,
+				F286CE5E16F111E600E7FBEC /* menu-icon.png */,
+				F286CE5F16F111E600E7FBEC /* menu-icon@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		F286CE6516F1E00300E7FBEC /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE8A16F1E29400E7FBEC /* CircleDefinition.h */,
+				F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */,
+				F286CE8716F1E29400E7FBEC /* User.h */,
+				F286CE8816F1E29400E7FBEC /* User.m */,
+				F286CE8416F1E29400E7FBEC /* Circle.h */,
+				F286CE8516F1E29400E7FBEC /* Circle.m */,
+				F286CE8116F1E29400E7FBEC /* HistoryRecord.h */,
+				F286CE8216F1E29400E7FBEC /* HistoryRecord.m */,
+				F286CE7E16F1E29400E7FBEC /* StartupInfo.h */,
+				F286CE7F16F1E29400E7FBEC /* StartupInfo.m */,
+				F286CE7B16F1E29400E7FBEC /* UserSettings.h */,
+				F286CE7C16F1E29400E7FBEC /* UserSettings.m */,
+			);
+			name = DAO;
+			sourceTree = "<group>";
+		};
+		F286CE9016F20E1200E7FBEC /* circleManagement */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE8D16F20E0D00E7FBEC /* CEAddCircleViewController.h */,
+				F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */,
+				F286CE9116F20E3A00E7FBEC /* CEAddFriendsViewController.h */,
+				F286CE9216F20E3A00E7FBEC /* CEAddFriendsViewController.m */,
+			);
+			name = circleManagement;
+			sourceTree = "<group>";
+		};
+		F286CE9416F228DD00E7FBEC /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE9816F2291000E7FBEC /* CECircle.h */,
+				F286CE9916F2291000E7FBEC /* CECircle.m */,
+				F286CE9E16F22B1A00E7FBEC /* CEUser.h */,
+				F286CE9F16F22B1A00E7FBEC /* CEUser.m */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		F2BD8EF516EA02B9008DEF8A /* common */ = {
+			isa = PBXGroup;
+			children = (
+				F286CE1616EE35FA00E7FBEC /* MFSideMenu */,
+				F25E136516DFB15C0086DE2B /* CERequestHandler.h */,
+				F25E136616DFB15C0086DE2B /* CERequestHandler.m */,
+				F2956A5C16E535E8002128E6 /* CEDBConnector.h */,
+				F2956A5D16E535E8002128E6 /* CEDBConnector.m */,
+				F2F422E816E3B49900D55906 /* KeyboardBar.h */,
+				F2F422E916E3B49900D55906 /* KeyboardBar.m */,
+				F25E136816DFCFDC0086DE2B /* CEConstants.h */,
+				F25E136916DFCFDC0086DE2B /* CEConstants.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		F2BD8EF616EA02E1008DEF8A /* usrManagement */ = {
+			isa = PBXGroup;
+			children = (
+				F291EAD216D2B5C9006C3BD6 /* CESignUp.h */,
+				F291EAD316D2B5C9006C3BD6 /* CESignUp.m */,
+				F25E136216DFAB1E0086DE2B /* CELogin.h */,
+				F25E136316DFAB1E0086DE2B /* CELogin.m */,
+			);
+			name = usrManagement;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +336,12 @@
 				F20B327416D0094C00B70559 /* Default.png in Resources */,
 				F20B327616D0094C00B70559 /* Default@2x.png in Resources */,
 				F20B327816D0094C00B70559 /* Default-568h@2x.png in Resources */,
+				F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */,
+				F286CE6016F111E600E7FBEC /* back-arrow.png in Resources */,
+				F286CE6116F111E600E7FBEC /* back-arrow@2x.png in Resources */,
+				F286CE6216F111E600E7FBEC /* Default-568h@2x.png in Resources */,
+				F286CE6316F111E600E7FBEC /* menu-icon.png in Resources */,
+				F286CE6416F111E600E7FBEC /* menu-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +355,26 @@
 				F20B326E16D0094C00B70559 /* main.m in Sources */,
 				F20B327216D0094C00B70559 /* CEAppDelegate.m in Sources */,
 				F20B327B16D0094C00B70559 /* CommonExpensesApp.xcdatamodeld in Sources */,
+				F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */,
+				F25E136416DFAB1E0086DE2B /* CELogin.m in Sources */,
+				F25E136716DFB15C0086DE2B /* CERequestHandler.m in Sources */,
+				F25E136A16DFCFDC0086DE2B /* CEConstants.m in Sources */,
+				F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */,
+				F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */,
+				F286CE1B16EE35FA00E7FBEC /* MFSideMenu.m in Sources */,
+				F286CE1C16EE35FA00E7FBEC /* UINavigationController+MFSideMenu.m in Sources */,
+				F286CE1F16EE366400E7FBEC /* CEHomeViewController.m in Sources */,
+				F286CE2216F0ED3E00E7FBEC /* SideMenuViewController.m in Sources */,
+				F286CE7D16F1E29400E7FBEC /* UserSettings.m in Sources */,
+				F286CE8016F1E29400E7FBEC /* StartupInfo.m in Sources */,
+				F286CE8316F1E29400E7FBEC /* HistoryRecord.m in Sources */,
+				F286CE8616F1E29400E7FBEC /* Circle.m in Sources */,
+				F286CE8916F1E29400E7FBEC /* User.m in Sources */,
+				F286CE8C16F1E29400E7FBEC /* CircleDefinition.m in Sources */,
+				F286CE8F16F20E0E00E7FBEC /* CEAddCircleViewController.m in Sources */,
+				F286CE9316F20E3A00E7FBEC /* CEAddFriendsViewController.m in Sources */,
+				F286CE9A16F2291000E7FBEC /* CECircle.m in Sources */,
+				F286CEA016F22B1A00E7FBEC /* CEUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,10 +451,12 @@
 		F20B327F16D0094C00B70559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (G52B9489BA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "201AC7E4-34B6-45D3-8B4C-508D3EC2D3F8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -262,10 +464,12 @@
 		F20B328016D0094C00B70559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (G52B9489BA)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "201AC7E4-34B6-45D3-8B4C-508D3EC2D3F8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -289,6 +493,7 @@
 				F20B328016D0094C00B70559 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -7,19 +7,71 @@
 //
 
 #import "CEAppDelegate.h"
+#import "CELogin.h"
+#import "CESignUp.h"
+#import "SideMenuViewController.h"
 
 @implementation CEAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize currentUser = _currentUser;
+
+- (UIViewController *)demoController {
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"StartupInfo" inManagedObjectContext:[self managedObjectContext]];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *objects = [[self managedObjectContext] executeFetchRequest:request error:&error];
+    if (objects != nil && objects.count > 0) {
+        NSManagedObject * info = [objects objectAtIndex:0];
+        _currentUser = [info valueForKey:@"defaultUsername"];
+        return [navigationController.storyboard instantiateViewControllerWithIdentifier:@"home"];
+
+    }
+    return [navigationController.storyboard instantiateViewControllerWithIdentifier:@"CELogin"];
+    
+    
+}
+
+- (UINavigationController *)navigationController {
+    return [[UINavigationController alloc]
+            initWithRootViewController:[self demoController]];
+}
+
+- (MFSideMenu *)sideMenu {
+    SideMenuViewController *leftSideMenuController = [[SideMenuViewController alloc] init];
+    SideMenuViewController *rightSideMenuController = [[SideMenuViewController alloc] init];
+    UINavigationController *navigationController = [self navigationController];
+    
+    MFSideMenu *sideMenu = [MFSideMenu menuWithNavigationController:navigationController
+                                             leftSideMenuController:leftSideMenuController
+                                            rightSideMenuController:rightSideMenuController];
+    
+    leftSideMenuController.sideMenu = sideMenu;
+    rightSideMenuController.sideMenu = sideMenu;
+    
+    return sideMenu;
+}
+
+- (void) setupNavigationControllerApp {
+    self.window.rootViewController = [self sideMenu].navigationController;
+    [self.window makeKeyAndVisible];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  //  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [self setupNavigationControllerApp];
+
+    
     return YES;
 }
 
