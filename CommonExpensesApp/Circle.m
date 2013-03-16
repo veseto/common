@@ -11,7 +11,7 @@
 
 @implementation Circle
 
-@dynamic circleId;
+@dynamic circleName;
 @dynamic friendId;
 @dynamic friendIndexInCircle;
 @dynamic friendName;

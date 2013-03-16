@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CEUser.h"
 
 @interface CEDBConnector : NSObject
 
--(NSString *) getUserPass: (NSString *)username;
+-(CEUser *) getUser: (NSString *)username :(NSString *)password;
 -(void) saveUser: (NSDictionary *) userAttributes;
--(void) setDefaultUser: (NSString *) username;
--(NSArray *) getCirclesForUser: (NSString *) userName;
--(NSNumber *) getUserId: (NSString *) userName;
+-(void) setDefaultUser: (NSString *) username :(NSNumber *)userId;
+-(NSArray *) getCirclesForUser: (NSNumber *) userId;
+-(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName;
 @end

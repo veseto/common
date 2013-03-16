@@ -12,7 +12,7 @@
 
 @interface Circle : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * circleId;
+@property (nonatomic, retain) NSString * circleName;
 @property (nonatomic, retain) NSNumber * friendId;
 @property (nonatomic, retain) NSNumber * friendIndexInCircle;
 @property (nonatomic, retain) NSString * friendName;

@@ -9,6 +9,7 @@
 #import "CEHomeViewController.h"
 #import "MFSideMenu.h"
 #import "CEAppDelegate.h"
+#import "CircleDefinition.h"
 
 
 @interface CEHomeViewController ()
@@ -16,6 +17,7 @@
 @end
 
 @implementation CEHomeViewController
+@synthesize circleName = _circleName;
 
 CEAppDelegate *delegate;
 
@@ -40,25 +42,27 @@ CEAppDelegate *delegate;
     [super viewDidLoad];
     delegate = [[UIApplication sharedApplication] delegate];
     [self setupMenuBarButtonItems];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveReloadNotification:)
+                                                 name:@"ReloadHomeViewNotification"
+                                               object:nil];
+
     __weak CEHomeViewController *weakSelf = self;
     // if you want to listen for menu open/close events
     // this is useful, for example, if you want to change a UIBarButtonItem when the menu closes
-    weakSelf.navigationItem.title = delegate.currentUser;
+    weakSelf.navigationItem.title = delegate.currentUser.userName;
     self.navigationController.sideMenu.menuStateEventBlock = ^(MFSideMenuStateEvent event) {
         NSLog(@"event occurred: %@", weakSelf.navigationItem.title);
         switch (event) {
             case MFSideMenuStateEventMenuWillOpen:
-                // the menu will open
-                //weakSelf.navigationItem.title = @"Menu Will Open!";
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ReloadTableNotification"
+                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuDidOpen:
-                // the menu finished opening
-               // weakSelf.navigationItem.title = @"Menu Opened!";
                 break;
             case MFSideMenuStateEventMenuWillClose:
-                // the menu will close
-               // weakSelf.navigationItem.title = @"Menu Will Close!";
+                
                 break;
             case MFSideMenuStateEventMenuDidClose:
                 // the menu finished closing
@@ -70,6 +74,13 @@ CEAppDelegate *delegate;
     };
 }
 
+- (void) reloadView: (CircleDefinition *) circle{
+    _circleName.text = [circle valueForKey:@"name"];
+}
+- (void) receiveReloadNotification:(NSNotification *) notification {
+    NSDictionary *userInfo = notification.userInfo;
+    [self reloadView:[userInfo objectForKey:@"circle"]];
+}
 - (void)setupMenuBarButtonItems {
     switch (self.navigationController.sideMenu.menuState) {
         case MFSideMenuStateClosed:

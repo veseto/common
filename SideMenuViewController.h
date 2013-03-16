@@ -10,5 +10,4 @@
 @interface SideMenuViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, assign) MFSideMenu *sideMenu;
-
 @end

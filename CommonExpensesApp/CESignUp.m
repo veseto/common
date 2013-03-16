@@ -76,9 +76,12 @@ KeyboardBar *bar;
         if (json != nil && json.count > 0) {
             CEDBConnector * connector = [[CEDBConnector alloc] init];
             [connector saveUser:json];
-            ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser = _userName.text;
+            CEUser *user = [CEUser new];
+            user.userName = [json valueForKey:@"username"];
+            user.userId = [json valueForKey:@"userid"];
+            ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
             if ([_isDefault isOn]) {
-                [connector setDefaultUser:_userName.text];
+                [connector setDefaultUser:user.userName:[NSNumber numberWithInt:user.userId.integerValue]];
             }
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
             [self.navigationController pushViewController:home animated:YES];

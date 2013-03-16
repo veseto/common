@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SideMenuViewController.h"
 
 @interface CEHomeViewController : UIViewController
-
+@property (nonatomic, retain) SideMenuViewController *sideMenu;
+@property (strong, nonatomic) IBOutlet UILabel *circleName;
 @end

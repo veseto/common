@@ -12,6 +12,6 @@
 @implementation StartupInfo
 
 @dynamic defaultUsername;
-@dynamic alwaysOnSync;
+@dynamic defaultUserId;
 
 @end

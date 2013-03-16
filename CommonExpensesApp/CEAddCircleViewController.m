@@ -10,6 +10,9 @@
 #import "CircleDefinition.h"
 #import "CEAddFriendsViewController.h"
 #import "KeyboardBar.h"
+#import "CEDBConnector.h"
+#import "CEAppDelegate.h"
+#import "CEUser.h"
 
 @interface CEAddCircleViewController ()
 
@@ -17,6 +20,7 @@
 
 @implementation CEAddCircleViewController
 @synthesize name = _name;
+@synthesize friendName = _friendName;
 @synthesize tableView = _tableView;
 
 NSMutableArray *friends;
@@ -41,12 +45,25 @@ KeyboardBar *bar;
     bar.field = nil;
     bar.index = -1;
     friends = [[NSMutableArray alloc] init];
+    self.navigationItem.title = @"Create new circle";
+    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
+                                   initWithTitle:@"Cancel"
+                                   style:UIBarButtonItemStyleBordered
+                                   target:self
+                                   action:@selector(cancel)];
+    self.navigationItem.rightBarButtonItem = flipButton;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) cancel {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
+    [self.navigationController pushViewController:home animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -76,10 +93,38 @@ KeyboardBar *bar;
     if (_friendName.text.length > 0) {
         [friends insertObject:_friendName.text atIndex:0];
         [_tableView reloadData];
+        _friendName.text = @"";
     }
 }
 
 - (IBAction)createCircle:(id)sender {
+    
+    if (_name.text.length < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"
+                                                        message:@"You have to provide circle name"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    } else if (friends.count < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No friends"
+                                                        message:@"You have to add friends"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    } else {
+        CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
+        [friends insertObject:user.userName atIndex:0];
+        CEDBConnector *connector = [CEDBConnector new];
+        [connector createCircle:friends :user.userId :_name.text];
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+        UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
+        [self.navigationController pushViewController:home animated:YES];
+    }
+    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

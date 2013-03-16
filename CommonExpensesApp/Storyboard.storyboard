@@ -420,9 +420,23 @@
                     <view key="view" contentMode="scaleToFill" id="ook-bu-n1O">
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ulR-xO-pVR">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ulR-xO-pVR" firstAttribute="top" secondItem="ook-bu-n1O" secondAttribute="top" constant="97" id="A7I-OO-vhg"/>
+                            <constraint firstItem="ulR-xO-pVR" firstAttribute="leading" secondItem="ook-bu-n1O" secondAttribute="leading" constant="128" id="CGm-Yk-Qzc"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jtp-eW-o0z"/>
+                    <connections>
+                        <outlet property="circleName" destination="ulR-xO-pVR" id="DIb-ew-k0g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hy-u4-WBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

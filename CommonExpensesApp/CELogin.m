@@ -11,6 +11,7 @@
 #import "CEDBConnector.h"
 #import "CEAppDelegate.h"
 #import "KeyboardBar.h"
+#import "CEUser.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface CELogin ()
@@ -57,11 +58,9 @@ KeyboardBar *bar;
     CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
     
     bool isLogged = NO;
-    NSString *pass = [connector getUserPass:_username.text];
-    if (pass != nil) {
-        if ([[self sha1:_password.text] isEqualToString:pass]) {
-            isLogged = YES;
-        }
+    CEUser *user = [connector getUser:_username.text :[self sha1:_password.text]];
+    if (user != nil) {
+        isLogged = YES;
     } else {
         CERequestHandler *handler = [[CERequestHandler alloc] init];
         NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -71,12 +70,15 @@ KeyboardBar *bar;
         [connector saveUser:json];
         if ([json count] > 0) {
             isLogged = YES;
+            user = [CEUser new];
+            user.userName = [json valueForKey:@"username"];
+            user.userId = [json valueForKey:@"userid"];
         }
     }
     if (isLogged) {
-        delegate.currentUser = _username.text;
+        delegate.currentUser = user;
         if ([_rememberUser isOn]) {
-            [connector setDefaultUser:_username.text];
+            [connector setDefaultUser:user.userName:user.userId];
         }
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
         UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];

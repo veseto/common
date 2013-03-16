@@ -16,12 +16,4 @@
 @dynamic numberOfFriends;
 @dynamic ownerId;
 
-+(CircleDefinition *) initWithAttrs: (NSString *) name :(NSNumber *)numberOfFriends :(NSNumber *)ownerId {
-    CircleDefinition *def = [[CircleDefinition alloc] init];
-    def.numberOfFriends = numberOfFriends;
-    def.name = name;
-    //def.ownerId =
-}
-
-
 @end

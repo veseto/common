@@ -10,6 +10,7 @@
 #import "CELogin.h"
 #import "CESignUp.h"
 #import "SideMenuViewController.h"
+#import "StartupInfo.h"
 
 @implementation CEAppDelegate
 
@@ -28,8 +29,10 @@
     NSError *error;
     NSArray *objects = [[self managedObjectContext] executeFetchRequest:request error:&error];
     if (objects != nil && objects.count > 0) {
-        NSManagedObject * info = [objects objectAtIndex:0];
-        _currentUser = [info valueForKey:@"defaultUsername"];
+        StartupInfo * info = [objects objectAtIndex:0];
+        _currentUser = [CEUser new];
+        _currentUser.userName = info.defaultUsername;
+        _currentUser.userId = info.defaultUserId;
         return [navigationController.storyboard instantiateViewControllerWithIdentifier:@"home"];
 
     }

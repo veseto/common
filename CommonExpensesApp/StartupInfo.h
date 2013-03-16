@@ -13,6 +13,6 @@
 @interface StartupInfo : NSManagedObject
 
 @property (nonatomic, retain) NSString * defaultUsername;
-@property (nonatomic, retain) NSNumber * alwaysOnSync;
+@property (nonatomic, retain) NSNumber * defaultUserId;
 
 @end

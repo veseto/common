@@ -16,7 +16,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * numberOfFriends;
 @property (nonatomic, retain) NSNumber * ownerId;
-+(CircleDefinition *) initWithAttrs: (NSString *) name :(NSNumber *)numberOfFriends :(NSNumber *)ownerId;
 
 
 @end

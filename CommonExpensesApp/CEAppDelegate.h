@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
+#import "CEUser.h"
 
 @interface CEAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -19,7 +20,7 @@
 @property (retain, nonatomic) UINavigationController *navigationController;
 @property (retain, nonatomic) MFSideMenu *sideMenu;
 
-@property NSString * currentUser;
+@property CEUser *currentUser;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

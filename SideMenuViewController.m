@@ -14,23 +14,39 @@
 @implementation SideMenuViewController
 
 @synthesize sideMenu;
-CEAppDelegate *delegate;
+
 UITableView *tableView;
-NSArray *circles;
+CEAppDelegate *delegate;
+NSMutableArray *circles;
 CEDBConnector *connector;
 
 - (id) init {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveReloadNotification:)
+                                                 name:@"ReloadTableNotification"
+                                               object:nil];
     return [self initWithStyle:UITableViewStyleGrouped];
+}
+
+-(void)receiveReloadNotification:(NSNotification *)reloadNotification {
+    circles = [[NSMutableArray alloc] initWithArray:[connector getCirclesForUser:delegate.currentUser.userId]];
+    if (!circles) {
+        circles = [[NSMutableArray alloc] init];
+    }
+    [tableView reloadData];
 }
 - (void) viewDidLoad {
     [super viewDidLoad];
+    tableView = self.tableView;
     delegate = [[UIApplication sharedApplication] delegate];
     connector = [CEDBConnector new];
-    circles = [connector getCirclesForUser:delegate.currentUser];
+    circles = [[NSMutableArray alloc] initWithArray:[connector getCirclesForUser:delegate.currentUser.userId]];
     if (!circles) {
-        circles = [[NSArray alloc] init];
+        circles = [[NSMutableArray alloc] init];
     }
 }
+
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == 0) {
@@ -90,6 +106,13 @@ CEDBConnector *connector;
             NSArray *controllers = [NSArray arrayWithObject:home];
             self.sideMenu.navigationController.viewControllers = controllers;
             [nav pushViewController:home animated:YES];
+        } else {
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[circles objectAtIndex:indexPath.row] forKey:@"circle"];
+
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"ReloadHomeViewNotification"
+             object:self
+             userInfo:userInfo];
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {

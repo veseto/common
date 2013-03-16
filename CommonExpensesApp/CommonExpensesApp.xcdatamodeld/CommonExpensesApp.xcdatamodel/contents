@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Circle" representedClassName="Circle" syncable="YES">
-        <attribute name="circleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendIndexInCircle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendName" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +20,7 @@
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="StartupInfo" representedClassName="StartupInfo" syncable="YES">
+        <attribute name="defaultUserId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="defaultUsername" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
@@ -36,9 +37,9 @@
     <elements>
         <element name="Circle" positionX="160" positionY="192" width="128" height="105"/>
         <element name="CircleDefinition" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="StartupInfo" positionX="160" positionY="192" width="128" height="60"/>
+        <element name="HistoryRecord" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="StartupInfo" positionX="160" positionY="192" width="128" height="75"/>
         <element name="User" positionX="160" positionY="192" width="128" height="105"/>
         <element name="UserSettings" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="HistoryRecord" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>
