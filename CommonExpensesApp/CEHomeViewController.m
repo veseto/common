@@ -185,6 +185,10 @@ CEDBConnector *connector;
 
 }
 
+- (IBAction)handleGesture:(UIPanGestureRecognizer *)sender {
+    //TODO:
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -207,4 +211,6 @@ CEDBConnector *connector;
    
     return cell;
 }
+
+
 @end

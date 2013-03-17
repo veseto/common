@@ -543,6 +543,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dt2-Gz-8ii">
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="174" id="9ae-48-mwb"/>
                                 </constraints>
@@ -556,6 +557,7 @@
                                 </state>
                                 <connections>
                                     <action selector="showSelfStatistics:" destination="Mq2-3a-O2W" eventType="touchUpInside" id="ngp-sQ-zzK"/>
+                                    <outletCollection property="gestureRecognizers" destination="dRo-aU-MLn" appends="YES" id="qcZ-vd-b36"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -577,6 +579,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Hy-u4-WBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="dRo-aU-MLn">
+                    <connections>
+                        <action selector="handleGesture:" destination="Mq2-3a-O2W" id="4EH-yr-yOK"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="832" y="-30"/>
         </scene>
@@ -595,6 +602,7 @@
         <class className="CEHomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHomeViewController.h"/>
             <relationships>
+                <relationship kind="action" name="handleGesture:"/>
                 <relationship kind="action" name="showSelfStatistics:"/>
                 <relationship kind="action" name="someAction:"/>
                 <relationship kind="action" name="sync:"/>

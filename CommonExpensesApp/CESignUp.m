@@ -48,6 +48,7 @@ KeyboardBar *bar;
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
 }
 
 -(void) viewWillAppear: (BOOL) animated {
@@ -102,7 +103,14 @@ KeyboardBar *bar;
         [params setObject:_email.text forKey:@"email"];
         CERequestHandler *handler = [[CERequestHandler alloc] init];
         NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
-        if (json != nil && json.count > 0) {
+        if (json != nil &&  [json objectForKey:@"error"] != nil) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
+                                                            message:((NSError *) [json objectForKey:@"error"]).localizedDescription
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else if (json != nil && json.count > 0) {
             CEDBConnector * connector = [[CEDBConnector alloc] init];
             [connector saveUser:json];
             CEUser *user = [CEUser new];

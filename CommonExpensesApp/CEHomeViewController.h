@@ -15,4 +15,5 @@
 - (IBAction)showSelfStatistics:(id)sender;
 - (IBAction)sync:(id)sender;
 - (IBAction)someAction:(id)sender;
+- (IBAction)handleGesture:(id)sender;
 @end
