@@ -91,9 +91,18 @@ KeyboardBar *bar;
 
 - (IBAction)add:(id)sender {
     if (_friendName.text.length > 0) {
-        [friends insertObject:_friendName.text atIndex:0];
-        [_tableView reloadData];
-        _friendName.text = @"";
+        if ([friends indexOfObject:_friendName.text] != NSNotFound) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Duplicate names"
+                                                            message:[NSString stringWithFormat:@"There is already friend with name %@ in the circle", _friendName.text]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else {
+            [friends insertObject:_friendName.text atIndex:0];
+            [_tableView reloadData];
+            _friendName.text = @"";
+        }
     }
 }
 
