@@ -451,12 +451,14 @@
 		F20B327F16D0094C00B70559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (G52B9489BA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "201AC7E4-34B6-45D3-8B4C-508D3EC2D3F8";
+				PROVISIONING_PROFILE = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -464,12 +466,14 @@
 		F20B328016D0094C00B70559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (G52B9489BA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "201AC7E4-34B6-45D3-8B4C-508D3EC2D3F8";
+				PROVISIONING_PROFILE = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

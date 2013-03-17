@@ -38,14 +38,7 @@ KeyboardBar *bar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    bar = [[KeyboardBar alloc] init];
-    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _email, _password, _confirm, nil];
-    bar.field = nil;
-    bar.index = -1;
-    for (UITextField *field in fields) {
-        [field setInputAccessoryView:bar];
-    }
-    [bar setFields:fields];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardDidShowNotification
@@ -57,6 +50,17 @@ KeyboardBar *bar;
                                                object:nil];
 }
 
+-(void) viewWillAppear: (BOOL) animated {
+    bar = [[KeyboardBar alloc] init];
+    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _email, _password, _confirm, nil];
+    bar.field = nil;
+    bar.index = -1;
+    for (UITextField *field in fields) {
+        [field setInputAccessoryView:bar];
+    }
+    [bar setFields:fields];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -64,6 +68,11 @@ KeyboardBar *bar;
 }
 
 - (IBAction)register:(id)sender {
+    [self signUp];
+    
+}
+
+- (void) signUp {
     if (_userName.text.length < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty username"
                                                         message:@"Enter username"
@@ -122,7 +131,6 @@ KeyboardBar *bar;
                                               otherButtonTitles:nil];
         [alert show];
     }
-    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -183,5 +191,12 @@ KeyboardBar *bar;
     
     return [emailTest evaluateWithObject:candidate];
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self signUp];
+    return YES;
+}
+
 
 @end

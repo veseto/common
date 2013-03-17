@@ -37,6 +37,9 @@ KeyboardBar *bar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+}
+-(void) viewWillAppear: (BOOL) animated {
     bar = [KeyboardBar new];
     NSMutableArray *fields = [[NSMutableArray alloc] initWithObjects:_username, _password, nil];
     for (UITextField *field in fields) {
@@ -54,7 +57,11 @@ KeyboardBar *bar;
 }
 
 - (IBAction)LogIn:(id)sender {
+    [self logIn];
     
+}
+
+- (void) logIn {
     if (_username.text.length < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Missing username"
                                                         message:@"Username is not provided"
@@ -141,5 +148,9 @@ KeyboardBar *bar;
     bar.index = -1;
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self logIn];
+    return YES;
+}
 
 @end

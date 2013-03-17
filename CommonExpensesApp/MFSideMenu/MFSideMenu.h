@@ -38,6 +38,9 @@ typedef void (^MFSideMenuStateEventBlock)(MFSideMenuStateEvent);
 @property (nonatomic, assign) MFSideMenuPanMode panMode;
 @property (nonatomic, assign) BOOL shadowEnabled;
 
+
+@property (nonatomic, assign) BOOL openMenuEnabled;
+
 // this can be used to observe all MFSideMenuStateEvents
 @property (copy) MFSideMenuStateEventBlock menuStateEventBlock;
 

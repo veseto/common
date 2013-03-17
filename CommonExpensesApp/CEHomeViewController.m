@@ -44,6 +44,7 @@ CEDBConnector *connector;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.sideMenu.openMenuEnabled = YES;
     delegate = [[UIApplication sharedApplication] delegate];
     connector = [CEDBConnector new];
     [self setupMenuBarButtonItems];

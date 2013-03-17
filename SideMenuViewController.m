@@ -125,7 +125,7 @@ CEDBConnector *connector;
 
         } else if (indexPath.row == 1) {
             delegate.currentUser = nil;
-            
+            self.sideMenu.openMenuEnabled = NO;
             UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
             UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
             NSArray *controllers = [NSArray arrayWithObject:home];

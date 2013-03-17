@@ -38,7 +38,7 @@ typedef enum {
 @synthesize menuStateEventBlock;
 @synthesize panDirection;
 @synthesize shadowEnabled = _shadowEnabled;
-
+@synthesize openMenuEnabled = _openMenuEnabled;
 
 #pragma mark -
 #pragma mark - Menu Creation
@@ -190,6 +190,7 @@ typedef enum {
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (!_openMenuEnabled) return NO;
     if([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]] &&
        self.menuState != MFSideMenuStateClosed) return YES;
     
@@ -206,6 +207,7 @@ typedef enum {
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (!_openMenuEnabled) return NO;
     return YES;
 }
 
@@ -256,6 +258,8 @@ typedef enum {
 
 - (void) handleRightPan:(UIPanGestureRecognizer *)recognizer {
     if(!self.leftSideMenuViewController) return;
+    
+    
     
     UIView *view = self.rootViewController.view;
     

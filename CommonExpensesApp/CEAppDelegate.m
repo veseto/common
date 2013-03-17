@@ -54,7 +54,7 @@
                                              leftSideMenuController:leftSideMenuController];
     
     leftSideMenuController.sideMenu = sideMenu;
-    
+    sideMenu.openMenuEnabled = NO;
     return sideMenu;
 }
 
