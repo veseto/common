@@ -48,15 +48,12 @@
 
 - (MFSideMenu *)sideMenu {
     SideMenuViewController *leftSideMenuController = [[SideMenuViewController alloc] init];
-    SideMenuViewController *rightSideMenuController = [[SideMenuViewController alloc] init];
     UINavigationController *navigationController = [self navigationController];
     
     MFSideMenu *sideMenu = [MFSideMenu menuWithNavigationController:navigationController
-                                             leftSideMenuController:leftSideMenuController
-                                            rightSideMenuController:rightSideMenuController];
+                                             leftSideMenuController:leftSideMenuController];
     
     leftSideMenuController.sideMenu = sideMenu;
-    rightSideMenuController.sideMenu = sideMenu;
     
     return sideMenu;
 }

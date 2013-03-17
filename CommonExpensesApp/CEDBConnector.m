@@ -10,7 +10,7 @@
 #import "CEAppDelegate.h"
 #import "User.h"
 #import "StartupInfo.h"
-#import "Circle.h"
+#import "Friend.h"
 #import "CircleDefinition.h"
 
 @implementation CEDBConnector
@@ -96,16 +96,46 @@ NSManagedObjectContext *context;
     circleDef.ownerId = ownerId;
     
     for (int i = 0; i < friends.count; i ++) {
-        Circle *c = [NSEntityDescription insertNewObjectForEntityForName:@"Circle" inManagedObjectContext:context];
-        c.circleName = circleName;
-        c.friendName = [friends objectAtIndex:i];;
-        c.friendIndexInCircle = [NSNumber numberWithInt:i];
+        Friend *f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
+        f.circleName = circleName;
+        f.friendName = [friends objectAtIndex:i];;
+        f.friendIndexInCircle = [NSNumber numberWithInt:i];
     }
     
     NSError *error;
     [context save:&error];
+}
 
+-(NSArray *) getFriendsInCircle: (NSString *) circleName {
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"Friend"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"circleName == %@", circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error || result.count < 1) {
+        return nil;
+    }
+    return result;
+}
+
+-(UserSettings *) getUserSettings: (NSNumber *)userid {
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"UserSettings"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"userid == %@", userid]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error || result.count < 1) {
+        return nil;
+    }
+    return [result objectAtIndex:0];
     
 }
+
 
 @end

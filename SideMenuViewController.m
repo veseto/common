@@ -107,7 +107,8 @@ CEDBConnector *connector;
             self.sideMenu.navigationController.viewControllers = controllers;
             [nav pushViewController:home animated:YES];
         } else {
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[circles objectAtIndex:indexPath.row] forKey:@"circle"];
+            CircleDefinition *c = [circles objectAtIndex:indexPath.row];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:c.name forKey:@"circle"];
 
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"ReloadHomeViewNotification"

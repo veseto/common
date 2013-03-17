@@ -83,7 +83,7 @@ KeyboardBar *bar;
             if ([_isDefault isOn]) {
                 [connector setDefaultUser:user.userName:[NSNumber numberWithInt:user.userId.integerValue]];
             }
-            UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
+            UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"addCircle"];
             [self.navigationController pushViewController:home animated:YES];
 
         } else {

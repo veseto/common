@@ -18,7 +18,6 @@ typedef enum {
 @interface MFSideMenu()
 @property (nonatomic, assign, readwrite) UINavigationController *navigationController;
 @property (nonatomic, strong) UIViewController *leftSideMenuViewController;
-@property (nonatomic, strong) UIViewController *rightSideMenuViewController;
 @property (nonatomic, strong) UIView *menuContainerView;
 
 @property (nonatomic, assign) CGPoint panGestureOrigin;
@@ -31,7 +30,6 @@ typedef enum {
 
 @synthesize navigationController;
 @synthesize leftSideMenuViewController;
-@synthesize rightSideMenuViewController;
 @synthesize menuContainerView;
 @synthesize panMode;
 @synthesize panGestureOrigin;
@@ -58,8 +56,7 @@ typedef enum {
 }
 
 + (MFSideMenu *)menuWithNavigationController:(UINavigationController *)controller
-                      leftSideMenuController:(id)leftMenuController
-                     rightSideMenuController:(id)rightMenuController {
+                      leftSideMenuController:(id)leftMenuController{
     MFSideMenuPanMode panMode = MFSideMenuPanModeNavigationBar|MFSideMenuPanModeNavigationController;
     return [MFSideMenu menuWithNavigationController:controller
                              leftSideMenuController:leftMenuController
@@ -106,7 +103,6 @@ typedef enum {
     if(menuContainerView.superview) return;
     
     if(self.leftSideMenuViewController) [menuContainerView insertSubview:self.leftSideMenuViewController.view atIndex:0];
-    if(self.rightSideMenuViewController) [menuContainerView insertSubview:self.rightSideMenuViewController.view atIndex:0];
     
     UIView *windowRootView = self.rootViewController.view;
     UIView *containerView = windowRootView.superview;
@@ -124,15 +120,6 @@ typedef enum {
         leftFrame.origin = CGPointZero;
         self.leftSideMenuViewController.view.frame = leftFrame;
         self.leftSideMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleHeight;
-    }
-    
-    if(self.rightSideMenuViewController) {
-        CGRect rightFrame = self.rightSideMenuViewController.view.frame;
-        rightFrame.size.width = kMFSideMenuSidebarWidth;
-        rightFrame.origin.x = self.navigationController.view.frame.size.width - kMFSideMenuSidebarWidth;
-        rightFrame.origin.y = 0;
-        self.rightSideMenuViewController.view.frame = rightFrame;
-        self.rightSideMenuViewController.view.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleHeight;
     }
 }
 
@@ -252,14 +239,10 @@ typedef enum {
         }
         else if(translatedPoint.x < 0) {
             self.panDirection = MFSideMenuPanDirectionLeft;
-            if(self.rightSideMenuViewController && self.menuState == MFSideMenuStateClosed) {
-                [self.menuContainerView bringSubviewToFront:self.rightSideMenuViewController.view];
-            }
         }
     }
     
-    if((self.menuState == MFSideMenuStateRightMenuOpen && self.panDirection == MFSideMenuPanDirectionLeft)
-       || (self.menuState == MFSideMenuStateLeftMenuOpen && self.panDirection == MFSideMenuPanDirectionRight)) {
+    if((self.menuState == MFSideMenuStateLeftMenuOpen && self.panDirection == MFSideMenuPanDirectionRight)) {
         self.panDirection = MFSideMenuPanDirectionNone;
         return;
     }
@@ -282,13 +265,10 @@ typedef enum {
                                   adjustedOrigin.y + translatedPoint.y);
     
     translatedPoint.x = MIN(translatedPoint.x, kMFSideMenuSidebarWidth);
-    if(self.menuState == MFSideMenuStateRightMenuOpen) {
-        // menu is already open, the most the user can do is close it in this gesture
-        translatedPoint.x = MIN(translatedPoint.x, 0);
-    } else {
+    
         // we are opening the menu
         translatedPoint.x = MAX(translatedPoint.x, 0);
-    }
+    
     
     [self setRootControllerOffset:translatedPoint.x];
     
@@ -326,8 +306,9 @@ typedef enum {
 }
 
 - (void) handleLeftPan:(UIPanGestureRecognizer *)recognizer {
-    if(!self.rightSideMenuViewController) return;
-    
+    if(self.menuState == MFSideMenuStateClosed) {
+        return;
+    }
     UIView *view = self.rootViewController.view;
     
     CGPoint translatedPoint = [recognizer translationInView:view];
@@ -341,7 +322,6 @@ typedef enum {
         translatedPoint.x = MAX(translatedPoint.x, 0);
     } else {
         // we are opening the menu
-        translatedPoint.x = MIN(translatedPoint.x, 0);
     }
     
     [self setRootControllerOffset:translatedPoint.x];
@@ -349,19 +329,9 @@ typedef enum {
 	if(recognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint velocity = [recognizer velocityInView:view];
         CGFloat finalX = translatedPoint.x + (.35*velocity.x);
-        CGFloat viewWidth = [self widthAdjustedForInterfaceOrientation:view];
         
         if(self.menuState == MFSideMenuStateClosed) {
-            BOOL showMenu = (finalX < -1*viewWidth/2);
-            if(showMenu) {
-                self.panGestureVelocity = velocity.x;
-                [self setMenuState:MFSideMenuStateRightMenuOpen];
-            } else {
-                self.panGestureVelocity = 0;
-                [UIView beginAnimations:nil context:NULL];
-                [self setRootControllerOffset:0];
-                [UIView commitAnimations];
-            }
+            return;
         } else {
             BOOL hideMenu = (finalX < adjustedOrigin.x);
             if(hideMenu) {
@@ -467,13 +437,13 @@ typedef enum {
     }
 }
 
-- (void) toggleRightSideMenu {
-    if(self.menuState == MFSideMenuStateRightMenuOpen) {
-        [self setMenuState:MFSideMenuStateClosed];
-    } else {
-        [self setMenuState:MFSideMenuStateRightMenuOpen];
-    }
-}
+//- (void) toggleRightSideMenu {
+//    if(self.menuState == MFSideMenuStateRightMenuOpen) {
+//        [self setMenuState:MFSideMenuStateClosed];
+//    } else {
+//        [self setMenuState:MFSideMenuStateRightMenuOpen];
+//    }
+//}
 
 - (void)setMenuState:(MFSideMenuState)menuState {
     switch (menuState) {
@@ -483,10 +453,6 @@ typedef enum {
         case MFSideMenuStateLeftMenuOpen:
             if(!self.leftSideMenuViewController) return;
             [self openLeftSideMenu];
-            break;
-        case MFSideMenuStateRightMenuOpen:
-            if(!self.rightSideMenuViewController) return;
-            [self openRightSideMenu];
             break;
         default:
             break;
@@ -503,10 +469,10 @@ typedef enum {
     [self openSideMenu:YES];
 }
 
-- (void)openRightSideMenu {
-    [self.menuContainerView bringSubviewToFront:self.rightSideMenuViewController.view];
-    [self openSideMenu:NO];
-}
+//- (void)openRightSideMenu {
+//   // [self.menuContainerView bringSubviewToFront:self.rightSideMenuViewController.view];
+//    [self openSideMenu:NO];
+//}
 
 - (void)openSideMenu:(BOOL)leftSideMenu {
     // notify that the menu state event is starting

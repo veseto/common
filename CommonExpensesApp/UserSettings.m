@@ -11,7 +11,7 @@
 
 @implementation UserSettings
 
-@dynamic defaultCircle;
+@dynamic defaultCircleName;
 @dynamic userid;
 
 @end

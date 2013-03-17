@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "SideMenuViewController.h"
 
-@interface CEHomeViewController : UIViewController
+@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, retain) SideMenuViewController *sideMenu;
-@property (strong, nonatomic) IBOutlet UILabel *circleName;
+@property (nonatomic, retain) IBOutlet UIButton *selfViewButton;
+- (IBAction)showSelfStatistics:(id)sender;
+- (IBAction)sync:(id)sender;
+- (IBAction)someAction:(id)sender;
 @end

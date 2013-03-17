@@ -19,7 +19,6 @@ typedef enum {
 typedef enum {
     MFSideMenuStateClosed, // the menu is closed
     MFSideMenuStateLeftMenuOpen, // the left-hand menu is open
-    MFSideMenuStateRightMenuOpen // the right-hand menu is open
 } MFSideMenuState;
 
 typedef enum {
@@ -43,8 +42,7 @@ typedef void (^MFSideMenuStateEventBlock)(MFSideMenuStateEvent);
 @property (copy) MFSideMenuStateEventBlock menuStateEventBlock;
 
 + (MFSideMenu *)menuWithNavigationController:(UINavigationController *)controller
-                      leftSideMenuController:(id)leftMenuController
-                     rightSideMenuController:(id)rightMenuController;
+                      leftSideMenuController:(id)leftMenuController;
 
 + (MFSideMenu *)menuWithNavigationController:(UINavigationController *)controller
                        leftSideMenuController:(id)leftMenuController
@@ -52,6 +50,5 @@ typedef void (^MFSideMenuStateEventBlock)(MFSideMenuStateEvent);
 
 
 - (void)toggleLeftSideMenu;
-- (void)toggleRightSideMenu;
 
 @end

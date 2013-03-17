@@ -2,20 +2,19 @@
 //  Circle.m
 //  CommonExpensesApp
 //
-//  Created by veseto on 14.03.13.
+//  Created by veseto on 16.03.13.
 //  Copyright (c) 2013 г. Vesela Popova. All rights reserved.
 //
 
-#import "Circle.h"
+#import "Friend.h"
 
 
-@implementation Circle
+@implementation Friend
 
 @dynamic circleName;
 @dynamic friendId;
 @dynamic friendIndexInCircle;
 @dynamic friendName;
-
-
+@dynamic balanceInCircle;
 
 @end

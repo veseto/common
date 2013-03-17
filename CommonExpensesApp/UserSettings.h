@@ -12,7 +12,7 @@
 
 @interface UserSettings : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * defaultCircle;
+@property (nonatomic, retain) NSString * defaultCircleName;
 @property (nonatomic, retain) NSNumber * userid;
 
 @end
