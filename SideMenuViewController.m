@@ -117,7 +117,12 @@ CEDBConnector *connector;
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
-            
+            UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
+            UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
+            NSArray *controllers = [NSArray arrayWithObject:settings];
+            self.sideMenu.navigationController.viewControllers = controllers;
+            [nav pushViewController:settings animated:YES];
+
         } else if (indexPath.row == 1) {
             delegate.currentUser = nil;
             

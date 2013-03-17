@@ -116,7 +116,7 @@ CEDBConnector *connector;
     CGRect newFrame = CGRectMake(0, 0, 0, 0);
     newFrame.size = CGSizeMake(screenWidth, screenHeight - 165);
     UIView *view = [[UIView alloc] initWithFrame:newFrame];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 100, 30)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, screenWidth, 30)];
     label.text = @"You don't have circles";
     [view addSubview:label];
     return view;
@@ -166,7 +166,7 @@ CEDBConnector *connector;
 
 - (IBAction)sync:(id)sender {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sync"
-                                                    message:@"Sync will be performed"
+                                                    message:@"Not yet implemented"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
@@ -175,8 +175,8 @@ CEDBConnector *connector;
 }
 
 - (IBAction)someAction:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Some other action"
-                                                    message:@"Something will happen here"
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Show history"
+                                                    message:@"Not yet implemented"
                                                    delegate:nil
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];

@@ -143,6 +143,50 @@
             </objects>
             <point key="canvasLocation" x="-111" y="-393"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="bRV-Ve-WT5">
+            <objects>
+                <viewController storyboardIdentifier="settings" useStoryboardIdentifierAsRestorationIdentifier="YES" id="xfn-NZ-n2s" customClass="CESettingsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o5N-Yi-kmk">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Settings page not yet implemented" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5M-l8-DSG">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="119" id="0Aq-hl-DT5"/>
+                                    <constraint firstAttribute="width" constant="285" id="s32-tz-4It"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yem-OL-buf">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeView:" destination="xfn-NZ-n2s" eventType="touchUpInside" id="BhW-6g-hc7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H5M-l8-DSG" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="59" id="8dX-7h-WJF"/>
+                            <constraint firstAttribute="trailing" secondItem="H5M-l8-DSG" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="E7X-oz-usZ"/>
+                            <constraint firstAttribute="trailing" secondItem="yem-OL-buf" secondAttribute="trailing" constant="25" id="FCH-lL-09G"/>
+                            <constraint firstItem="yem-OL-buf" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="200" id="fQa-NX-b7W"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P6j-wg-eJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="563" y="-1381"/>
+        </scene>
         <!--Add Circle View Controller-->
         <scene sceneID="Hdw-Hp-P2T">
             <objects>
@@ -421,9 +465,9 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Here some statistics" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xod-9K-4Hy">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Here some statistics not yet implemented" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xod-9K-4Hy">
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="216" id="JNF-ah-EZC"/>
+                                    <constraint firstAttribute="width" constant="216" id="YI3-PW-SQ3"/>
                                     <constraint firstAttribute="height" constant="59" id="sId-27-0Ns"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -446,10 +490,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xod-9K-4Hy" firstAttribute="top" secondItem="9pD-HC-nf6" secondAttribute="top" constant="86" id="CiL-sM-Pit"/>
                             <constraint firstAttribute="trailing" secondItem="yD8-q7-8KK" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="RfA-aw-POj"/>
-                            <constraint firstItem="xod-9K-4Hy" firstAttribute="top" secondItem="yD8-q7-8KK" secondAttribute="top" type="default" id="ZVs-DU-VfS"/>
-                            <constraint firstItem="xod-9K-4Hy" firstAttribute="leading" secondItem="9pD-HC-nf6" secondAttribute="leading" constant="61" id="tiX-wM-ThB"/>
+                            <constraint firstItem="xod-9K-4Hy" firstAttribute="top" secondItem="9pD-HC-nf6" secondAttribute="top" constant="19" id="cpm-oI-esm"/>
+                            <constraint firstItem="yD8-q7-8KK" firstAttribute="top" secondItem="xod-9K-4Hy" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="lUf-ov-OG3"/>
+                            <constraint firstItem="xod-9K-4Hy" firstAttribute="leading" secondItem="9pD-HC-nf6" secondAttribute="leading" constant="47" id="tLR-6L-0R8"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -487,7 +531,7 @@
                                     <constraint firstAttribute="height" constant="44" id="xO3-RM-CcN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="??">
+                                <state key="normal" title="History">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -572,6 +616,12 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESelfStatisticsViewController.h"/>
             <relationships>
                 <relationship kind="action" name="close:"/>
+            </relationships>
+        </class>
+        <class className="CESettingsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CESettingsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="closeView:"/>
             </relationships>
         </class>
         <class className="CESignUp" superclassName="UIViewController">
