@@ -64,8 +64,28 @@ KeyboardBar *bar;
 }
 
 - (IBAction)register:(id)sender {
-    
-    if ([_password.text isEqualToString:_confirm.text]) {
+    if (_userName.text.length < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty username"
+                                                        message:@"Enter username"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else if (![self validateEmail:_email.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
+                                                        message:@"Enter valid e-mail address"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else if (_password.text.length < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty password"
+                                                        message:@"Enter password"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else if ([_password.text isEqualToString:_confirm.text]) {
         NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
         [params setObject:_userName.text forKey:@"username"];
         [params setObject:_password.text forKey:@"password"];
@@ -85,10 +105,10 @@ KeyboardBar *bar;
             }
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"addCircle"];
             [self.navigationController pushViewController:home animated:YES];
-
+            
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration fail"
-                                                            message:@"User cannot be created"
+                                                            message:[NSString stringWithFormat:@"User with username %@ already exists", _userName.text]
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -102,11 +122,12 @@ KeyboardBar *bar;
                                               otherButtonTitles:nil];
         [alert show];
     }
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//CESuccessViewController *vc = [segue destinationViewController];
+    //CESuccessViewController *vc = [segue destinationViewController];
     
 }
 
@@ -147,6 +168,20 @@ KeyboardBar *bar;
     UIEdgeInsets contentInsets = UIEdgeInsetsZero;
     _scrollView.contentInset = contentInsets;
     _scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+- (BOOL) validateEmail: (NSString *) candidate {
+    NSString *emailRegex =
+    @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
+    @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+    @"x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+    @"z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+    @"]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+    @"9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+    @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    
+    return [emailTest evaluateWithObject:candidate];
 }
 
 @end
