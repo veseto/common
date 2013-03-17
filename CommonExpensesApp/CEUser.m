@@ -12,5 +12,5 @@
 
 @synthesize userId = _userId;
 @synthesize userName = _userName;
-
+@synthesize password = _password;
 @end

@@ -137,45 +137,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "385145329.711621"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
-         landmarkName = "-LogIn:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "385145329.711621"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "79"
-         endingLineNumber = "79"
-         landmarkName = "-LogIn:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "385145329.711621"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "83"
-         endingLineNumber = "83"
-         landmarkName = "-LogIn:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
          timestampString = "385217363.837261"
          startingColumnNumber = "9223372036854775807"
@@ -320,11 +281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385145329.711621"
+         timestampString = "385219593.680728"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "93"
-         endingLineNumber = "93"
+         startingLineNumber = "94"
+         endingLineNumber = "94"
          landmarkName = "-createCircle:::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -333,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385145459.826381"
+         timestampString = "385219593.680728"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
          landmarkName = "-getCirclesForUser:"
          landmarkType = "5">
       </FileBreakpoint>

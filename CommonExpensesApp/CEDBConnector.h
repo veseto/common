@@ -12,7 +12,7 @@
 
 @interface CEDBConnector : NSObject
 
--(CEUser *) getUser: (NSString *)username :(NSString *)password;
+-(CEUser *) getUser: (NSString *)username;
 -(void) saveUser: (NSDictionary *) userAttributes;
 -(void) setDefaultUser: (NSString *) username :(NSNumber *)userId;
 -(NSArray *) getCirclesForUser: (NSNumber *) userId;

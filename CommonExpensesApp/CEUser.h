@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) NSNumber *userId;
 @property (nonatomic, retain) NSString *userName;
+@property (nonatomic, retain) NSString *password;
 
 
 @end

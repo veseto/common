@@ -28,9 +28,9 @@ NSManagedObjectContext *context;
 }
 
 
--(CEUser *) getUser: (NSString *)username :(NSString *) password {
+-(CEUser *) getUser: (NSString *)username {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"username == %@ && password == %@", username, password]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"username == %@", username]];
     [request setEntity:[NSEntityDescription entityForName:@"User" inManagedObjectContext:context]];
     NSError *error;
     NSArray *result = [context executeFetchRequest:request error:&error];
@@ -40,6 +40,7 @@ NSManagedObjectContext *context;
     CEUser *user = [CEUser new];
     user.userName = [[result objectAtIndex:0] valueForKey:@"username"];
     user.userId = [[result objectAtIndex:0] valueForKey:@"userid"];
+    user.password = [[result objectAtIndex:0] valueForKey:@"password"];
     return user;
 }
 
