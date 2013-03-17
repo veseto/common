@@ -135,9 +135,10 @@ KeyboardBar *bar;
     [bar setField:textField];
     bar.index = [bar.fields indexOfObject:textField];
     
-    
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    [bar setField:nil];
+    bar.index = -1;
 }
 
 
