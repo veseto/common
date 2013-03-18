@@ -138,5 +138,19 @@ NSManagedObjectContext *context;
     
 }
 
-
+-(void) removeDefaultUser {
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"StartupInfo"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    StartupInfo *startupInfo;
+    if (result != nil && result.count > 0) {
+        startupInfo = [result objectAtIndex:0];
+        [context deleteObject:startupInfo];
+    } 
+    
+}
 @end

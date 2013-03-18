@@ -11,7 +11,7 @@
 
 @implementation CircleDefinition
 
-@dynamic id;
+@dynamic circleId;
 @dynamic name;
 @dynamic numberOfFriends;
 @dynamic ownerId;

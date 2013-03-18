@@ -25,6 +25,7 @@
 
 NSMutableArray *friends;
 KeyboardBar *bar;
+CEAppDelegate *delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,6 +40,7 @@ KeyboardBar *bar;
 {
     [super viewDidLoad];
     bar = [KeyboardBar new];
+    delegate =[[UIApplication sharedApplication] delegate];
     _friendName.inputAccessoryView = bar;
     _name.inputAccessoryView = bar;
     bar.fields = [[NSMutableArray alloc] initWithObjects:_name, _friendName, nil];
@@ -98,6 +100,14 @@ KeyboardBar *bar;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
+        } else if ([_friendName.text isEqualToString:delegate.currentUser.userName]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Duplicate names"
+                                                           message:@"You cannot add yourself as friend"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+
         } else {
             [friends insertObject:_friendName.text atIndex:0];
             [_tableView reloadData];
@@ -115,7 +125,7 @@ KeyboardBar *bar;
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-
+        
     } else if (friends.count < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No friends"
                                                         message:@"You have to add friends"
@@ -123,7 +133,7 @@ KeyboardBar *bar;
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-
+        
     } else {
         CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
         [friends insertObject:user.userName atIndex:0];

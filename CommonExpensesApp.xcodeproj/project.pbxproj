@@ -40,6 +40,7 @@
 		F286CE8C16F1E29400E7FBEC /* CircleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */; };
 		F286CE8F16F20E0E00E7FBEC /* CEAddCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */; };
 		F286CEA016F22B1A00E7FBEC /* CEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE9F16F22B1A00E7FBEC /* CEUser.m */; };
+		F28B06EC16F71C050050145F /* CESynchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B06EB16F71C050050145F /* CESynchManager.m */; };
 		F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */; };
 		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
 		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
@@ -101,6 +102,8 @@
 		F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEAddCircleViewController.m; sourceTree = "<group>"; };
 		F286CE9E16F22B1A00E7FBEC /* CEUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEUser.h; sourceTree = "<group>"; };
 		F286CE9F16F22B1A00E7FBEC /* CEUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEUser.m; sourceTree = "<group>"; };
+		F28B06EA16F71C050050145F /* CESynchManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESynchManager.h; sourceTree = "<group>"; };
+		F28B06EB16F71C050050145F /* CESynchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESynchManager.m; sourceTree = "<group>"; };
 		F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		F291EAD216D2B5C9006C3BD6 /* CESignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESignUp.h; sourceTree = "<group>"; };
 		F291EAD316D2B5C9006C3BD6 /* CESignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESignUp.m; sourceTree = "<group>"; };
@@ -165,7 +168,6 @@
 				F20B327916D0094C00B70559 /* CommonExpensesApp.xcdatamodeld */,
 				F2BD8EF516EA02B9008DEF8A /* common */,
 				F2BD8EF616EA02E1008DEF8A /* usrManagement */,
-				F20B326816D0094C00B70559 /* Supporting Files */,
 				F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */,
 				F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */,
 				F286CE2016F0ED3E00E7FBEC /* SideMenuViewController.h */,
@@ -174,6 +176,7 @@
 				F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */,
 				F21625C916F6004500324637 /* CESettingsViewController.h */,
 				F21625CA16F6004600324637 /* CESettingsViewController.m */,
+				F20B326816D0094C00B70559 /* Supporting Files */,
 			);
 			path = CommonExpensesApp;
 			sourceTree = "<group>";
@@ -265,6 +268,8 @@
 				F2F422E916E3B49900D55906 /* KeyboardBar.m */,
 				F25E136816DFCFDC0086DE2B /* CEConstants.h */,
 				F25E136916DFCFDC0086DE2B /* CEConstants.m */,
+				F28B06EA16F71C050050145F /* CESynchManager.h */,
+				F28B06EB16F71C050050145F /* CESynchManager.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				F21625C716F5D62900324637 /* MFSideMenu.m in Sources */,
 				F21625C816F5D62900324637 /* UINavigationController+MFSideMenu.m in Sources */,
 				F21625CB16F6004600324637 /* CESettingsViewController.m in Sources */,
+				F28B06EC16F71C050050145F /* CESynchManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,14 +457,14 @@
 		F20B327F16D0094C00B70559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
+				PROVISIONING_PROFILE = "176FF7FA-986A-4761-B29A-0C8F94C1716B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "176FF7FA-986A-4761-B29A-0C8F94C1716B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -466,14 +472,14 @@
 		F20B328016D0094C00B70559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (8TK6ALMH9U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5FA48454-3F8A-4FD9-8914-C1F226F71EB1";
+				PROVISIONING_PROFILE = "176FF7FA-986A-4761-B29A-0C8F94C1716B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "176FF7FA-986A-4761-B29A-0C8F94C1716B";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

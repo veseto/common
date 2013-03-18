@@ -12,4 +12,5 @@
 
 -(NSDictionary *) sendRequest:(NSDictionary *)params :(NSString *)alias;
 
+-(NSDictionary *) sendJsonRequest: (NSData *) json :(NSString *) alias;
 @end

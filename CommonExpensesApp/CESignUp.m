@@ -119,6 +119,8 @@ KeyboardBar *bar;
             ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
             if ([_isDefault isOn]) {
                 [connector setDefaultUser:user.userName:[NSNumber numberWithInt:user.userId.integerValue]];
+            } else {
+                [connector removeDefaultUser];
             }
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"addCircle"];
             [self.navigationController pushViewController:home animated:YES];

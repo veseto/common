@@ -12,7 +12,8 @@
 #import "CircleDefinition.h"
 #import "CEDBConnector.h"
 #import "UserSettings.h"
-
+#import "CESynchManager.h"
+#import "CERequestHandler.h"
 
 @interface CEHomeViewController ()
 
@@ -166,13 +167,10 @@ CEDBConnector *connector;
 }
 
 - (IBAction)sync:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sync"
-                                                    message:@"Not yet implemented"
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-
+    CESynchManager *syncMngr = [[CESynchManager alloc] init];
+    CERequestHandler *handler = [CERequestHandler new];
+    NSDictionary *res = [handler sendJsonRequest:[syncMngr syncAllUserData:delegate.currentUser.userId] :@"usrsync.php"];
+    
 }
 
 - (IBAction)someAction:(id)sender {

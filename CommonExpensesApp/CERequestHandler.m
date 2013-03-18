@@ -37,4 +37,25 @@
         return json;
     }
 }
+
+-(NSDictionary *) sendJsonRequest: (NSData *) json :(NSString *) alias {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, alias]]];
+    [request setHTTPMethod:@"post"];
+    [request setHTTPBody:json];
+    NSString *postString = [[NSString alloc] init];
+    NSURLResponse *response;
+    NSError *error;
+    postString = [postString stringByAppendingString:@"ios=true"];
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (error) {
+        return [NSDictionary dictionaryWithObject:error forKey:@"error"];
+    } else {
+        NSString *test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(test);
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:
+                              NSJSONReadingMutableContainers error:&error];
+        return json;
+    }
+    
+}
 @end

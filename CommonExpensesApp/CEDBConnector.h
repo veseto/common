@@ -19,5 +19,5 @@
 -(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName;
 -(NSArray *) getFriendsInCircle: (NSString *) circleName;
 -(UserSettings *) getUserSettings: (NSNumber *)userid;
-
+-(void) removeDefaultUser;
 @end

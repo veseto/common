@@ -110,6 +110,8 @@ KeyboardBar *bar;
                 delegate.currentUser = user;
                 if ([_rememberUser isOn]) {
                     [connector setDefaultUser:user.userName:user.userId];
+                } else {
+                    [connector removeDefaultUser];
                 }
                 UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];

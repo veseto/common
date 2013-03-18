@@ -49,23 +49,31 @@ CEDBConnector *connector;
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"Circles";
-    } else {
-        return @"--";
+    switch (section) {
+        case 0:
+            return @"";
+        case 1:
+            return @"Circles";
+        default:
+            return @"--";
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) return circles.count + 1;
-    if (section == 1) return 2;
-    return 0;
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return circles.count + 1;
+        case 2:
+            return 2;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,20 +85,33 @@ CEDBConnector *connector;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    if (indexPath.section == 0) {
-        if (indexPath.row == circles.count) {
-            cell.textLabel.text = @"Add new";
-        } else {
-            CircleDefinition *c = [circles objectAtIndex:indexPath.row];
-            cell.textLabel.text = c.name;
-        }
-    } else {
-        if (indexPath.row == 0) {
-            cell.textLabel.text = @"Settings";
-        } else if (indexPath.row == 1) {
-            cell.textLabel.text = @"Log out";
-        }
+    
+    switch (indexPath.section) {
+        case 0:
+            cell.textLabel.text = delegate.currentUser.userName;
+            [cell setBackgroundColor:[UIColor clearColor]];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setUserInteractionEnabled:NO];
+            break;
+        case 1:
+            if (indexPath.row == circles.count) {
+                cell.textLabel.text = @"Add new";
+            } else {
+                CircleDefinition *c = [circles objectAtIndex:indexPath.row];
+                cell.textLabel.text = c.name;
+            }
+            break;
+        case 2:
+            if (indexPath.row == 0) {
+                cell.textLabel.text = @"Settings";
+            } else if (indexPath.row == 1) {
+                cell.textLabel.text = @"Log out";
+            }
+            break;
+        default:
+            break;
     }
+    
     return cell;
 }
 
@@ -99,40 +120,49 @@ CEDBConnector *connector;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    if (indexPath.section == 0) {
-        if (indexPath.row == circles.count) {
-            UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
-            UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-            NSArray *controllers = [NSArray arrayWithObject:home];
-            self.sideMenu.navigationController.viewControllers = controllers;
-            [nav pushViewController:home animated:YES];
-        } else {
-            CircleDefinition *c = [circles objectAtIndex:indexPath.row];
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:c.name forKey:@"circle"];
-
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"ReloadHomeViewNotification"
-             object:self
-             userInfo:userInfo];
-        }
-    } else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
-            UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-            NSArray *controllers = [NSArray arrayWithObject:settings];
-            self.sideMenu.navigationController.viewControllers = controllers;
-            [nav pushViewController:settings animated:YES];
-
-        } else if (indexPath.row == 1) {
-            delegate.currentUser = nil;
-            self.sideMenu.openMenuEnabled = NO;
-            UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
-            UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-            NSArray *controllers = [NSArray arrayWithObject:home];
-            self.sideMenu.navigationController.viewControllers = controllers;
-            [nav pushViewController:home animated:YES];
-
-        }
+    
+    switch (indexPath.section) {
+        case 0:
+            
+            break;
+        case 1:
+            if (indexPath.row == circles.count) {
+                UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
+                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
+                NSArray *controllers = [NSArray arrayWithObject:home];
+                self.sideMenu.navigationController.viewControllers = controllers;
+                [nav pushViewController:home animated:YES];
+            } else {
+                CircleDefinition *c = [circles objectAtIndex:indexPath.row];
+                NSDictionary *userInfo = [NSDictionary dictionaryWithObject:c.name forKey:@"circle"];
+                
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ReloadHomeViewNotification"
+                 object:self
+                 userInfo:userInfo];
+            }
+            break;
+        case 2:
+            if (indexPath.row == 0) {
+                UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
+                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
+                NSArray *controllers = [NSArray arrayWithObject:settings];
+                self.sideMenu.navigationController.viewControllers = controllers;
+                [nav pushViewController:settings animated:YES];
+                
+            } else if (indexPath.row == 1) {
+                delegate.currentUser = nil;
+                self.sideMenu.openMenuEnabled = NO;
+                UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
+                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
+                NSArray *controllers = [NSArray arrayWithObject:home];
+                self.sideMenu.navigationController.viewControllers = controllers;
+                [nav pushViewController:home animated:YES];
+                
+            }
+            break;
+        default:
+            break;
     }
     [self.sideMenu setMenuState:MFSideMenuStateClosed];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
