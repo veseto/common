@@ -151,6 +151,6 @@ NSManagedObjectContext *context;
         startupInfo = [result objectAtIndex:0];
         [context deleteObject:startupInfo];
     } 
-    
+    [context save:&error];
 }
 @end
