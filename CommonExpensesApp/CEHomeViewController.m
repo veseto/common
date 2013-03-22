@@ -54,21 +54,24 @@ CEDBConnector *connector;
     NSArray *def = [connector getCirclesForUser:delegate.currentUser.userId];
     if (settings != nil && [settings valueForKey:@"defaultCirlceName"] != nil) {
         [self.view addSubview:[self createTableView]];
-        [self reloadView:[settings valueForKey:@"defaultCirlceName"]];
+        [self reloadView:[settings valueForKey:@"defaultCirlceName"] :0];
     } else if (def != nil && def.count > 0){
         [self.view addSubview:[self createTableView]];
-        [self reloadView:[[def objectAtIndex:0] valueForKey:@"name"]];
+        [self reloadView:[[def objectAtIndex:0] valueForKey:@"name"] :[[[def objectAtIndex:0] valueForKey:@"numberOfFriends"] intValue]];
     } else {
         [self.view addSubview:[self createView]];
     }
     
-    [_selfViewButton setTitle:delegate.currentUser.userName forState:UIControlStateNormal];;
+    [_selfViewButton setTitle:delegate.currentUser.userName forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
                                                object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showStatsView:)
+                                                 name:@"ShowStatsViewNotification"
+                                               object:nil];
     __weak CEHomeViewController *weakSelf = self;
     // if you want to listen for menu open/close events
     // this is useful, for example, if you want to change a UIBarButtonItem when the menu closes
@@ -81,13 +84,19 @@ CEDBConnector *connector;
                  object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuDidOpen:
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ReloadTableNotification"
+                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuWillClose:
-                
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ReloadTableNotification"
+                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuDidClose:
-                // the menu finished closing
-                //   weakSelf.navigationItem.title = @"Menu Closed!";
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ReloadTableNotification"
+                 object:weakSelf];
                 break;
         }
         
@@ -125,20 +134,26 @@ CEDBConnector *connector;
     return view;
 }
 
-- (void) reloadView: (NSString *) circle{
-    self.navigationItem.title = circle;
-    friends = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:circle]];
-    UITableView *tableView = (UITableView *)[self.view viewWithTag:1000];
-    if (tableView == nil) {
-        [[self.view viewWithTag:2000] removeFromSuperview];
-        [self.view addSubview:[self createTableView]];
+- (void) reloadView: (NSString *) circle :(int) numberOfFriends{
+    if (circle != nil && circle.length >0) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@(%d)", circle, numberOfFriends];
+        friends = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:circle]];
+        UITableView *tableView = (UITableView *)[self.view viewWithTag:1000];
+        if (tableView == nil) {
+            [[self.view viewWithTag:2000] removeFromSuperview];
+            [self.view addSubview:[self createTableView]];
+        }
+        [tableView reloadData];
     }
-    [tableView reloadData];
 }
 
 - (void) receiveReloadNotification:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
-    [self reloadView:[userInfo objectForKey:@"circle"]];
+    [self reloadView:[userInfo objectForKey:@"circle"] :[[userInfo objectForKey:@"numberOfFriends"] integerValue]];
+}
+
+-(void) showStatsView: (NSNotification *) notification {
+    [self showStatView];
 }
 
 - (void)setupMenuBarButtonItems {
@@ -167,9 +182,13 @@ CEDBConnector *connector;
 
 
 - (IBAction)showSelfStatistics:(id)sender {
+    [self showStatView];
+}
+
+-(void) showStatView{
     UIViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"statistics"];
     [self presentViewController:stats animated:YES completion:nil];
-    
+
 }
 
 - (IBAction)sync:(id)sender {
@@ -181,14 +200,16 @@ CEDBConnector *connector;
     CERequestHandler *handler = [CERequestHandler new];
     NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
     NSString *first = @"";
+    int num = 0;
     for (NSDictionary * dict in res) {
         [connector createCircleFromServer:[dict objectForKey:@"friends"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] integerValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] integerValue]]];
         if (first.length == 0) {
             first = [dict objectForKey:@"name"];
+            num = [[dict objectForKey:@"numberOfFriends"] intValue];
         }
     }
     [spinner stopAnimating];
-    [self reloadView:first];
+    [self reloadView:first :num];
 }
 
 - (IBAction)someAction:(id)sender {

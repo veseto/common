@@ -91,6 +91,7 @@ NSManagedObjectContext *context;
 }
 
 -(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
+    //TODO add userId if any
     CircleDefinition *circleDef = [NSEntityDescription insertNewObjectForEntityForName:@"CircleDefinition" inManagedObjectContext:context];
     circleDef.name = circleName;
     circleDef.numberOfFriends = [NSNumber numberWithInt:friends.count];

@@ -89,15 +89,15 @@ CEDBConnector *connector;
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = delegate.currentUser.userName;
-            [cell setBackgroundColor:[UIColor clearColor]];
-            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            [cell setUserInteractionEnabled:NO];
+            // [cell setBackgroundColor:[UIColor clearColor]];
+            // [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            // [cell setUserInteractionEnabled:NO];
             break;
         case 1:
-            if (indexPath.row == circles.count) {
-                cell.textLabel.text = @"Add new";
+            if (indexPath.row == 0) {
+                cell.textLabel.text = @"Add new circle";
             } else {
-                CircleDefinition *c = [circles objectAtIndex:indexPath.row];
+                CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                 cell.textLabel.text = c.name;
             }
             break;
@@ -123,19 +123,23 @@ CEDBConnector *connector;
     
     switch (indexPath.section) {
         case 0:
-            
+            if (indexPath.row == 0){
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"ShowStatsViewNotification"
+                 object:self];
+            }
             break;
         case 1:
-            if (indexPath.row == circles.count) {
+            if (indexPath.row == 0) {
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
                 UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
                 NSArray *controllers = [NSArray arrayWithObject:home];
                 self.sideMenu.navigationController.viewControllers = controllers;
                 [nav pushViewController:home animated:YES];
             } else {
-                CircleDefinition *c = [circles objectAtIndex:indexPath.row];
-                NSDictionary *userInfo = [NSDictionary dictionaryWithObject:c.name forKey:@"circle"];
-                
+                CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
+                NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c.name forKey:@"circle"];
+                [userInfo setObject:c.numberOfFriends forKey:@"numberOfFriends"];
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"ReloadHomeViewNotification"
                  object:self

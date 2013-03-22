@@ -49,7 +49,7 @@ CEAppDelegate *delegate;
     friends = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"Create new circle";
     UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Cancel"
+                                   initWithTitle:@"Back"
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(cancel)];

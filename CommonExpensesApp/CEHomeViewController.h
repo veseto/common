@@ -16,4 +16,5 @@
 - (IBAction)sync:(id)sender;
 - (IBAction)someAction:(id)sender;
 - (IBAction)handleGesture:(id)sender;
+-(void) showStatView;
 @end
