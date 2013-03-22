@@ -44,8 +44,9 @@ CEAppDelegate *delegate;
     _friendName.inputAccessoryView = bar;
     _name.inputAccessoryView = bar;
     bar.fields = [[NSMutableArray alloc] initWithObjects:_name, _friendName, nil];
-    bar.field = nil;
-    bar.index = -1;
+    bar.field = _name;
+    bar.index = 0;
+    [_name becomeFirstResponder];
     friends = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"Create new circle";
     UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
