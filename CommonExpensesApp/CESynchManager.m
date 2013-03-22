@@ -38,6 +38,7 @@
                 [friendsDict setObject:friend.circleName forKey:@"circleName"];
                 [friendsDict setObject:friend.friendIndexInCircle forKey:@"friendIndexInCircle"];
                 [friendsDict setObject:friend.balanceInCircle forKey:@"balanceInCircle"];
+                [friendsDict setObject:friend.circleOwner forKey:@"circleOwner"];
                 [frArray addObject:friendsDict];
             }
             [tmp setObject:frArray forKey:@"friends"];

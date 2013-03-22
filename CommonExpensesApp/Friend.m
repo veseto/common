@@ -16,5 +16,5 @@
 @dynamic friendIndexInCircle;
 @dynamic friendName;
 @dynamic balanceInCircle;
-
+@dynamic circleOwner;
 @end

@@ -185,9 +185,17 @@ CEDBConnector *connector;
     [searchBar resignFirstResponder];
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    CircleDefinition *d = [circles objectAtIndex:indexPath.row - 1];
+    [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
+    [connector deleteCircle:d.name :delegate.currentUser.userId];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 1 && indexPath.row > 0) return YES;
+    return NO;
+}
+
 
 @end

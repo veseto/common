@@ -47,7 +47,7 @@ NSManagedObjectContext *context;
 
 -(void) saveUser: (NSDictionary *) userAttributes {
     User *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-    [user setValue:[NSNumber numberWithInt:[[userAttributes objectForKey:@"userid"] integerValue]] forKey:@"userid"];
+    [user setValue:[NSNumber numberWithInt:[[userAttributes objectForKey:@"userid"] intValue]] forKey:@"userid"];
     [user setValue:[userAttributes objectForKey:@"username"] forKey:@"username"];
     [user setValue:[userAttributes objectForKey:@"password"] forKey:@"password"];
     [user setValue:[userAttributes objectForKey:@"email"] forKey:@"email"];
@@ -103,6 +103,7 @@ NSManagedObjectContext *context;
         f.circleName = circleName;
         f.friendName = [friends objectAtIndex:i];;
         f.friendIndexInCircle = [NSNumber numberWithInt:i];
+        f.circleOwner = ownerId;
     }
     
     NSError *error;
@@ -134,7 +135,7 @@ NSManagedObjectContext *context;
         NSDictionary *dict = [friends objectAtIndex:i];
         NSEntityDescription *entityDescFr = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
         NSFetchRequest *requestFr = [[NSFetchRequest alloc] init];
-        [requestFr setPredicate:[NSPredicate predicateWithFormat:@"friendName == %@ && circleName == %@", [dict objectForKey:@"friendName"], circleName]];
+        [requestFr setPredicate:[NSPredicate predicateWithFormat:@"friendName == %@ && circleName == %@ && circleOwner == %@", [dict objectForKey:@"friendName"], circleName, ownerId]];
         [requestFr setEntity:entityDescFr];
         NSError *errorFr;
         NSArray *resultFr = [context executeFetchRequest:requestFr error:&errorFr];
@@ -146,11 +147,12 @@ NSManagedObjectContext *context;
         }
         f.circleName = circleName;
         f.friendName = [dict objectForKey:@"friendName"];
-        f.friendIndexInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"friedIndexInCircle"] integerValue]];
+        f.friendIndexInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"friedIndexInCircle"] intValue]];
         if (![[dict objectForKey:@"friendId"] isEqual: [NSNull null]]) {
-            f.friendId = [NSNumber numberWithInt:[[dict objectForKey:@"friendId"] integerValue]];
+            f.friendId = [NSNumber numberWithInt:[[dict objectForKey:@"friendId"] intValue]];
         }
-        f.balanceInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"balanceInCircle"] integerValue]];
+        f.balanceInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"balanceInCircle"] intValue]];
+        f.circleOwner = [NSNumber numberWithInt:[[dict objectForKey:@"circleOwner"] intValue]];
     }
     
     [context save:&error];
@@ -237,7 +239,11 @@ NSManagedObjectContext *context;
     if (error || result.count < 1) {
         return [NSArray new];
     }
-    return result;
+    NSMutableArray *resArray = [NSMutableArray new];
+    for (DeletedCircles *delCircle in result) {
+        [resArray addObject:delCircle.circleId];
+    }
+    return resArray;
 }
 
 -(void) removeDeletedCirclesForUser: (NSArray *) circleIds :(NSNumber *) userId{
@@ -255,6 +261,26 @@ NSManagedObjectContext *context;
                 [context deleteObject:d];
             }
         }
+    }
+    [context save:&error];
+}
+
+-(void) deleteCircle: (NSString *) circleName :(NSNumber *) userId {
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"CircleDefinition"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ and ownerId == %@", circleName, userId]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (result != nil && result.count > 0) {
+        CircleDefinition *def = [result objectAtIndex:0];
+        NSArray *friends = [self getFriendsInCircle:circleName];
+        for (Friend *f in friends) {
+            [context deleteObject:f];
+        }
+        [context deleteObject:def];
     }
     [context save:&error];
 }

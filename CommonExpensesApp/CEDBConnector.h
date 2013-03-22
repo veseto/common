@@ -24,4 +24,5 @@
 -(BOOL) circleExistsForUser:(NSString *) circleName :(NSNumber *) userId;
 -(void) addDeletedCircle: (NSNumber *) circleId :(NSNumber *) userId;
 -(NSArray *) getDeletedCirclesForUser: (NSNumber *) userId;
+-(void) deleteCircle: (NSString *) circleName :(NSNumber *) userId;
 @end
