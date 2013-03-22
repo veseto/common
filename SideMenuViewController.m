@@ -73,6 +73,8 @@ CEDBConnector *connector;
             return circles.count + 1;
         case 2:
             return 2;
+        default:
+            return 0;
     }
 }
 

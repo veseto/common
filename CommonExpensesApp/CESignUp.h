@@ -12,7 +12,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *userName;
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UITextField *password;
-@property (strong, nonatomic) IBOutlet UISwitch *isDefault;
 @property (strong, nonatomic) IBOutlet UITextField *confirm;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)register:(id)sender;

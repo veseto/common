@@ -22,7 +22,6 @@
 @synthesize email = _email;
 @synthesize password = _password;
 @synthesize confirm = _confirm;
-@synthesize isDefault = _isDefault;
 
 KeyboardBar *bar;
 
@@ -81,6 +80,13 @@ KeyboardBar *bar;
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
+    } else if (_userName.text.length < 4) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid username"
+                                                        message:@"Username should be at least 4 symbols"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     } else if (![self validateEmail:_email.text]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
                                                         message:@"Enter valid e-mail address"
@@ -117,13 +123,8 @@ KeyboardBar *bar;
             user.userName = [json valueForKey:@"username"];
             user.userId = [json valueForKey:@"userid"];
             ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
-            if ([_isDefault isOn]) {
-                [connector setDefaultUser:user.userName:[NSNumber numberWithInt:user.userId.integerValue]];
-            } else {
-                [connector removeDefaultUser];
-            }
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-            UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"addCircle"];
+            UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
             [self.navigationController pushViewController:home animated:YES];
             
         } else {
