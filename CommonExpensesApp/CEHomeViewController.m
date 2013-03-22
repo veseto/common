@@ -75,28 +75,18 @@ CEDBConnector *connector;
     __weak CEHomeViewController *weakSelf = self;
     // if you want to listen for menu open/close events
     // this is useful, for example, if you want to change a UIBarButtonItem when the menu closes
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:weakSelf];
     self.navigationController.sideMenu.menuStateEventBlock = ^(MFSideMenuStateEvent event) {
         NSLog(@"event occurred: %@", weakSelf.navigationItem.title);
         switch (event) {
             case MFSideMenuStateEventMenuWillOpen:
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"ReloadTableNotification"
-                 object:weakSelf];
+                
                 break;
             case MFSideMenuStateEventMenuDidOpen:
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"ReloadTableNotification"
-                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuWillClose:
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"ReloadTableNotification"
-                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuDidClose:
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"ReloadTableNotification"
-                 object:weakSelf];
                 break;
         }
         
@@ -209,6 +199,7 @@ CEDBConnector *connector;
         }
     }
     [spinner stopAnimating];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
     [self reloadView:first :num];
 }
 

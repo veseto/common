@@ -258,8 +258,7 @@ typedef enum {
 
 - (void) handleRightPan:(UIPanGestureRecognizer *)recognizer {
     if(!self.leftSideMenuViewController) return;
-    
-    
+  //  [self sendMenuStateEventNotification:MFSideMenuStateEventMenuWillOpen];
     
     UIView *view = self.rootViewController.view;
     
@@ -313,6 +312,7 @@ typedef enum {
     if(self.menuState == MFSideMenuStateClosed) {
         return;
     }
+
     UIView *view = self.rootViewController.view;
     
     CGPoint translatedPoint = [recognizer translationInView:view];

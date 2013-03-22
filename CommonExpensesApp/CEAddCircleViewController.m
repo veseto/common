@@ -139,6 +139,7 @@ CEAppDelegate *delegate;
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
         UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
         [self.navigationController pushViewController:home animated:YES];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
     }
     
 }

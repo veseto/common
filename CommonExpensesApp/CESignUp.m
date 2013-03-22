@@ -122,6 +122,7 @@ KeyboardBar *bar;
             } else {
                 [connector removeDefaultUser];
             }
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"addCircle"];
             [self.navigationController pushViewController:home animated:YES];
             

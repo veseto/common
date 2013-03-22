@@ -107,6 +107,7 @@ KeyboardBar *bar;
             [alert show];
         } else {
             if (isLogged) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
                 delegate.currentUser = user;
                 if ([_rememberUser isOn]) {
                     [connector setDefaultUser:user.userName:user.userId];
