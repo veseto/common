@@ -82,7 +82,7 @@ NSManagedObjectContext *context;
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setPredicate:[NSPredicate predicateWithFormat:@"ownerId == %@", userId]];
     [request setEntity:entityDesc];
-    NSError *error;
+    NSError *error; 
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (error || result.count < 1) {
         return nil;
@@ -90,12 +90,12 @@ NSManagedObjectContext *context;
     return result;
 }
 
--(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName {
+-(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
     CircleDefinition *circleDef = [NSEntityDescription insertNewObjectForEntityForName:@"CircleDefinition" inManagedObjectContext:context];
     circleDef.name = circleName;
     circleDef.numberOfFriends = [NSNumber numberWithInt:friends.count];
     circleDef.ownerId = ownerId;
-    
+    circleDef.circleId = circleId;
     for (int i = 0; i < friends.count; i ++) {
         Friend *f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
         f.circleName = circleName;
@@ -106,6 +106,55 @@ NSManagedObjectContext *context;
     NSError *error;
     [context save:&error];
 }
+
+
+-(void) createCircleFromServer: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
+    
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"CircleDefinition"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ownerId == %@ && name == %@", ownerId, circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    CircleDefinition *circleDef;
+    if (result != nil && result.count > 0) {
+        circleDef = [result objectAtIndex:0];
+    } else {
+       circleDef = [NSEntityDescription insertNewObjectForEntityForName:@"CircleDefinition" inManagedObjectContext:context];
+    }
+    circleDef.name = circleName;
+    circleDef.numberOfFriends = [NSNumber numberWithInt:friends.count];
+    circleDef.ownerId = ownerId;
+    circleDef.circleId = circleId;
+    for (int i = 0; i < friends.count; i ++) {
+        NSDictionary *dict = [friends objectAtIndex:i];
+        NSEntityDescription *entityDescFr = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
+        NSFetchRequest *requestFr = [[NSFetchRequest alloc] init];
+        [requestFr setPredicate:[NSPredicate predicateWithFormat:@"friendName == %@ && circleName == %@", [dict objectForKey:@"friendName"], circleName]];
+        [requestFr setEntity:entityDescFr];
+        NSError *errorFr;
+        NSArray *resultFr = [context executeFetchRequest:requestFr error:&errorFr];
+        Friend *f;
+        if (resultFr != nil && resultFr.count > 0) {
+            f = [resultFr objectAtIndex:0];
+        } else {
+            f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
+        }
+        f.circleName = circleName;
+        f.friendName = [dict objectForKey:@"friendName"];
+        f.friendIndexInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"friedIndexInCircle"] integerValue]];
+        if (![[dict objectForKey:@"friendId"] isEqual: [NSNull null]]) {
+            f.friendId = [NSNumber numberWithInt:[[dict objectForKey:@"friendId"] integerValue]];
+        }
+        f.balanceInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"balanceInCircle"] integerValue]];
+    }
+    
+    [context save:&error];
+}
+
+
 
 -(NSArray *) getFriendsInCircle: (NSString *) circleName {
     NSEntityDescription *entityDesc =

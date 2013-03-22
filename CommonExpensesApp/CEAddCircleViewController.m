@@ -138,7 +138,7 @@ CEAppDelegate *delegate;
         CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
         [friends insertObject:user.userName atIndex:0];
         CEDBConnector *connector = [CEDBConnector new];
-        [connector createCircle:friends :user.userId :_name.text];
+        [connector createCircle:friends :user.userId :_name.text :nil];
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
         UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
         [self.navigationController pushViewController:home animated:YES];

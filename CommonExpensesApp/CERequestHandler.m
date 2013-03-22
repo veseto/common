@@ -54,7 +54,7 @@
         NSLog(test);
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:
                               NSJSONReadingMutableContainers error:&error];
-        return json;
+        return [json objectForKey:@"data"];
     }
     
 }

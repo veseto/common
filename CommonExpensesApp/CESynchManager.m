@@ -22,9 +22,9 @@
     NSMutableArray *jsonCircles = [NSMutableArray new];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:userId forKey:@"userid"];
-    
+    NSMutableArray *circleIndexes = [NSMutableArray new];
     for (CircleDefinition *def in circlesForUser) {
-        if ([def.circleId isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        if (def.circleId == nil || [def.circleId isEqualToNumber:[NSNumber numberWithInt:0]]) {
             NSMutableDictionary *tmp = [NSMutableDictionary new];
             [tmp setObject:def.name forKey:@"name"];
             [tmp setObject:def.ownerId forKey:@"ownerId"];
@@ -41,8 +41,11 @@
                 [frArray addObject:friendsDict];
             }
             [tmp setObject:frArray forKey:@"friends"];
+        } else {
+            [circleIndexes addObject:def.circleId];
         }
     }
+    [dict setObject:circleIndexes forKey:@"indexes"];
     [dict setObject:jsonCircles forKey:@"circles"];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
@@ -51,8 +54,10 @@
     if (!jsonData) {
         NSLog(@"JSON error: %@", error);
     } else {
-        //Do something with jsonData
+        NSLog(newStr);
     }
+    
+    
     return jsonData;
 }
 

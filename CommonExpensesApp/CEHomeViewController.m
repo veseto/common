@@ -63,12 +63,12 @@ CEDBConnector *connector;
     }
     
     [_selfViewButton setTitle:delegate.currentUser.userName forState:UIControlStateNormal];;
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
                                                object:nil];
-
+    
     __weak CEHomeViewController *weakSelf = self;
     // if you want to listen for menu open/close events
     // this is useful, for example, if you want to change a UIBarButtonItem when the menu closes
@@ -87,7 +87,7 @@ CEDBConnector *connector;
                 break;
             case MFSideMenuStateEventMenuDidClose:
                 // the menu finished closing
-             //   weakSelf.navigationItem.title = @"Menu Closed!";
+                //   weakSelf.navigationItem.title = @"Menu Closed!";
                 break;
         }
         
@@ -121,13 +121,19 @@ CEDBConnector *connector;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, screenWidth, 30)];
     label.text = @"You don't have circles";
     [view addSubview:label];
+    view.tag = 2000;
     return view;
 }
 
 - (void) reloadView: (NSString *) circle{
     self.navigationItem.title = circle;
     friends = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:circle]];
-    [((UITableView *)[self.view viewWithTag:1000]) reloadData];
+    UITableView *tableView = (UITableView *)[self.view viewWithTag:1000];
+    if (tableView == nil) {
+        [[self.view viewWithTag:2000] removeFromSuperview];
+        [self.view addSubview:[self createTableView]];
+    }
+    [tableView reloadData];
 }
 
 - (void) receiveReloadNotification:(NSNotification *) notification {
@@ -163,14 +169,26 @@ CEDBConnector *connector;
 - (IBAction)showSelfStatistics:(id)sender {
     UIViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"statistics"];
     [self presentViewController:stats animated:YES completion:nil];
-
+    
 }
 
 - (IBAction)sync:(id)sender {
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setCenter:CGPointMake(self.view.window.frame.size.width/2.0, self.view.window.frame.size.height/2.0)]; // I do this because I'm in landscape mode
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
     CESynchManager *syncMngr = [[CESynchManager alloc] init];
     CERequestHandler *handler = [CERequestHandler new];
-    NSDictionary *res = [handler sendJsonRequest:[syncMngr syncAllUserData:delegate.currentUser.userId] :@"usrsync.php"];
-    
+    NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
+    NSString *first = @"";
+    for (NSDictionary * dict in res) {
+        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] integerValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] integerValue]]];
+        if (first.length == 0) {
+            first = [dict objectForKey:@"name"];
+        }
+    }
+    [spinner stopAnimating];
+    [self reloadView:first];
 }
 
 - (IBAction)someAction:(id)sender {
@@ -180,7 +198,7 @@ CEDBConnector *connector;
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-
+    
 }
 
 - (IBAction)handleGesture:(UIPanGestureRecognizer *)sender {
@@ -206,7 +224,7 @@ CEDBConnector *connector;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.textLabel.text = [[friends objectAtIndex:indexPath.row] valueForKey:@"friendName"];
-   
+    
     return cell;
 }
 

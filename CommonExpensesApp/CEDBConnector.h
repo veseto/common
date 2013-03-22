@@ -16,7 +16,8 @@
 -(void) saveUser: (NSDictionary *) userAttributes;
 -(void) setDefaultUser: (NSString *) username :(NSNumber *)userId;
 -(NSArray *) getCirclesForUser: (NSNumber *) userId;
--(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName;
+-(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName :(NSNumber *) circleId;
+-(void) createCircleFromServer: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName :(NSNumber *) circleId;
 -(NSArray *) getFriendsInCircle: (NSString *) circleName;
 -(UserSettings *) getUserSettings: (NSNumber *)userid;
 -(void) removeDefaultUser;
