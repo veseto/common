@@ -9,6 +9,7 @@
     <entity name="Friend" representedClassName="Circle" syncable="YES">
         <attribute name="balanceInCircle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="circleOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendIndexInCircle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendName" optional="YES" attributeType="String" syncable="YES"/>
@@ -37,7 +38,7 @@
     </entity>
     <elements>
         <element name="CircleDefinition" positionX="160" positionY="192" width="128" height="105"/>
-        <element name="Friend" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="Friend" positionX="160" positionY="192" width="128" height="135"/>
         <element name="HistoryRecord" positionX="160" positionY="192" width="128" height="120"/>
         <element name="StartupInfo" positionX="160" positionY="192" width="128" height="75"/>
         <element name="User" positionX="160" positionY="192" width="128" height="105"/>

@@ -101,6 +101,7 @@ NSManagedObjectContext *context;
         f.circleName = circleName;
         f.friendName = [friends objectAtIndex:i];;
         f.friendIndexInCircle = [NSNumber numberWithInt:i];
+        f.circleOwner = ownerId;
     }
     
     NSError *error;

@@ -17,5 +17,7 @@
 @property (nonatomic, retain) NSNumber * friendIndexInCircle;
 @property (nonatomic, retain) NSString * friendName;
 @property (nonatomic, retain) NSNumber * balanceInCircle;
+@property (nonatomic, retain) NSNumber * circleOwner;
+
 
 @end
