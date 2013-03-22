@@ -203,4 +203,18 @@ NSManagedObjectContext *context;
     } 
     [context save:&error];
 }
+
+
+-(BOOL) circleExistsForUser:(NSString *) circleName :(NSNumber *) userId {
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"CircleDefinition"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ownerId == %@ && name == %@", userId, circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (result == nil || result.count < 1) return NO;
+    return YES;
+}
 @end

@@ -108,11 +108,11 @@ CEAppDelegate *delegate;
         } else if ([_friendName.text isEqualToString:delegate.currentUser.userName]) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Duplicate names"
                                                            message:@"You cannot add yourself as friend"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
+                                                          delegate:nil
+                                                 cancelButtonTitle:@"OK"
+                                                 otherButtonTitles:nil];
             [alert show];
-
+            
         } else {
             [friends insertObject:_friendName.text atIndex:0];
             [_tableView reloadData];
@@ -134,7 +134,7 @@ CEAppDelegate *delegate;
     } else {
         CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
         [friends insertObject:user.userName atIndex:0];
-         NSMutableDictionary *dict = [NSMutableDictionary new];
+        NSMutableDictionary *dict = [NSMutableDictionary new];
         [dict setObject:_name.text forKey:@"circle"];
         [dict setObject:[NSNumber numberWithInt:friends.count] forKey:@"numberOfFriends"];
         CEDBConnector *connector = [CEDBConnector new];
@@ -150,14 +150,25 @@ CEAppDelegate *delegate;
 
 - (IBAction)submitName:(id)sender {
     if (_name.text.length > 0) {
-        [_circleNameLbl setEnabled:NO];
-        [_name setEnabled:NO];
-        [_okButton setEnabled:NO];
-        [_friendNameLbl setHidden:NO];
-        [_friendName setHidden:NO];
-        [_friendName setUserInteractionEnabled:YES];
-        [_plusButton setHidden:NO];
-        [_plusButton setUserInteractionEnabled:YES];
+        CEDBConnector *connector = [CEDBConnector new];
+        
+        if ([connector circleExistsForUser:_name.text :((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser.userId]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Circle exists"
+                                                            message:[NSString stringWithFormat:@"Circle with name %@ already exists", _name.text]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else {
+            [_circleNameLbl setEnabled:NO];
+            [_name setEnabled:NO];
+            [_okButton setEnabled:NO];
+            [_friendNameLbl setHidden:NO];
+            [_friendName setHidden:NO];
+            [_friendName setUserInteractionEnabled:YES];
+            [_plusButton setHidden:NO];
+            [_plusButton setUserInteractionEnabled:YES];
+        }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"
                                                         message:@"You have to provide circle name"
