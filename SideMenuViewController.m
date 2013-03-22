@@ -128,7 +128,7 @@ CEDBConnector *connector;
                  postNotificationName:@"ShowStatsViewNotification"
                  object:self];
             }
-            break;
+            break; 
         case 1:
             if (indexPath.row == 0) {
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
