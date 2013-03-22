@@ -126,7 +126,7 @@ CEDBConnector *connector;
 
 - (void) reloadView: (NSString *) circle :(int) numberOfFriends{
     if (circle != nil && circle.length >0) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@(%d)", circle, numberOfFriends];
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", circle, numberOfFriends];
         friends = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:circle]];
         UITableView *tableView = (UITableView *)[self.view viewWithTag:1000];
         if (tableView == nil) {

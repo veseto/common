@@ -12,6 +12,7 @@
 #import "StartupInfo.h"
 #import "Friend.h"
 #import "CircleDefinition.h"
+#import "DeletedCircles.h"
 
 @implementation CEDBConnector
 
@@ -216,5 +217,45 @@ NSManagedObjectContext *context;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (result == nil || result.count < 1) return NO;
     return YES;
+}
+
+-(void) addDeletedCircle: (NSNumber *) circleId :(NSNumber *) userId {
+    DeletedCircles *deletedCircle = [NSEntityDescription insertNewObjectForEntityForName:@"DeletedCircles" inManagedObjectContext:context];
+    deletedCircle.userId = userId;
+    deletedCircle.circleId = circleId;
+        NSError *error;
+    [context save:&error];
+}
+
+-(NSArray *) getDeletedCirclesForUser: (NSNumber *) userId {
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"DeletedCircles" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"userId == %@", userId]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error || result.count < 1) {
+        return [NSArray new];
+    }
+    return result;
+}
+
+-(void) removeDeletedCirclesForUser: (NSArray *) circleIds :(NSNumber *) userId{
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"DeletedCircles"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"userId == %@", userId]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (result != nil && result.count > 0) {
+        for (DeletedCircles *d in result) {
+            if ([circleIds containsObject:d.circleId]) {
+                [context deleteObject:d];
+            }
+        }
+    }
+    [context save:&error];
 }
 @end

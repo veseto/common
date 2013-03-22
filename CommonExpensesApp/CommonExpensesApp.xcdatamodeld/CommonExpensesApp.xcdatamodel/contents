@@ -6,6 +6,10 @@
         <attribute name="numberOfFriends" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="DeletedCircles" representedClassName="DeletedCircles" syncable="YES">
+        <attribute name="circleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Friend" representedClassName="Circle" syncable="YES">
         <attribute name="balanceInCircle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,5 +46,6 @@
         <element name="StartupInfo" positionX="160" positionY="192" width="128" height="75"/>
         <element name="User" positionX="160" positionY="192" width="128" height="105"/>
         <element name="UserSettings" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="DeletedCircles" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>

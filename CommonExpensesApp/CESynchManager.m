@@ -47,6 +47,7 @@
     }
     [dict setObject:circleIndexes forKey:@"indexes"];
     [dict setObject:jsonCircles forKey:@"circles"];
+    [dict setObject:[connector getDeletedCirclesForUser:userId] forKey:@"deleted"];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString* newStr = [[NSString alloc] initWithData:jsonData

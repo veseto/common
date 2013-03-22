@@ -168,6 +168,7 @@ CEAppDelegate *delegate;
             [_friendName setUserInteractionEnabled:YES];
             [_plusButton setHidden:NO];
             [_plusButton setUserInteractionEnabled:YES];
+            [_okButton setHidden:YES];
         }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"

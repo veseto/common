@@ -22,4 +22,6 @@
 -(UserSettings *) getUserSettings: (NSNumber *)userid;
 -(void) removeDefaultUser;
 -(BOOL) circleExistsForUser:(NSString *) circleName :(NSNumber *) userId;
+-(void) addDeletedCircle: (NSNumber *) circleId :(NSNumber *) userId;
+-(NSArray *) getDeletedCirclesForUser: (NSNumber *) userId;
 @end
