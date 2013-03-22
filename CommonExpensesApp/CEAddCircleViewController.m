@@ -22,6 +22,10 @@
 @synthesize name = _name;
 @synthesize friendName = _friendName;
 @synthesize tableView = _tableView;
+@synthesize friendNameLbl = _friendNameLbl;
+@synthesize plusButton = _plusButton;
+@synthesize okButton = _okButton;
+@synthesize circleNameLbl = _circleNameLbl;
 
 NSMutableArray *friends;
 KeyboardBar *bar;
@@ -43,7 +47,7 @@ CEAppDelegate *delegate;
     delegate =[[UIApplication sharedApplication] delegate];
     _friendName.inputAccessoryView = bar;
     _name.inputAccessoryView = bar;
-    bar.fields = [[NSMutableArray alloc] initWithObjects:_name, _friendName, nil];
+    bar.fields = [[NSMutableArray alloc] initWithObjects:_name, nil];
     bar.field = _name;
     bar.index = 0;
     [_name becomeFirstResponder];
@@ -119,15 +123,7 @@ CEAppDelegate *delegate;
 
 - (IBAction)createCircle:(id)sender {
     
-    if (_name.text.length < 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"
-                                                        message:@"You have to provide circle name"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        
-    } else if (friends.count < 1) {
+    if (friends.count < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No friends"
                                                         message:@"You have to add friends"
                                                        delegate:nil
@@ -145,6 +141,26 @@ CEAppDelegate *delegate;
         [self.navigationController pushViewController:home animated:YES];
     }
     
+}
+
+- (IBAction)submitName:(id)sender {
+    if (_name.text.length > 0) {
+        [_circleNameLbl setEnabled:NO];
+        [_name setEnabled:NO];
+        [_okButton setEnabled:NO];
+        [_friendNameLbl setHidden:NO];
+        [_friendName setHidden:NO];
+        [_friendName setUserInteractionEnabled:YES];
+        [_plusButton setHidden:NO];
+        [_plusButton setUserInteractionEnabled:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"
+                                                        message:@"You have to provide circle name"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
