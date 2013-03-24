@@ -95,7 +95,7 @@ KeyboardBar *bar;
                 isLogged = YES;
                 user = [CEUser new];
                 user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] integerValue]];
+                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
             }
         }
         if (user == nil) {

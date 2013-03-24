@@ -139,7 +139,7 @@ CEDBConnector *connector;
 
 - (void) receiveReloadNotification:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
-    [self reloadView:[userInfo objectForKey:@"circle"] :[[userInfo objectForKey:@"numberOfFriends"] integerValue]];
+    [self reloadView:[userInfo objectForKey:@"circle"] :[[userInfo objectForKey:@"numberOfFriends"] intValue]];
 }
 
 -(void) showStatsView: (NSNotification *) notification {
@@ -189,10 +189,13 @@ CEDBConnector *connector;
     CESynchManager *syncMngr = [[CESynchManager alloc] init];
     CERequestHandler *handler = [CERequestHandler new];
     NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
+    NSDictionary *data = [res objectForKey:@"data"];
+    NSArray *deleted = [res objectForKey:@"deleted"];
+    [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
     NSString *first = @"";
     int num = 0;
-    for (NSDictionary * dict in res) {
-        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] integerValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] integerValue]]];
+    for (NSDictionary * dict in data) {
+        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]]];
         if (first.length == 0) {
             first = [dict objectForKey:@"name"];
             num = [[dict objectForKey:@"numberOfFriends"] intValue];

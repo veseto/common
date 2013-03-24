@@ -121,7 +121,7 @@ KeyboardBar *bar;
             [connector saveUser:json];
             CEUser *user = [CEUser new];
             user.userName = [json valueForKey:@"username"];
-            user.userId = [json valueForKey:@"userid"];
+            user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
             ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
