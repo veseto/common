@@ -142,6 +142,7 @@ CEDBConnector *connector;
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c.name forKey:@"circle"];
                 [userInfo setObject:c.numberOfFriends forKey:@"numberOfFriends"];
+                
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"ReloadHomeViewNotification"
                  object:self
@@ -187,7 +188,9 @@ CEDBConnector *connector;
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     CircleDefinition *d = [circles objectAtIndex:indexPath.row - 1];
-    [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
+    if (d.circleId != nil) {
+        [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
+    }
     [connector deleteCircle:d.name :delegate.currentUser.userId];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
 }

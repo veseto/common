@@ -22,6 +22,8 @@
     NSMutableArray *jsonCircles = [NSMutableArray new];
     
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObject:userId forKey:@"userid"];
+    NSArray *deleted = [connector getDeletedCirclesForUser:userId];
+    [dict setObject:deleted forKey:@"deleted"];
     NSMutableArray *circleIndexes = [NSMutableArray new];
     for (CircleDefinition *def in circlesForUser) {
         if (def.circleId == nil || [def.circleId isEqualToNumber:[NSNumber numberWithInt:0]]) {
@@ -43,12 +45,13 @@
             }
             [tmp setObject:frArray forKey:@"friends"];
         } else {
-            [circleIndexes addObject:def.circleId];
+            if (![deleted containsObject:def.circleId]){
+                [circleIndexes addObject:def.circleId];
+            }
         }
     }
     [dict setObject:circleIndexes forKey:@"indexes"];
     [dict setObject:jsonCircles forKey:@"circles"];
-    [dict setObject:[connector getDeletedCirclesForUser:userId] forKey:@"deleted"];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
     NSString* newStr = [[NSString alloc] initWithData:jsonData
