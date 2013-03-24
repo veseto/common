@@ -42,7 +42,10 @@
     </entity>
     <elements>
         <element name="CircleDefinition" positionX="160" positionY="192" width="128" height="105"/>
+<<<<<<< HEAD
         <element name="DeletedCircles" positionX="160" positionY="192" width="128" height="75"/>
+=======
+>>>>>>> veseto
         <element name="Friend" positionX="160" positionY="192" width="128" height="135"/>
         <element name="HistoryRecord" positionX="160" positionY="192" width="128" height="120"/>
         <element name="StartupInfo" positionX="160" positionY="192" width="128" height="75"/>
