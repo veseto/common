@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *circleNameLbl;
 @property (strong, nonatomic) IBOutlet UIButton *plusButton;
 @property (strong, nonatomic) IBOutlet UILabel *friendNameLbl;
+@property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 - (IBAction)add:(id)sender;
 - (IBAction)createCircle:(id)sender;
 - (IBAction)submitName:(id)sender;

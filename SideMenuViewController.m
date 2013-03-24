@@ -130,14 +130,11 @@ CEDBConnector *connector;
                  postNotificationName:@"ShowStatsViewNotification"
                  object:self];
             }
-            break; 
+            break;
         case 1:
             if (indexPath.row == 0) {
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
-                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-                NSArray *controllers = [NSArray arrayWithObject:home];
-                self.sideMenu.navigationController.viewControllers = controllers;
-                [nav pushViewController:home animated:YES];
+                [self.sideMenu.navigationController presentViewController:home animated:YES completion:nil];
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                 NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c.name forKey:@"circle"];
@@ -193,6 +190,22 @@ CEDBConnector *connector;
     }
     [connector deleteCircle:d.name :delegate.currentUser.userId];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
+    
+    if (circles.count > 0) {
+        CircleDefinition *c = [circles objectAtIndex:0];
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c.name forKey:@"circle"];
+        [userInfo setObject:c.numberOfFriends forKey:@"numberOfFriends"];
+        
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"ReloadHomeViewNotification"
+         object:self
+         userInfo:userInfo];
+    } else {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"ReloadHomeViewNotification"
+         object:self
+         userInfo:nil];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

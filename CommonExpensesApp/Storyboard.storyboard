@@ -293,27 +293,35 @@
                                     <action selector="submitName:" destination="aZj-mt-b0j" eventType="touchUpInside" id="8Y2-uW-j71"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wq5-QJ-VNC">
+                                <items>
+                                    <navigationItem title="Title" id="Dga-fQ-25I"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KI7-8f-44U" firstAttribute="top" secondItem="5HX-8V-YrU" secondAttribute="top" type="default" id="2Ib-dn-XXt"/>
                             <constraint firstItem="kqn-HV-aON" firstAttribute="baseline" secondItem="QiG-wL-gju" secondAttribute="baseline" type="default" id="4Fy-bh-cJx"/>
-                            <constraint firstItem="qiZ-YB-VY9" firstAttribute="top" secondItem="3pF-C1-G3Q" secondAttribute="top" constant="72" id="5y2-8h-Ps8"/>
                             <constraint firstItem="2XT-k1-UU9" firstAttribute="centerX" secondItem="qiZ-YB-VY9" secondAttribute="centerX" type="default" id="6Pz-ZG-GYW"/>
+                            <constraint firstItem="Wq5-QJ-VNC" firstAttribute="trailing" secondItem="3pF-C1-G3Q" secondAttribute="trailing" type="default" id="AbH-0J-yKI"/>
                             <constraint firstItem="ed3-5a-3SN" firstAttribute="bottom" secondItem="QiG-wL-gju" secondAttribute="bottom" type="default" id="BGa-Pz-csy"/>
+                            <constraint firstItem="Wq5-QJ-VNC" firstAttribute="top" secondItem="3pF-C1-G3Q" secondAttribute="top" constant="-2" id="Cxs-h1-WQs"/>
                             <constraint firstItem="KI7-8f-44U" firstAttribute="leading" secondItem="3pF-C1-G3Q" secondAttribute="leading" constant="50" id="DUX-W0-weT"/>
+                            <constraint firstItem="Wq5-QJ-VNC" firstAttribute="leading" secondItem="3pF-C1-G3Q" secondAttribute="leading" type="default" id="Kmi-bE-xwU"/>
+                            <constraint firstItem="cgw-LJ-o0j" firstAttribute="top" secondItem="qiZ-YB-VY9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="L1Z-fI-DfE"/>
                             <constraint firstAttribute="trailing" secondItem="qiZ-YB-VY9" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="L6D-Ag-TUC"/>
+                            <constraint firstItem="Wq5-QJ-VNC" firstAttribute="centerX" secondItem="cgw-LJ-o0j" secondAttribute="centerX" type="default" id="TzB-ps-Ekx"/>
                             <constraint firstAttribute="bottom" secondItem="2XT-k1-UU9" secondAttribute="bottom" constant="62" id="Wl6-fl-GgH"/>
                             <constraint firstItem="QiG-wL-gju" firstAttribute="leading" secondItem="3pF-C1-G3Q" secondAttribute="leading" constant="112" id="XmB-6T-ehN"/>
                             <constraint firstItem="ed3-5a-3SN" firstAttribute="leading" secondItem="3pF-C1-G3Q" secondAttribute="leading" constant="12" id="Y68-bf-h54"/>
                             <constraint firstItem="kqn-HV-aON" firstAttribute="centerX" secondItem="qiZ-YB-VY9" secondAttribute="centerX" type="default" id="Zct-4q-VSW"/>
                             <constraint firstItem="QiG-wL-gju" firstAttribute="leading" secondItem="5HX-8V-YrU" secondAttribute="leading" type="default" id="awk-8m-fdc"/>
                             <constraint firstItem="qiZ-YB-VY9" firstAttribute="baseline" secondItem="5HX-8V-YrU" secondAttribute="baseline" type="default" id="f4A-5J-LgI"/>
-                            <constraint firstItem="kqn-HV-aON" firstAttribute="top" secondItem="3pF-C1-G3Q" secondAttribute="top" constant="29" id="pqg-oQ-7nc"/>
+                            <constraint firstItem="Wq5-QJ-VNC" firstAttribute="bottom" secondItem="kqn-HV-aON" secondAttribute="top" type="default" id="hzD-CD-EBu"/>
                             <constraint firstItem="qiZ-YB-VY9" firstAttribute="centerY" secondItem="5HX-8V-YrU" secondAttribute="centerY" type="default" id="rL9-Wu-N8L"/>
-                            <constraint firstItem="cgw-LJ-o0j" firstAttribute="trailing" secondItem="3pF-C1-G3Q" secondAttribute="trailing" type="default" id="tsN-EU-KtF"/>
-                            <constraint firstItem="cgw-LJ-o0j" firstAttribute="top" secondItem="5HX-8V-YrU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vra-vY-OOW"/>
                             <constraint firstItem="qiZ-YB-VY9" firstAttribute="baseline" secondItem="KI7-8f-44U" secondAttribute="baseline" type="default" id="vuh-KP-mea"/>
+                            <constraint firstItem="qiZ-YB-VY9" firstAttribute="top" secondItem="3pF-C1-G3Q" secondAttribute="top" constant="85" id="w0d-Hq-vc0"/>
                             <constraint firstItem="5HX-8V-YrU" firstAttribute="trailing" secondItem="QiG-wL-gju" secondAttribute="trailing" type="default" id="wwO-dD-B25"/>
                         </constraints>
                     </view>
@@ -322,6 +330,7 @@
                         <outlet property="friendName" destination="5HX-8V-YrU" id="v10-4S-1Rs"/>
                         <outlet property="friendNameLbl" destination="KI7-8f-44U" id="hYX-wW-zg1"/>
                         <outlet property="name" destination="QiG-wL-gju" id="VeI-sr-Qcc"/>
+                        <outlet property="navItem" destination="Dga-fQ-25I" id="CFE-0f-DVC"/>
                         <outlet property="okButton" destination="kqn-HV-aON" id="cmj-jh-OzC"/>
                         <outlet property="plusButton" destination="qiZ-YB-VY9" id="dL4-34-bGp"/>
                         <outlet property="tableView" destination="cgw-LJ-o0j" id="e0r-Kt-EFJ"/>
@@ -589,6 +598,7 @@
                 <relationship kind="outlet" name="friendName" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="friendNameLbl" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="name" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="navItem" candidateClass="UINavigationItem"/>
                 <relationship kind="outlet" name="okButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="plusButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
@@ -633,7 +643,6 @@
                 <relationship kind="action" name="register:"/>
                 <relationship kind="outlet" name="confirm" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="isDefault" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="userName" candidateClass="UITextField"/>

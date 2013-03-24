@@ -139,7 +139,13 @@ CEDBConnector *connector;
 
 - (void) receiveReloadNotification:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
-    [self reloadView:[userInfo objectForKey:@"circle"] :[[userInfo objectForKey:@"numberOfFriends"] intValue]];
+    if (userInfo !=nil) {
+        [self reloadView:[userInfo objectForKey:@"circle"] :[[userInfo objectForKey:@"numberOfFriends"] intValue]];
+    } else {
+        [[self.view viewWithTag:1000] removeFromSuperview];
+        [self.view addSubview:[self createView]];
+        self.navigationItem.title = @"";
+    }
 }
 
 -(void) showStatsView: (NSNotification *) notification {

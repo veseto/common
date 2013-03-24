@@ -26,6 +26,7 @@
 @synthesize plusButton = _plusButton;
 @synthesize okButton = _okButton;
 @synthesize circleNameLbl = _circleNameLbl;
+@synthesize navItem = _navItem;
 
 NSMutableArray *friends;
 KeyboardBar *bar;
@@ -52,13 +53,13 @@ CEAppDelegate *delegate;
     bar.index = 0;
     [_name becomeFirstResponder];
     friends = [[NSMutableArray alloc] init];
-    self.navigationItem.title = @"Create new circle";
+    _navItem.title = @"Create new circle";
     UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Back"
+                                   initWithTitle:@"Cancel"
                                    style:UIBarButtonItemStyleBordered
                                    target:self
                                    action:@selector(cancel)];
-    self.navigationItem.rightBarButtonItem = flipButton;
+    _navItem.rightBarButtonItem = flipButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,9 +69,7 @@ CEAppDelegate *delegate;
 }
 
 -(void) cancel {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
-    [self.navigationController pushViewController:home animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
