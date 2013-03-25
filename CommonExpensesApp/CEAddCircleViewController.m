@@ -116,6 +116,7 @@ CEAppDelegate *delegate;
             [friends insertObject:_friendName.text atIndex:0];
             [_tableView reloadData];
             _friendName.text = @"";
+            [_friendName becomeFirstResponder];
         }
     }
 }
@@ -138,11 +139,9 @@ CEAppDelegate *delegate;
         [dict setObject:[NSNumber numberWithInt:friends.count] forKey:@"numberOfFriends"];
         CEDBConnector *connector = [CEDBConnector new];
         [connector createCircle:friends :user.userId :_name.text :nil];
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-        UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
-        [self.navigationController pushViewController:home animated:YES];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:dict];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     
 }

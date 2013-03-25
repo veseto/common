@@ -97,7 +97,7 @@ CEDBConnector *connector;
             break;
         case 1:
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Add new circle";
+                cell.textLabel.text = @"Add Circle";
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                 cell.textLabel.text = c.name;
