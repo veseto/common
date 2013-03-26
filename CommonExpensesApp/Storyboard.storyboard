@@ -139,15 +139,6 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Settings page not yet implemented" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5M-l8-DSG">
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="119" id="0Aq-hl-DT5"/>
-                                    <constraint firstAttribute="width" constant="285" id="s32-tz-4It"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yem-OL-buf">
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Close">
@@ -161,19 +152,70 @@
                                     <action selector="closeView:" destination="xfn-NZ-n2s" eventType="touchUpInside" id="BhW-6g-hc7"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Etk-75-FgM">
+                                <segments>
+                                    <segment title="Name"/>
+                                    <segment title="Date Changed"/>
+                                </segments>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rLX-g2-6t6">
+                                <segments>
+                                    <segment title="On"/>
+                                    <segment title="Off"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Always On Sync" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijt-tw-DYg">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Default Circle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYe-As-JAQ">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Sort circles by" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwH-Kg-AQr">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXe-fS-bRh">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="PLG-mP-V6B"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Dropdown">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="H5M-l8-DSG" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="59" id="8dX-7h-WJF"/>
-                            <constraint firstAttribute="trailing" secondItem="H5M-l8-DSG" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="E7X-oz-usZ"/>
-                            <constraint firstAttribute="trailing" secondItem="yem-OL-buf" secondAttribute="trailing" constant="25" id="FCH-lL-09G"/>
-                            <constraint firstItem="yem-OL-buf" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="200" id="fQa-NX-b7W"/>
+                            <constraint firstAttribute="bottom" secondItem="zXe-fS-bRh" secondAttribute="bottom" constant="212" id="5g7-V1-yY0"/>
+                            <constraint firstItem="nwH-Kg-AQr" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="106" id="9AF-4I-djk"/>
+                            <constraint firstItem="rLX-g2-6t6" firstAttribute="baseline" secondItem="ijt-tw-DYg" secondAttribute="baseline" type="default" id="Bit-vY-Ofi"/>
+                            <constraint firstItem="zXe-fS-bRh" firstAttribute="centerY" secondItem="WYe-As-JAQ" secondAttribute="centerY" type="default" id="Dcw-Xw-2xA"/>
+                            <constraint firstItem="yem-OL-buf" firstAttribute="centerX" secondItem="o5N-Yi-kmk" secondAttribute="centerX" type="default" id="Orl-UF-o3L"/>
+                            <constraint firstItem="yem-OL-buf" firstAttribute="centerX" secondItem="Etk-75-FgM" secondAttribute="centerX" type="default" id="TkK-hD-5ie"/>
+                            <constraint firstItem="rLX-g2-6t6" firstAttribute="top" secondItem="o5N-Yi-kmk" secondAttribute="top" constant="214" id="XNX-6h-aLd"/>
+                            <constraint firstAttribute="bottom" secondItem="yem-OL-buf" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="a8n-MZ-OVR"/>
+                            <constraint firstItem="Etk-75-FgM" firstAttribute="top" secondItem="nwH-Kg-AQr" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="aJ9-3y-bBY"/>
+                            <constraint firstItem="rLX-g2-6t6" firstAttribute="centerY" secondItem="ijt-tw-DYg" secondAttribute="centerY" type="default" id="bWx-oH-4TS"/>
+                            <constraint firstAttribute="trailing" secondItem="zXe-fS-bRh" secondAttribute="trailing" constant="27" id="mAD-Ft-SOI"/>
+                            <constraint firstItem="Etk-75-FgM" firstAttribute="trailing" secondItem="rLX-g2-6t6" secondAttribute="trailing" type="default" id="qkB-Gr-FRz"/>
+                            <constraint firstItem="nwH-Kg-AQr" firstAttribute="leading" secondItem="o5N-Yi-kmk" secondAttribute="leading" constant="43" id="u21-xu-I0X"/>
+                            <constraint firstItem="ijt-tw-DYg" firstAttribute="leading" secondItem="o5N-Yi-kmk" secondAttribute="leading" constant="33" id="wf6-HN-ijA"/>
+                            <constraint firstItem="WYe-As-JAQ" firstAttribute="leading" secondItem="ijt-tw-DYg" secondAttribute="leading" type="default" id="wxa-qT-mlb"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6j-wg-eJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="563" y="-1381"/>
+            <point key="canvasLocation" x="466" y="-1398"/>
         </scene>
         <!--Add Circle View Controller-->
         <scene sceneID="Hdw-Hp-P2T">
@@ -464,7 +506,7 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Here some statistics not yet implemented" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xod-9K-4Hy">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stats go here" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xod-9K-4Hy">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="216" id="YI3-PW-SQ3"/>
                                     <constraint firstAttribute="height" constant="59" id="sId-27-0Ns"/>
