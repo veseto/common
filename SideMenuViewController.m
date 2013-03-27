@@ -149,11 +149,7 @@ CEDBConnector *connector;
         case 2:
             if (indexPath.row == 0) {
                 UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
-                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-                NSArray *controllers = [NSArray arrayWithObject:settings];
-                self.sideMenu.navigationController.viewControllers = controllers;
-                [nav pushViewController:settings animated:YES];
-                
+                [self.sideMenu.navigationController presentViewController:settings animated:YES completion:nil];
             } else if (indexPath.row == 1) {
                 delegate.currentUser = nil;
                 self.sideMenu.openMenuEnabled = NO;

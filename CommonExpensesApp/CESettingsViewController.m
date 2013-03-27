@@ -36,8 +36,6 @@
 }
 
 - (IBAction)closeView:(id)sender {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-    UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
-    [self.navigationController pushViewController:home animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
