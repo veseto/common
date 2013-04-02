@@ -32,10 +32,14 @@
 		F21625C716F5D62900324637 /* MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C416F5D62900324637 /* MFSideMenu.m */; };
 		F21625C816F5D62900324637 /* UINavigationController+MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C616F5D62900324637 /* UINavigationController+MFSideMenu.m */; };
 		F21625CB16F6004600324637 /* CESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625CA16F6004600324637 /* CESettingsViewController.m */; };
+		F2513545170997A400800E55 /* HistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F2513544170997A400800E55 /* HistoryRecord.m */; };
 		F25E136416DFAB1E0086DE2B /* CELogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136316DFAB1E0086DE2B /* CELogin.m */; };
 		F25E136716DFB15C0086DE2B /* CERequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136616DFB15C0086DE2B /* CERequestHandler.m */; };
 		F25E136A16DFCFDC0086DE2B /* CEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136916DFCFDC0086DE2B /* CEConstants.m */; };
 		F26293CD16F4E5A6002E0933 /* CESelfStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */; };
+		F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2720FE81704A48E00A16090 /* addDataCell.xib */; };
+		F2720FEE1704A52E00A16090 /* DropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F2720FEB1704A52E00A16090 /* DropDown.m */; };
+		F2720FEF1704A52E00A16090 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2720FED1704A52E00A16090 /* PopoverView.m */; };
 		F286CE1F16EE366400E7FBEC /* CEHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */; };
 		F286CE2216F0ED3E00E7FBEC /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE2116F0ED3E00E7FBEC /* SideMenuViewController.m */; };
 		F286CE6016F111E600E7FBEC /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5B16F111E600E7FBEC /* back-arrow.png */; };
@@ -45,7 +49,6 @@
 		F286CE6416F111E600E7FBEC /* menu-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5F16F111E600E7FBEC /* menu-icon@2x.png */; };
 		F286CE7D16F1E29400E7FBEC /* UserSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE7C16F1E29400E7FBEC /* UserSettings.m */; };
 		F286CE8016F1E29400E7FBEC /* StartupInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE7F16F1E29400E7FBEC /* StartupInfo.m */; };
-		F286CE8316F1E29400E7FBEC /* HistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8216F1E29400E7FBEC /* HistoryRecord.m */; };
 		F286CE8916F1E29400E7FBEC /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8816F1E29400E7FBEC /* User.m */; };
 		F286CE8C16F1E29400E7FBEC /* CircleDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */; };
 		F286CE8F16F20E0E00E7FBEC /* CEAddCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE8E16F20E0D00E7FBEC /* CEAddCircleViewController.m */; };
@@ -55,7 +58,11 @@
 		F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */; };
 		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
 		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
+		F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */; };
 		F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F422E916E3B49900D55906 /* KeyboardBar.m */; };
+		F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB90EA1704A851009CD45C /* CEFriendHelper.m */; };
+		F2FB90ED1705DD54009CD45C /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F2FB90EC1705DD54009CD45C /* images.jpeg */; };
+		F2FB90EF1705DD8B009CD45C /* 0271@2x rotated.png in Resources */ = {isa = PBXBuildFile; fileRef = F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +99,8 @@
 		F21625C616F5D62900324637 /* UINavigationController+MFSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+MFSideMenu.m"; sourceTree = "<group>"; };
 		F21625C916F6004500324637 /* CESettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESettingsViewController.h; sourceTree = "<group>"; };
 		F21625CA16F6004600324637 /* CESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESettingsViewController.m; sourceTree = "<group>"; };
+		F2513543170997A400800E55 /* HistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecord.h; sourceTree = "<group>"; };
+		F2513544170997A400800E55 /* HistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecord.m; sourceTree = "<group>"; };
 		F25E136216DFAB1E0086DE2B /* CELogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELogin.h; sourceTree = "<group>"; };
 		F25E136316DFAB1E0086DE2B /* CELogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CELogin.m; sourceTree = "<group>"; };
 		F25E136516DFB15C0086DE2B /* CERequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CERequestHandler.h; sourceTree = "<group>"; };
@@ -100,6 +109,11 @@
 		F25E136916DFCFDC0086DE2B /* CEConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEConstants.m; sourceTree = "<group>"; };
 		F26293CB16F4E5A6002E0933 /* CESelfStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESelfStatisticsViewController.h; sourceTree = "<group>"; };
 		F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESelfStatisticsViewController.m; sourceTree = "<group>"; };
+		F2720FE81704A48E00A16090 /* addDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addDataCell.xib; sourceTree = "<group>"; };
+		F2720FEA1704A52E00A16090 /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDown.h; path = ../../../DiabloIIIApp/DiabloIIIApp/DropDown.h; sourceTree = "<group>"; };
+		F2720FEB1704A52E00A16090 /* DropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDown.m; path = ../../../DiabloIIIApp/DiabloIIIApp/DropDown.m; sourceTree = "<group>"; };
+		F2720FEC1704A52E00A16090 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopoverView.h; path = ../../../DiabloIIIApp/DiabloIIIApp/PopoverView.h; sourceTree = "<group>"; };
+		F2720FED1704A52E00A16090 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopoverView.m; path = ../../../DiabloIIIApp/DiabloIIIApp/PopoverView.m; sourceTree = "<group>"; };
 		F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEHomeViewController.h; sourceTree = "<group>"; };
 		F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEHomeViewController.m; sourceTree = "<group>"; };
 		F286CE2016F0ED3E00E7FBEC /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuViewController.h; path = ../SideMenuViewController.h; sourceTree = "<group>"; };
@@ -113,8 +127,6 @@
 		F286CE7C16F1E29400E7FBEC /* UserSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSettings.m; sourceTree = "<group>"; };
 		F286CE7E16F1E29400E7FBEC /* StartupInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartupInfo.h; sourceTree = "<group>"; };
 		F286CE7F16F1E29400E7FBEC /* StartupInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartupInfo.m; sourceTree = "<group>"; };
-		F286CE8116F1E29400E7FBEC /* HistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecord.h; sourceTree = "<group>"; };
-		F286CE8216F1E29400E7FBEC /* HistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecord.m; sourceTree = "<group>"; };
 		F286CE8716F1E29400E7FBEC /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		F286CE8816F1E29400E7FBEC /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		F286CE8A16F1E29400E7FBEC /* CircleDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDefinition.h; sourceTree = "<group>"; };
@@ -132,8 +144,14 @@
 		F291EAD316D2B5C9006C3BD6 /* CESignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESignUp.m; sourceTree = "<group>"; };
 		F2956A5C16E535E8002128E6 /* CEDBConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEDBConnector.h; sourceTree = "<group>"; };
 		F2956A5D16E535E8002128E6 /* CEDBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEDBConnector.m; sourceTree = "<group>"; };
+		F2B70D4B170A0D6E00A1C76B /* CEHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEHistoryViewController.h; path = ../CEHistoryViewController.h; sourceTree = "<group>"; };
+		F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEHistoryViewController.m; path = ../CEHistoryViewController.m; sourceTree = "<group>"; };
 		F2F422E816E3B49900D55906 /* KeyboardBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardBar.h; path = ../KeyboardBar.h; sourceTree = "<group>"; };
 		F2F422E916E3B49900D55906 /* KeyboardBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardBar.m; path = ../KeyboardBar.m; sourceTree = "<group>"; };
+		F2FB90E91704A851009CD45C /* CEFriendHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEFriendHelper.h; sourceTree = "<group>"; };
+		F2FB90EA1704A851009CD45C /* CEFriendHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEFriendHelper.m; sourceTree = "<group>"; };
+		F2FB90EC1705DD54009CD45C /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = images.jpeg; path = ../../../../DiabloIIIApp/Resources/images.jpeg; sourceTree = "<group>"; };
+		F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "0271@2x rotated.png"; path = "../../../../DiabloIIIApp/Resources/0271@2x rotated.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +218,9 @@
 		F20B326716D0094C00B70559 /* CommonExpensesApp */ = {
 			isa = PBXGroup;
 			children = (
+				F2B70D4B170A0D6E00A1C76B /* CEHistoryViewController.h */,
+				F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */,
+				F2720FE71704A46100A16090 /* history */,
 				D94ECE421701A481006EB9F0 /* artwork */,
 				F286CE9416F228DD00E7FBEC /* helpers */,
 				F286CE9016F20E1200E7FBEC /* circleManagement */,
@@ -249,9 +270,19 @@
 			path = MFSideMenu;
 			sourceTree = "<group>";
 		};
+		F2720FE71704A46100A16090 /* history */ = {
+			isa = PBXGroup;
+			children = (
+				F2720FE81704A48E00A16090 /* addDataCell.xib */,
+			);
+			name = history;
+			sourceTree = "<group>";
+		};
 		F286CE5A16F111E600E7FBEC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */,
+				F2FB90EC1705DD54009CD45C /* images.jpeg */,
 				F286CE5B16F111E600E7FBEC /* back-arrow.png */,
 				F286CE5C16F111E600E7FBEC /* back-arrow@2x.png */,
 				F286CE5D16F111E600E7FBEC /* Default-568h@2x.png */,
@@ -264,6 +295,8 @@
 		F286CE6516F1E00300E7FBEC /* DAO */ = {
 			isa = PBXGroup;
 			children = (
+				F2513543170997A400800E55 /* HistoryRecord.h */,
+				F2513544170997A400800E55 /* HistoryRecord.m */,
 				F28B9CAB16FC870C00CA6FBB /* DeletedCircles.h */,
 				F28B9CAC16FC870C00CA6FBB /* DeletedCircles.m */,
 				F21625BF16F4F85200324637 /* Friend.h */,
@@ -272,8 +305,6 @@
 				F286CE8B16F1E29400E7FBEC /* CircleDefinition.m */,
 				F286CE8716F1E29400E7FBEC /* User.h */,
 				F286CE8816F1E29400E7FBEC /* User.m */,
-				F286CE8116F1E29400E7FBEC /* HistoryRecord.h */,
-				F286CE8216F1E29400E7FBEC /* HistoryRecord.m */,
 				F286CE7E16F1E29400E7FBEC /* StartupInfo.h */,
 				F286CE7F16F1E29400E7FBEC /* StartupInfo.m */,
 				F286CE7B16F1E29400E7FBEC /* UserSettings.h */,
@@ -296,6 +327,8 @@
 			children = (
 				F286CE9E16F22B1A00E7FBEC /* CEUser.h */,
 				F286CE9F16F22B1A00E7FBEC /* CEUser.m */,
+				F2FB90E91704A851009CD45C /* CEFriendHelper.h */,
+				F2FB90EA1704A851009CD45C /* CEFriendHelper.m */,
 			);
 			name = helpers;
 			sourceTree = "<group>";
@@ -303,6 +336,10 @@
 		F2BD8EF516EA02B9008DEF8A /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F2720FEA1704A52E00A16090 /* DropDown.h */,
+				F2720FEB1704A52E00A16090 /* DropDown.m */,
+				F2720FEC1704A52E00A16090 /* PopoverView.h */,
+				F2720FED1704A52E00A16090 /* PopoverView.m */,
 				F21625C216F5D62900324637 /* MFSideMenu */,
 				F25E136516DFB15C0086DE2B /* CERequestHandler.h */,
 				F25E136616DFB15C0086DE2B /* CERequestHandler.m */,
@@ -401,6 +438,9 @@
 				D94ECE561701A55F006EB9F0 /* Icon@2x.png in Resources */,
 				D94ECE571701A55F006EB9F0 /* iTunesArtwork.png in Resources */,
 				D94ECE581701A55F006EB9F0 /* iTunesArtwork@2x.png in Resources */,
+				F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */,
+				F2FB90ED1705DD54009CD45C /* images.jpeg in Resources */,
+				F2FB90EF1705DD8B009CD45C /* 0271@2x rotated.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +464,6 @@
 				F286CE2216F0ED3E00E7FBEC /* SideMenuViewController.m in Sources */,
 				F286CE7D16F1E29400E7FBEC /* UserSettings.m in Sources */,
 				F286CE8016F1E29400E7FBEC /* StartupInfo.m in Sources */,
-				F286CE8316F1E29400E7FBEC /* HistoryRecord.m in Sources */,
 				F286CE8916F1E29400E7FBEC /* User.m in Sources */,
 				F286CE8C16F1E29400E7FBEC /* CircleDefinition.m in Sources */,
 				F286CE8F16F20E0E00E7FBEC /* CEAddCircleViewController.m in Sources */,
@@ -436,6 +475,11 @@
 				F21625CB16F6004600324637 /* CESettingsViewController.m in Sources */,
 				F28B06EC16F71C050050145F /* CESynchManager.m in Sources */,
 				F28B9CAD16FC870C00CA6FBB /* DeletedCircles.m in Sources */,
+				F2720FEE1704A52E00A16090 /* DropDown.m in Sources */,
+				F2720FEF1704A52E00A16090 /* PopoverView.m in Sources */,
+				F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */,
+				F2513545170997A400800E55 /* HistoryRecord.m in Sources */,
+				F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

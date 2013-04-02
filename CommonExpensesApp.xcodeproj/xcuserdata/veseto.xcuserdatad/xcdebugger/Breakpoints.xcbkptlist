@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385845151.347345"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
          landmarkName = "-setupMenuBarButtonItems"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385326599.263717"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "48"
-         endingLineNumber = "48"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -164,11 +164,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385644132.672164"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
+         startingLineNumber = "90"
+         endingLineNumber = "90"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385644132.672164"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "81"
-         endingLineNumber = "81"
+         startingLineNumber = "93"
+         endingLineNumber = "93"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385649224.235143"
+         timestampString = "386505949.25335"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "96"
-         endingLineNumber = "96"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
          landmarkName = "-createCircle::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385649224.235143"
+         timestampString = "386505949.25335"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "80"
-         endingLineNumber = "80"
+         startingLineNumber = "82"
+         endingLineNumber = "82"
          landmarkName = "-getCirclesForUser:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +307,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385644132.672164"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "140"
-         endingLineNumber = "140"
+         startingLineNumber = "158"
+         endingLineNumber = "158"
          landmarkName = "-receiveReloadNotification:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,25 +320,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385644132.672164"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "127"
-         endingLineNumber = "127"
-         landmarkName = "-reloadView::"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385845151.347345"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "248"
-         endingLineNumber = "248"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         startingLineNumber = "140"
+         endingLineNumber = "140"
+         landmarkName = "-reloadView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -411,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385326599.263717"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "53"
-         endingLineNumber = "53"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -424,12 +411,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385644132.672164"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-reloadView::"
+         startingLineNumber = "144"
+         endingLineNumber = "144"
+         landmarkName = "-reloadView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -437,11 +424,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385845151.347345"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
+         startingLineNumber = "218"
+         endingLineNumber = "218"
          landmarkName = "-sync:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -502,11 +489,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEAddCircleViewController.m"
-         timestampString = "385845428.47656"
+         timestampString = "386501658.233409"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "109"
-         endingLineNumber = "109"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
          landmarkName = "-add:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -515,11 +502,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386512034.255932"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "196"
-         endingLineNumber = "196"
+         startingLineNumber = "202"
+         endingLineNumber = "202"
          landmarkName = "-removeDefaultUser"
          landmarkType = "5">
       </FileBreakpoint>
@@ -528,11 +515,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEHomeViewController.m"
-         timestampString = "385845151.347345"
+         timestampString = "386536064.685907"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "203"
-         endingLineNumber = "203"
+         startingLineNumber = "224"
+         endingLineNumber = "224"
          landmarkName = "-sync:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -541,11 +528,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "146"
-         endingLineNumber = "146"
+         startingLineNumber = "152"
+         endingLineNumber = "152"
          landmarkName = "-createCircleFromServer::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -619,11 +606,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "116"
-         endingLineNumber = "116"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
          landmarkName = "-createCircleFromServer::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -632,11 +619,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "142"
+         endingLineNumber = "142"
          landmarkName = "-createCircleFromServer::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -645,11 +632,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
+         startingLineNumber = "141"
+         endingLineNumber = "141"
          landmarkName = "-createCircleFromServer::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -671,11 +658,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "150"
-         endingLineNumber = "150"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
          landmarkName = "-createCircleFromServer::::"
          landmarkType = "5">
       </FileBreakpoint>
@@ -684,38 +671,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "158"
-         endingLineNumber = "158"
-         landmarkName = "-createCircleFromServer::::"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "165"
-         endingLineNumber = "165"
-         landmarkName = "-getFriendsInCircle:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEDBConnector.m"
-         timestampString = "385654316.947066"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "164"
          endingLineNumber = "164"
-         landmarkName = "-getFriendsInCircle:"
+         landmarkName = "-createCircleFromServer::::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEDBConnector.m"
+         timestampString = "386506399.003491"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
+         landmarkName = "-getFriendsInCircle::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEDBConnector.m"
+         timestampString = "386506399.003491"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
+         landmarkName = "-getFriendsInCircle::"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -723,7 +710,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEAddCircleViewController.m"
-         timestampString = "385845428.47656"
+         timestampString = "386506399.003491"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "143"
+         endingLineNumber = "143"
+         landmarkName = "-createCircle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEAddCircleViewController.m"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "145"
@@ -736,24 +736,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEAddCircleViewController.m"
-         timestampString = "385845428.47656"
+         timestampString = "386506399.003491"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
-         landmarkName = "-createCircle:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEAddCircleViewController.m"
-         timestampString = "385845428.47656"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "148"
-         endingLineNumber = "148"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
          landmarkName = "@implementation CEAddCircleViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -807,6 +794,214 @@
          startingLineNumber = "53"
          endingLineNumber = "53"
          landmarkName = "-sendJsonRequest::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386536064.685907"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "286"
+         endingLineNumber = "286"
+         landmarkName = "-textFieldDidEndEditing:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../DiabloIIIApp/DiabloIIIApp/DropDown.m"
+         timestampString = "386260606.813824"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "55"
+         endingLineNumber = "55"
+         landmarkName = "-showPopOver"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../DiabloIIIApp/DiabloIIIApp/DropDown.m"
+         timestampString = "386260630.210864"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-tapped:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../DiabloIIIApp/DiabloIIIApp/PopoverView.m"
+         timestampString = "386261306.357636"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
+         landmarkName = "+showPopoverAtPoint:inView:withStringArray:delegate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../DiabloIIIApp/DiabloIIIApp/DropDown.m"
+         timestampString = "386260840.171213"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "56"
+         endingLineNumber = "56"
+         landmarkName = "-showPopOver"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386536064.685907"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "214"
+         endingLineNumber = "214"
+         landmarkName = "-sync:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386536064.685907"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "159"
+         endingLineNumber = "159"
+         landmarkName = "-receiveReloadNotification:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386536064.685907"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "256"
+         endingLineNumber = "256"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SideMenuViewController.m"
+         timestampString = "386513110.357955"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
+         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386620959.557719"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "305"
+         endingLineNumber = "305"
+         landmarkName = "-addHistoryRecords:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386620959.557719"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "304"
+         endingLineNumber = "304"
+         landmarkName = "-addHistoryRecords:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEDBConnector.m"
+         timestampString = "386620959.557719"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "322"
+         endingLineNumber = "322"
+         landmarkName = "-getHistoryRecords::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEDBConnector.m"
+         timestampString = "386620959.557719"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "321"
+         endingLineNumber = "321"
+         landmarkName = "-getHistoryRecords::"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CEHistoryViewController.m"
+         timestampString = "386536593.911489"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CEHistoryViewController.m"
+         timestampString = "386536657.445885"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CEHomeViewController.m"
+         timestampString = "386621132.268888"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "153"
+         endingLineNumber = "153"
+         landmarkName = "-reloadView"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

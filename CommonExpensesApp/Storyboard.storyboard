@@ -601,6 +601,19 @@
                                     <outletCollection property="gestureRecognizers" destination="dRo-aU-MLn" appends="YES" id="qcZ-vd-b36"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVC-Cm-AO0">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addHistoryRecords:" destination="Mq2-3a-O2W" eventType="touchUpInside" id="DHP-Ns-N2h"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -609,13 +622,16 @@
                             <constraint firstItem="dt2-Gz-8ii" firstAttribute="bottom" secondItem="OQV-hw-vbm" secondAttribute="bottom" type="default" id="IRO-0b-yWc"/>
                             <constraint firstAttribute="bottom" secondItem="OQV-hw-vbm" secondAttribute="bottom" constant="4" id="KBw-ea-70q"/>
                             <constraint firstItem="dt2-Gz-8ii" firstAttribute="bottom" secondItem="cwk-9X-4sx" secondAttribute="bottom" type="default" id="XPc-q0-4M1"/>
-                            <constraint firstItem="dt2-Gz-8ii" firstAttribute="top" secondItem="cwk-9X-4sx" secondAttribute="top" type="default" id="ar8-cw-c8q"/>
                             <constraint firstItem="dt2-Gz-8ii" firstAttribute="centerX" secondItem="ook-bu-n1O" secondAttribute="centerX" type="default" id="cOy-3l-NuE"/>
                             <constraint firstItem="cwk-9X-4sx" firstAttribute="trailing" secondItem="ook-bu-n1O" secondAttribute="trailing" type="default" id="cXv-P3-FC0"/>
+                            <constraint firstAttribute="trailing" secondItem="bVC-Cm-AO0" secondAttribute="trailing" constant="9" id="gqc-Ug-12u"/>
+                            <constraint firstItem="dt2-Gz-8ii" firstAttribute="top" secondItem="bVC-Cm-AO0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="gyD-Yx-IBg"/>
+                            <constraint firstItem="cwk-9X-4sx" firstAttribute="top" secondItem="bVC-Cm-AO0" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="nLd-I4-GfD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Jtp-eW-o0z"/>
                     <connections>
+                        <outlet property="okButton" destination="bVC-Cm-AO0" id="7Yd-D0-EDy"/>
                         <outlet property="selfViewButton" destination="dt2-Gz-8ii" id="21r-Rh-3cy"/>
                     </connections>
                 </viewController>
@@ -627,6 +643,91 @@
                 </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="832" y="-30"/>
+        </scene>
+        <!--History View Controller-->
+        <scene sceneID="t5j-7x-Ofh">
+            <objects>
+                <viewController storyboardIdentifier="history" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uKK-HC-Jft" customClass="CEHistoryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Wn-mr-5aO">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwl-Ri-mSf">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeHistoryView:" destination="uKK-HC-Jft" eventType="touchUpInside" id="CZ0-7E-NTv"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yGI-bv-zKh">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="284" id="eYc-GF-Qvs"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="HistoryCell" id="HHA-P7-fWH">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2010" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NlT-vR-87K">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2020" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4YS-0A-oIg">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" tag="2030" contentMode="left" text="BGN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmy-7E-7Gc">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="4YS-0A-oIg" firstAttribute="baseline" secondItem="NlT-vR-87K" secondAttribute="baseline" type="default" id="22a-mA-ocf"/>
+                                            <constraint firstItem="NlT-vR-87K" firstAttribute="leading" secondItem="HHA-P7-fWH" secondAttribute="leading" constant="25" id="IIj-38-l0N"/>
+                                            <constraint firstItem="NlT-vR-87K" firstAttribute="top" secondItem="HHA-P7-fWH" secondAttribute="top" constant="11" id="SDI-jV-fod"/>
+                                            <constraint firstItem="mmy-7E-7Gc" firstAttribute="baseline" secondItem="4YS-0A-oIg" secondAttribute="baseline" type="default" id="Ulw-g5-ykj"/>
+                                            <constraint firstItem="4YS-0A-oIg" firstAttribute="leading" secondItem="HHA-P7-fWH" secondAttribute="leading" constant="132" id="YLv-ZV-Vwh"/>
+                                            <constraint firstAttribute="trailing" secondItem="mmy-7E-7Gc" secondAttribute="trailing" constant="43" id="yQr-JZ-EiU"/>
+                                        </constraints>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="uKK-HC-Jft" id="Mb5-a6-oyO"/>
+                                    <outlet property="delegate" destination="uKK-HC-Jft" id="WGJ-fY-xdZ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Vwl-Ri-mSf" secondAttribute="trailing" constant="26" id="6UU-TP-gI9"/>
+                            <constraint firstItem="yGI-bv-zKh" firstAttribute="bottom" secondItem="1Wn-mr-5aO" secondAttribute="bottom" type="default" id="hWi-E5-51E"/>
+                            <constraint firstItem="Vwl-Ri-mSf" firstAttribute="top" secondItem="1Wn-mr-5aO" secondAttribute="top" constant="103" id="ouM-WP-9Om"/>
+                            <constraint firstItem="yGI-bv-zKh" firstAttribute="leading" secondItem="1Wn-mr-5aO" secondAttribute="leading" type="default" id="sdE-ge-LDz"/>
+                            <constraint firstItem="yGI-bv-zKh" firstAttribute="trailing" secondItem="1Wn-mr-5aO" secondAttribute="trailing" type="default" id="x1E-lR-VD4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="yGI-bv-zKh" id="XDb-Kv-HLT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Idf-yj-eo3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1246" y="-549"/>
         </scene>
     </scenes>
     <classes>
@@ -646,14 +747,24 @@
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
+        <class className="CEHistoryViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHistoryViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="closeHistoryView:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="CEHomeViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHomeViewController.h"/>
             <relationships>
+                <relationship kind="action" name="addHistoryRecords:" candidateClass="UIButton"/>
                 <relationship kind="action" name="handleGesture:"/>
                 <relationship kind="action" name="showSelfStatistics:"/>
                 <relationship kind="action" name="someAction:"/>
                 <relationship kind="action" name="sync:"/>
+                <relationship kind="outlet" name="okButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="selfViewButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="CELogin" superclassName="UIViewController">

@@ -8,13 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "SideMenuViewController.h"
+#import "DropDown.h"
 
-@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DropDownDelegate>
 @property (nonatomic, retain) SideMenuViewController *sideMenu;
 @property (nonatomic, retain) IBOutlet UIButton *selfViewButton;
+@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIButton *okButton;
+
 - (IBAction)showSelfStatistics:(id)sender;
 - (IBAction)sync:(id)sender;
 - (IBAction)someAction:(id)sender;
 - (IBAction)handleGesture:(id)sender;
--(void) showStatView;
+- (void) showStatView;
+-(IBAction) addHistoryRecords:(UIButton *) sender;
+
 @end

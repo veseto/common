@@ -13,6 +13,8 @@
 #import "Friend.h"
 #import "CircleDefinition.h"
 #import "DeletedCircles.h"
+#import "CEFriendHelper.h"
+#import "HistoryRecord.h"
 
 @implementation CEDBConnector
 
@@ -91,7 +93,7 @@ NSManagedObjectContext *context;
     return result;
 }
 
--(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
+-(CircleDefinition *) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
     //TODO add userId if any
     CircleDefinition *circleDef = [NSEntityDescription insertNewObjectForEntityForName:@"CircleDefinition" inManagedObjectContext:context];
     circleDef.name = circleName;
@@ -108,6 +110,10 @@ NSManagedObjectContext *context;
     
     NSError *error;
     [context save:&error];
+    if (!error) {
+        return circleDef;
+    }
+    return nil;
 }
 
 
@@ -160,12 +166,12 @@ NSManagedObjectContext *context;
 
 
 
--(NSArray *) getFriendsInCircle: (NSString *) circleName {
+-(NSArray *) getFriendsInCircle: (NSString *) circleName :(NSNumber *)circleOwner{
     NSEntityDescription *entityDesc =
     [NSEntityDescription entityForName:@"Friend"
                 inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"circleName == %@", circleName]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"circleName == %@ && circleOwner == %d", circleName, circleOwner.intValue]];
     [request setEntity:entityDesc];
     NSError *error;
     NSArray *result = [context executeFetchRequest:request error:&error];
@@ -276,7 +282,7 @@ NSManagedObjectContext *context;
     NSArray *result = [context executeFetchRequest:request error:&error];
     if (result != nil && result.count > 0) {
         CircleDefinition *def = [result objectAtIndex:0];
-        NSArray *friends = [self getFriendsInCircle:circleName];
+        NSArray *friends = [self getFriendsInCircle:circleName :userId];
         for (Friend *f in friends) {
             [context deleteObject:f];
         }
@@ -284,4 +290,56 @@ NSManagedObjectContext *context;
     }
     [context save:&error];
 }
+
+-(void) addHistoryRecords: (NSArray *) friendsArray :(NSString  *) circleName :(NSNumber *) circleOwner :(NSNumber *)authorId {
+    double sum = 0;
+    for (CEFriendHelper *frHelper in friendsArray) {
+        if (frHelper.amount > 0) {
+            HistoryRecord *record = [NSEntityDescription insertNewObjectForEntityForName:@"HistoryRecord" inManagedObjectContext:context];
+            record.user = frHelper.userName;
+            record.sum = [NSNumber numberWithDouble: frHelper.amount.doubleValue];
+            record.currency = frHelper.currency;
+            record.circleName = circleName;
+            record.circleOwner = circleOwner;
+            record.authorId = authorId;
+            sum += record.sum.doubleValue;
+        }
+    }
+    NSArray *friendsInCircle = [[NSArray alloc] initWithArray:[self getFriendsInCircle:circleName :circleOwner]];
+    for (Friend *f in friendsInCircle) {
+        for (CEFriendHelper *frHelper in friendsArray) {
+            if ([frHelper.userName isEqualToString:f.friendName]) {
+                f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + frHelper.amount.doubleValue - sum/friendsInCircle.count];
+            }
+        }
+    }
+    NSError *error;
+    [context save:&error];
+    
+}
+
+-(NSArray *) getHistoryRecords:(NSString  *) circleName :(NSNumber *) circleOwner {
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"HistoryRecord" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"circleOwner == %d && circleName == %@", circleOwner.intValue, circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error || result.count < 1) {
+        return [NSArray new];
+    }
+    return result;
+}
+
+-(void) updateFriendsInCircle:(NSArray *) friends :circleName :(NSNumber *) circleOwner{
+    NSArray *friendsInCircle = [self getFriendsInCircle:circleName :circleOwner];
+    for (Friend *f in friendsInCircle) {
+        for (CEFriendHelper *h in friends) {
+            if ([f.friendName isEqualToString:h.userName]) {
+                
+            }
+        }
+    }
+}
+
 @end

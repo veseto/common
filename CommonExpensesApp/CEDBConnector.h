@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CEUser.h"
 #import "UserSettings.h"
+#import "CircleDefinition.h"
 
 @interface CEDBConnector : NSObject
 
@@ -16,9 +17,9 @@
 -(void) saveUser: (NSDictionary *) userAttributes;
 -(void) setDefaultUser: (NSString *) username :(NSNumber *)userId;
 -(NSArray *) getCirclesForUser: (NSNumber *) userId;
--(void) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName :(NSNumber *) circleId;
+-(CircleDefinition *) createCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName :(NSNumber *) circleId;
 -(void) createCircleFromServer: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName :(NSNumber *) circleId;
--(NSArray *) getFriendsInCircle: (NSString *) circleName;
+-(NSMutableArray *) getFriendsInCircle: (NSString *) circleName :(NSNumber *)circleOwner;
 -(UserSettings *) getUserSettings: (NSNumber *)userid;
 -(void) removeDefaultUser;
 -(BOOL) circleExistsForUser:(NSString *) circleName :(NSNumber *) userId;
@@ -26,4 +27,8 @@
 -(NSArray *) getDeletedCirclesForUser: (NSNumber *) userId;
 -(void) removeDeletedCirclesForUser: (NSArray *) circleIds :(NSNumber *) userId;
 -(void) deleteCircle: (NSString *) circleName :(NSNumber *) userId;
+-(void) addHistoryRecords: (NSArray *) friendsArray :(NSString  *) circleName :(NSNumber *) circleOwner :(NSNumber *)authorId;
+-(NSArray *) getHistoryRecords:(NSString  *) circleName :(NSNumber *) circleOwner;
+-(void) updateFriendsInCircle:(NSArray *) friends :circleName :(NSNumber *) circleOwner;
+
 @end

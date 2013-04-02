@@ -41,8 +41,7 @@ CEAppDelegate *delegate;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     bar = [KeyboardBar new];
     delegate =[[UIApplication sharedApplication] delegate];
@@ -134,11 +133,10 @@ CEAppDelegate *delegate;
     } else {
         CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
         [friends insertObject:user.userName atIndex:0];
-        NSMutableDictionary *dict = [NSMutableDictionary new];
-        [dict setObject:_name.text forKey:@"circle"];
-        [dict setObject:[NSNumber numberWithInt:friends.count] forKey:@"numberOfFriends"];
         CEDBConnector *connector = [CEDBConnector new];
-        [connector createCircle:friends :user.userId :_name.text :nil];
+        CircleDefinition *def = [connector createCircle:friends :user.userId :_name.text :nil];
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        [dict setObject:def forKey:@"circle"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:dict];
         [self dismissViewControllerAnimated:YES completion:nil];

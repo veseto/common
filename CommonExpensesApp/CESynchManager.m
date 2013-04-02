@@ -32,7 +32,7 @@
             [tmp setObject:def.ownerId forKey:@"ownerId"];
             [tmp setObject:def.numberOfFriends forKey:@"numberOfFriends"];
             [jsonCircles addObject:tmp];
-            NSArray *friends = [connector getFriendsInCircle:[def valueForKey:@"name"]];
+            NSArray *friends = [connector getFriendsInCircle:def.name :def.ownerId];
             NSMutableArray *frArray = [NSMutableArray new];
             for (Friend *friend in friends) {
                 NSMutableDictionary *friendsDict = [NSMutableDictionary new];

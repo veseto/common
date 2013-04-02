@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[CEHomeViewController receiveReloadNotification:]:CEHomeViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CEHomeViewController reloadView]:CEHomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(NSMutableArray *)friends">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[CEDBConnector addHistoryRecords::::]:CEDBConnector.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[CEHomeViewController textFieldDidEndEditing:]:CEHomeViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(NSMutableArray *)friends">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
