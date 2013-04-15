@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * numberOfFriends;
 @property (nonatomic, retain) NSNumber * ownerId;
-
+@property (nonatomic, retain) NSNumber * lastServerRevision;
 
 @end

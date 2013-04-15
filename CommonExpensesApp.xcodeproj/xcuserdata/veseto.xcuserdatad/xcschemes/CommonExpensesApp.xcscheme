@@ -60,7 +60,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "-com.apple.CoreData.SQLDebug 1&#10;&#10;1&#10;&#10;-com.apple.CoreData.SQLDebug&#10;&#10;1&#10;&#10;-com.apple.CoreData.SQLDebug 1&#10;&#10;-com.apple.CoreData.SQLDebug 1&#10;&#10;"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

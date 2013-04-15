@@ -2,6 +2,7 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2057" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CircleDefinition" representedClassName="CircleDefinition" syncable="YES">
         <attribute name="circleId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastServerRevision" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="numberOfFriends" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="ownerId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -11,7 +12,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="Friend" representedClassName="Circle" syncable="YES">
-        <attribute name="balanceInCircle" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="balanceInCircle" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="circleOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="friendId" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -24,7 +25,7 @@
         <attribute name="circleName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="circleOwner" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="currency" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sum" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sum" optional="YES" attributeType="Double" defaultValueString="0" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="StartupInfo" representedClassName="StartupInfo" syncable="YES">
@@ -43,7 +44,7 @@
         <attribute name="userid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CircleDefinition" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="CircleDefinition" positionX="160" positionY="192" width="128" height="120"/>
         <element name="DeletedCircles" positionX="160" positionY="192" width="128" height="75"/>
         <element name="Friend" positionX="160" positionY="192" width="128" height="135"/>
         <element name="HistoryRecord" positionX="160" positionY="192" width="128" height="150"/>

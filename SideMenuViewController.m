@@ -188,8 +188,7 @@ CEDBConnector *connector;
     
     if (circles.count > 0) {
         CircleDefinition *c = [circles objectAtIndex:0];
-        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c.name forKey:@"circle"];
-        [userInfo setObject:c.numberOfFriends forKey:@"numberOfFriends"];
+        NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:c forKey:@"circle"];
         
         [[NSNotificationCenter defaultCenter]
          postNotificationName:@"ReloadHomeViewNotification"

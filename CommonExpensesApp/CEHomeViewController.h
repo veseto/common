@@ -14,7 +14,6 @@
 @property (nonatomic, retain) SideMenuViewController *sideMenu;
 @property (nonatomic, retain) IBOutlet UIButton *selfViewButton;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *okButton;
 
 - (IBAction)showSelfStatistics:(id)sender;
 - (IBAction)sync:(id)sender;

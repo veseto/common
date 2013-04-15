@@ -27,13 +27,14 @@
 @implementation CEHomeViewController
 @synthesize selfViewButton = _selfViewButton;
 @synthesize tableView = _tableView;
-@synthesize okButton = _okButton;
 
 CEAppDelegate *delegate;
+NSArray *tmp;
 NSMutableArray *friends;
 CEDBConnector *connector;
 CircleDefinition *definition;
 KeyboardBar *bar;
+UITextView *scroll;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,21 +55,20 @@ KeyboardBar *bar;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    bar = [KeyboardBar new];
     self.navigationController.sideMenu.openMenuEnabled = YES;
     delegate = [[UIApplication sharedApplication] delegate];
     connector = [CEDBConnector new];
     [self setupMenuBarButtonItems];
     friends = [[NSMutableArray alloc] init];
-    UserSettings *settings = [connector getUserSettings:delegate.currentUser.userId];
+    bar = [KeyboardBar new];
+    
+    //Add init with default circle
     NSArray *def = [connector getCirclesForUser:delegate.currentUser.userId];
-    if (settings != nil && [settings valueForKey:@"defaultCirlceName"] != nil) {
-      //  definition = [def objectAtIndex:0];
-       // [self.view addSubview:[self createTableView]];
-        [self reloadView];
-    } else if (def != nil && def.count > 0){
+    if (def != nil && def.count > 0){
         definition = [def objectAtIndex:0];
-        [self.view addSubview:[self createTableView]];
+        if (_tableView == nil) {
+            [self.view addSubview:[self createTableView]];
+        }
         [self reloadView];
     } else {
         [self.view addSubview:[self createView]];
@@ -106,27 +106,72 @@ KeyboardBar *bar;
 
 }
 
--(UITableView *) createTableView {
-    
+-(UIView *) createTableView {
+    UIView *viewToRemove = [self.view viewWithTag:2000];
+    [[viewToRemove subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [viewToRemove removeFromSuperview];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+
+    CGRect newFrame3 = CGRectMake(0, 0, 0, 0);
+    newFrame3.size = CGSizeMake(screenWidth, screenHeight - 110);
+    UIView *container = [[UIView alloc] initWithFrame:newFrame3];
+  //  [container setBackgroundColor:[UIColor redColor]];
     
     CGRect newFrame = CGRectMake(0, 0, 0, 0);
-    newFrame.size = CGSizeMake(screenWidth, screenHeight - 165);
-    _tableView = [[UITableView alloc] initWithFrame:newFrame style:UITableViewStylePlain];
+    newFrame.size = CGSizeMake(screenWidth, 100);
+    tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:definition.name :definition.ownerId]];
+    
+    scroll = [[UITextView alloc] initWithFrame:newFrame];
+    NSMutableString *text = [NSMutableString new];
+    for (Friend *fr in tmp) {
+        [text appendString:fr.friendName];
+        [text appendString:@"   "];
+        [text appendString:[NSString stringWithFormat:@"%.2f", fr.balanceInCircle.doubleValue]];
+        [text appendString:@"\n"];
+    }
+    scroll.text = text;
+    scroll.backgroundColor = [UIColor clearColor];
+    [container addSubview:scroll];
+    
+    
+    CGRect newFrame2 = CGRectMake(0, 100, 0, 0);
+    newFrame2.size = CGSizeMake(screenWidth, screenHeight - 265);
+    _tableView = [[UITableView alloc] initWithFrame:newFrame2 style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tag = 1000;
+    _tableView.backgroundColor = [UIColor clearColor];
+    
+    [container addSubview:_tableView];
+    
+    CGRect newFrame4 = CGRectMake(screenWidth - 120, screenHeight - 155, 0, 0);
+    newFrame4.size = CGSizeMake(70, 42);
+    UIButton *okButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 
-    return _tableView;
+    [okButton setFrame:newFrame4];
+    [okButton addTarget:self
+               action:@selector(addHistoryRecords:)
+     forControlEvents:UIControlEventTouchDown];
+    [okButton setTitle:@"OK" forState:UIControlStateNormal];
+    [okButton actionsForTarget:okButton forControlEvent:UIControlEventTouchUpInside];
+
+    [container addSubview:okButton];
+    container.tag = 3003;
+    return container;
 }
 
 -(UIView *) createView {
+    UIView *viewToRemove = [self.view viewWithTag:3003];
+    _tableView = nil;
+    [[viewToRemove subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [viewToRemove removeFromSuperview];
+    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    
+
     CGRect newFrame = CGRectMake(0, 0, 0, 0);
     newFrame.size = CGSizeMake(screenWidth, screenHeight - 165);
     UIView *view = [[UIView alloc] initWithFrame:newFrame];
@@ -142,30 +187,37 @@ KeyboardBar *bar;
     if (definition != nil && definition.name.length >0) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", definition.name, definition.numberOfFriends.intValue];
         friends = [NSMutableArray new];
-        NSArray *tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:definition.name :definition.ownerId]];
+        tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:definition.name :definition.ownerId]];
         for (Friend *f in tmp) {
             [friends addObject:[[CEFriendHelper alloc] initWithName:f.friendName]];
         }
         if (_tableView == nil) {
-            [[self.view viewWithTag:2000] removeFromSuperview];
             [self.view addSubview:[self createTableView]];
         }
-        [_tableView reloadData];
+        [self reloadData:definition];
 
     }
 }
 
+- (void) reloadData: (CircleDefinition *)def {
+    [_tableView reloadData];
+    tmp = [connector getFriendsInCircle:def.name :def.ownerId];
+    NSMutableString *text = [NSMutableString new];
+    for (Friend *fr in tmp) {
+        [text appendString:fr.friendName];
+        [text appendString:@"   "];
+        [text appendString:[NSString stringWithFormat:@"%.2f", fr.balanceInCircle.doubleValue]];
+        [text appendString:@"\n"];
+    }
+    scroll.text = text;
+}
+
 - (void) receiveReloadNotification:(NSNotification *) notification {
     NSDictionary *userInfo = notification.userInfo;
-    definition = [userInfo objectForKey:@"circle"];
     if (userInfo !=nil) {
-        _okButton.hidden = NO;
-        _okButton.enabled = YES;
+        definition = [userInfo objectForKey:@"circle"];
         [self reloadView];
     } else {
-        _okButton.hidden = YES;
-        _okButton.enabled = NO;
-        [_tableView removeFromSuperview];
         [self.view addSubview:[self createView]];
         self.navigationItem.title = @"";
     }
@@ -219,10 +271,10 @@ KeyboardBar *bar;
     CERequestHandler *handler = [CERequestHandler new];
     NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
     NSDictionary *data = [res objectForKey:@"data"];
-    NSArray *deleted = [res objectForKey:@"deleted"];
+    NSArray *deleted = [data objectForKey:@"deleted"];
     [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
-    for (NSDictionary * dict in data) {
-        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]]];
+    for (NSDictionary * dict in [data objectForKey:@"circles"]) {
+        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[dict objectForKey:@"history"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]] :[NSNumber numberWithInt:[[dict objectForKey:@"lastRevision"] intValue]]];
     }
     [spinner stopAnimating];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
@@ -270,6 +322,8 @@ KeyboardBar *bar;
     [bar.fields insertObject:amount atIndex:indexPath.row];
     if (fHelper.amount != nil && fHelper.amount.length > 0) {
         amount.text = fHelper.amount;
+    } else {
+        amount.text = @"";
     }
     UITextField *dropDown = (UITextField *)[cell viewWithTag:1030];
     [dropDown setDelegate:self];
@@ -289,9 +343,9 @@ KeyboardBar *bar;
     
     if (textField.tag == 1020) {
         friend.amount = textField.text;
-    } else if (textField.tag == 1030) {
-        friend.currency = textField.text;
     }
+    friend.currency = ((UITextField *)[cell viewWithTag:1030]).text;
+    
     
 }
 
@@ -300,9 +354,8 @@ KeyboardBar *bar;
 }
 
 -(IBAction) addHistoryRecords:(UIButton *) sender {
-    
     [connector addHistoryRecords:friends :definition.name :definition.ownerId :delegate.currentUser.userId];
-    
+    [self reloadView];
 }
 
 @end

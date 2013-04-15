@@ -15,5 +15,6 @@
 @dynamic name;
 @dynamic numberOfFriends;
 @dynamic ownerId;
+@dynamic lastServerRevision;
 
 @end

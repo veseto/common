@@ -100,6 +100,7 @@ NSManagedObjectContext *context;
     circleDef.numberOfFriends = [NSNumber numberWithInt:friends.count];
     circleDef.ownerId = ownerId;
     circleDef.circleId = circleId;
+    circleDef.lastServerRevision = 0;
     for (int i = 0; i < friends.count; i ++) {
         Friend *f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
         f.circleName = circleName;
@@ -117,7 +118,12 @@ NSManagedObjectContext *context;
 }
 
 
--(void) createCircleFromServer: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId{
+-(void) createCircleFromServer: (NSArray *) friends :(NSArray *) history :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId :(NSNumber *) lastRevision{
+    
+    NSArray *historyToDelete = [self getUnsyncedHistoryRecordsForCircle:circleName :ownerId];
+    for (HistoryRecord *h in historyToDelete) {
+        [context deleteObject:h];
+    }
     
     NSEntityDescription *entityDesc =
     [NSEntityDescription entityForName:@"CircleDefinition"
@@ -137,6 +143,7 @@ NSManagedObjectContext *context;
     circleDef.numberOfFriends = [NSNumber numberWithInt:friends.count];
     circleDef.ownerId = ownerId;
     circleDef.circleId = circleId;
+    circleDef.lastServerRevision = lastRevision;
     for (int i = 0; i < friends.count; i ++) {
         NSDictionary *dict = [friends objectAtIndex:i];
         NSEntityDescription *entityDescFr = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
@@ -157,8 +164,20 @@ NSManagedObjectContext *context;
         if (![[dict objectForKey:@"friendId"] isEqual: [NSNull null]]) {
             f.friendId = [NSNumber numberWithInt:[[dict objectForKey:@"friendId"] intValue]];
         }
-        f.balanceInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"balanceInCircle"] intValue]];
+        f.balanceInCircle = [NSNumber numberWithInt:[[dict objectForKey:@"balanceInCircle"] doubleValue]];
         f.circleOwner = [NSNumber numberWithInt:[[dict objectForKey:@"circleOwner"] intValue]];
+    }
+    
+    for (int j = 0; j < history.count; j ++) {
+        NSDictionary *tmp = [history objectAtIndex:j];
+        HistoryRecord *hr = [NSEntityDescription insertNewObjectForEntityForName:@"HistoryRecord" inManagedObjectContext:context];
+        hr.authorId = [NSNumber numberWithInt:[[tmp objectForKey:@"authorId"] intValue]];
+        hr.centralId = [NSNumber numberWithInt:[[tmp objectForKey:@"id"] intValue]];
+        hr.user = [tmp objectForKey:@"user"];
+        hr.sum = [NSNumber numberWithDouble: [[tmp objectForKey:@"sum"] doubleValue]];
+        hr.currency = [tmp objectForKey:@"currency"];
+        hr.circleName = [tmp objectForKey:@"circleName"];
+        hr.circleOwner = [NSNumber numberWithInt:[[tmp objectForKey:@"circleOwner"] intValue]];
     }
     
     [context save:&error];
@@ -292,9 +311,9 @@ NSManagedObjectContext *context;
 }
 
 -(void) addHistoryRecords: (NSArray *) friendsArray :(NSString  *) circleName :(NSNumber *) circleOwner :(NSNumber *)authorId {
-    double sum = 0;
+    NSArray *friendsInCircle = [[NSArray alloc] initWithArray:[self getFriendsInCircle:circleName :circleOwner]];
     for (CEFriendHelper *frHelper in friendsArray) {
-        if (frHelper.amount > 0) {
+        if (authorId != nil && frHelper.amount > 0) {
             HistoryRecord *record = [NSEntityDescription insertNewObjectForEntityForName:@"HistoryRecord" inManagedObjectContext:context];
             record.user = frHelper.userName;
             record.sum = [NSNumber numberWithDouble: frHelper.amount.doubleValue];
@@ -302,17 +321,15 @@ NSManagedObjectContext *context;
             record.circleName = circleName;
             record.circleOwner = circleOwner;
             record.authorId = authorId;
-            sum += record.sum.doubleValue;
-        }
-    }
-    NSArray *friendsInCircle = [[NSArray alloc] initWithArray:[self getFriendsInCircle:circleName :circleOwner]];
-    for (Friend *f in friendsInCircle) {
-        for (CEFriendHelper *frHelper in friendsArray) {
-            if ([frHelper.userName isEqualToString:f.friendName]) {
-                f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + frHelper.amount.doubleValue - sum/friendsInCircle.count];
+            for (Friend *f in friendsInCircle) {
+                if ([f.friendName isEqualToString:record.user]) {
+                    f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + record.sum.doubleValue];
+                    break;
+                }
             }
         }
     }
+
     NSError *error;
     [context save:&error];
     
@@ -331,15 +348,19 @@ NSManagedObjectContext *context;
     return result;
 }
 
--(void) updateFriendsInCircle:(NSArray *) friends :circleName :(NSNumber *) circleOwner{
-    NSArray *friendsInCircle = [self getFriendsInCircle:circleName :circleOwner];
-    for (Friend *f in friendsInCircle) {
-        for (CEFriendHelper *h in friends) {
-            if ([f.friendName isEqualToString:h.userName]) {
-                
-            }
-        }
+-(NSArray *) getUnsyncedHistoryRecordsForCircle: (NSString *) circleName :(NSNumber *) ownerId {
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"HistoryRecord" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"circleOwner == %d && circleName == %@ && centralId == 0", ownerId.intValue, circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    if (error || result.count < 1) {
+        return [NSArray new];
     }
+    return result;
+
 }
+
 
 @end
