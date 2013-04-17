@@ -52,7 +52,7 @@ KeyboardBar *bar;
 
 -(void) viewWillAppear: (BOOL) animated {
     bar = [[KeyboardBar alloc] init];
-    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _password, _confirm, nil];
+    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _email, _password, _confirm, nil];
     bar.field = nil;
     bar.index = -1;
     for (UITextField *field in fields) {
@@ -123,6 +123,12 @@ KeyboardBar *bar;
             user.userName = [json valueForKey:@"username"];
             user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
             ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
+                                                            message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", _email.text]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
             UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
             [self.navigationController pushViewController:home animated:YES];

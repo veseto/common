@@ -556,8 +556,8 @@
 		F20B327F16D0094C00B70559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
@@ -571,8 +571,8 @@
 		F20B328016D0094C00B70559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
