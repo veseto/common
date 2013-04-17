@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
 #import "CEUser.h"
+#import "CircleDefinition.h"
 
 @interface CEAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -21,6 +22,8 @@
 @property (retain, nonatomic) MFSideMenu *sideMenu;
 
 @property CEUser *currentUser;
+@property CircleDefinition *currentCircle;
+
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

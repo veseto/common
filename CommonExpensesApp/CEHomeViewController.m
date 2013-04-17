@@ -32,7 +32,6 @@ CEAppDelegate *delegate;
 NSArray *tmp;
 NSMutableArray *friends;
 CEDBConnector *connector;
-CircleDefinition *definition;
 KeyboardBar *bar;
 UITextView *scroll;
 
@@ -63,17 +62,7 @@ UITextView *scroll;
     bar = [KeyboardBar new];
     
     //Add init with default circle
-    NSArray *def = [connector getCirclesForUser:delegate.currentUser.userId];
-    if (def != nil && def.count > 0){
-        definition = [def objectAtIndex:0];
-        if (_tableView == nil) {
-            [self.view addSubview:[self createTableView]];
-        }
-        [self reloadView];
-    } else {
-        [self.view addSubview:[self createView]];
-    }
-    
+    [self reloadView];
     [_selfViewButton setTitle:delegate.currentUser.userName forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -121,7 +110,7 @@ UITextView *scroll;
     
     CGRect newFrame = CGRectMake(0, 0, 0, 0);
     newFrame.size = CGSizeMake(screenWidth, 100);
-    tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:definition.name :definition.ownerId]];
+    tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
     
     scroll = [[UITextView alloc] initWithFrame:newFrame];
     NSMutableString *text = [NSMutableString new];
@@ -184,18 +173,21 @@ UITextView *scroll;
 
 - (void) reloadView{
     
-    if (definition != nil && definition.name.length >0) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", definition.name, definition.numberOfFriends.intValue];
+    if (delegate.currentCircle != nil && delegate.currentCircle.name.length >0) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
         friends = [NSMutableArray new];
-        tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:definition.name :definition.ownerId]];
+        tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
         for (Friend *f in tmp) {
             [friends addObject:[[CEFriendHelper alloc] initWithName:f.friendName]];
         }
         if (_tableView == nil) {
             [self.view addSubview:[self createTableView]];
         }
-        [self reloadData:definition];
+        [self reloadData:delegate.currentCircle];
 
+    } else {
+        [self.view addSubview:[self createView]];
+        self.navigationItem.title = @"";
     }
 }
 
@@ -213,14 +205,7 @@ UITextView *scroll;
 }
 
 - (void) receiveReloadNotification:(NSNotification *) notification {
-    NSDictionary *userInfo = notification.userInfo;
-    if (userInfo !=nil) {
-        definition = [userInfo objectForKey:@"circle"];
-        [self reloadView];
-    } else {
-        [self.view addSubview:[self createView]];
-        self.navigationItem.title = @"";
-    }
+    [self reloadView];
 }
 
 -(void) showStatsView: (NSNotification *) notification {
@@ -271,10 +256,19 @@ UITextView *scroll;
     CERequestHandler *handler = [CERequestHandler new];
     NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
     NSDictionary *data = [res objectForKey:@"data"];
-    NSArray *deleted = [data objectForKey:@"deleted"];
-    [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
-    for (NSDictionary * dict in [data objectForKey:@"circles"]) {
-        [connector createCircleFromServer:[dict objectForKey:@"friends"] :[dict objectForKey:@"history"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]] :[NSNumber numberWithInt:[[dict objectForKey:@"lastRevision"] intValue]]];
+    if ([data objectForKey:@"error"] != nil) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account is not active"
+                                                        message:@"You have to activate your account first"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else {
+        NSArray *deleted = [data objectForKey:@"deleted"];
+        [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
+        for (NSDictionary * dict in [data objectForKey:@"circles"]) {
+            [connector createCircleFromServer:[dict objectForKey:@"friends"] :[dict objectForKey:@"history"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]] :[NSNumber numberWithInt:[[dict objectForKey:@"lastRevision"] intValue]]];
+        }
     }
     [spinner stopAnimating];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
@@ -283,7 +277,7 @@ UITextView *scroll;
 
 - (IBAction)someAction:(id)sender {
     CEHistoryViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"history"];
-    stats.definition = definition;
+    stats.definition = delegate.currentCircle;
     [self presentViewController:stats animated:YES completion:nil];
     
 }
@@ -354,7 +348,7 @@ UITextView *scroll;
 }
 
 -(IBAction) addHistoryRecords:(UIButton *) sender {
-    [connector addHistoryRecords:friends :definition.name :definition.ownerId :delegate.currentUser.userId];
+    [connector addHistoryRecords:friends :delegate.currentCircle.name :delegate.currentCircle.ownerId :delegate.currentUser.userId];
     [self reloadView];
 }
 

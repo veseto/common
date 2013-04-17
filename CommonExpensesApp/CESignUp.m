@@ -19,9 +19,9 @@
 @implementation CESignUp
 
 @synthesize userName = _userName;
-@synthesize email = _email;
 @synthesize password = _password;
 @synthesize confirm = _confirm;
+@synthesize email = _email;
 
 KeyboardBar *bar;
 
@@ -52,7 +52,7 @@ KeyboardBar *bar;
 
 -(void) viewWillAppear: (BOOL) animated {
     bar = [[KeyboardBar alloc] init];
-    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _email, _password, _confirm, nil];
+    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _password, _confirm, nil];
     bar.field = nil;
     bar.index = -1;
     for (UITextField *field in fields) {
@@ -104,9 +104,9 @@ KeyboardBar *bar;
     } else if ([_password.text isEqualToString:_confirm.text]) {
         NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
         [params setObject:_userName.text forKey:@"username"];
+        [params setObject:_email.text forKey:@"email"];
         [params setObject:_password.text forKey:@"password"];
         [params setObject:_confirm.text forKey:@"confirm"];
-        [params setObject:_email.text forKey:@"email"];
         CERequestHandler *handler = [[CERequestHandler alloc] init];
         NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
         if (json != nil &&  [json objectForKey:@"error"] != nil) {
@@ -190,6 +190,12 @@ KeyboardBar *bar;
     _scrollView.scrollIndicatorInsets = contentInsets;
 }
 
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self signUp];
+    return YES;
+}
+
 - (BOOL) validateEmail: (NSString *) candidate {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
@@ -203,12 +209,5 @@ KeyboardBar *bar;
     
     return [emailTest evaluateWithObject:candidate];
 }
-
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self signUp];
-    return YES;
-}
-
 
 @end

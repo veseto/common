@@ -40,6 +40,9 @@ KeyboardBar *bar;
     
 }
 -(void) viewWillAppear: (BOOL) animated {
+    CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
+    delegate.currentCircle = nil;
+    delegate.currentUser = nil;
     bar = [KeyboardBar new];
     NSMutableArray *fields = [[NSMutableArray alloc] initWithObjects:_username, _password, nil];
     for (UITextField *field in fields) {

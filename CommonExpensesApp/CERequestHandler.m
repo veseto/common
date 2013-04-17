@@ -22,6 +22,8 @@
         key = [keyEnum nextObject];
     }
     postString = [postString stringByAppendingString:@"ios=true"];
+    postString = [postString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
     [request setHTTPBody:[postString dataUsingEncoding:NSUTF8StringEncoding]];
     
     NSError *error;

@@ -135,10 +135,9 @@ CEAppDelegate *delegate;
         [friends insertObject:user.userName atIndex:0];
         CEDBConnector *connector = [CEDBConnector new];
         CircleDefinition *def = [connector createCircle:friends :user.userId :_name.text :nil];
-        NSMutableDictionary *dict = [NSMutableDictionary new];
-        [dict setObject:def forKey:@"circle"];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:dict];
+        delegate.currentCircle = def;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
