@@ -249,30 +249,46 @@ UITextView *scroll;
 
 - (IBAction)sync:(id)sender {
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    [spinner setCenter:CGPointMake(self.view.window.frame.size.width/2.0, self.view.window.frame.size.height/2.0)]; // I do this because I'm in landscape mode
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+
+    spinner.center = CGPointMake(screenWidth/2, screenHeight/2 - 35);
+    spinner.color = [UIColor blackColor];
     [self.view addSubview:spinner];
     [spinner startAnimating];
-    CESynchManager *syncMngr = [[CESynchManager alloc] init];
-    CERequestHandler *handler = [CERequestHandler new];
-    NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
-    NSDictionary *data = [res objectForKey:@"data"];
-    if ([data objectForKey:@"error"] != nil) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account is not active"
-                                                        message:@"You have to activate your account first"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else {
-        NSArray *deleted = [data objectForKey:@"deleted"];
-        [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
-        for (NSDictionary * dict in [data objectForKey:@"circles"]) {
-            [connector createCircleFromServer:[dict objectForKey:@"friends"] :[dict objectForKey:@"history"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]] :[NSNumber numberWithInt:[[dict objectForKey:@"lastRevision"] intValue]]];
-        }
-    }
-    [spinner stopAnimating];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-    [self reloadView];
+
+    dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    // it's not, so we will start a background process to calculate it and not block the UI
+    dispatch_async(workingQueue,
+                   ^{
+                       
+                       CESynchManager *syncMngr = [[CESynchManager alloc] init];
+                       CERequestHandler *handler = [CERequestHandler new];
+                       NSDictionary *res = [handler sendJsonRequest: [syncMngr syncAllUserData:delegate.currentUser.userId]:@"usrsync.php"];
+                       NSDictionary *data = [res objectForKey:@"data"];
+                       if ([data objectForKey:@"error"] == nil) {
+                           NSArray *deleted = [data objectForKey:@"deleted"];
+                           [connector removeDeletedCirclesForUser:deleted :delegate.currentUser.userId];
+                           for (NSDictionary * dict in [data objectForKey:@"circles"]) {
+                               [connector createCircleFromServer:[dict objectForKey:@"friends"] :[dict objectForKey:@"history"] :[NSNumber numberWithInt: [[dict objectForKey:@"ownerId"] intValue]] :[dict objectForKey:@"name"] :[NSNumber numberWithInt:[[dict objectForKey:@"id"] intValue]] :[NSNumber numberWithInt:[[dict objectForKey:@"lastRevision"] intValue]]];
+                           }
+                       }
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           [spinner stopAnimating];
+                           if ([data objectForKey:@"error"] != nil) {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account is not active"
+                                                                               message:@"You have to activate your account first"
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                               [alert show];
+                           }
+                           [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
+                           [self reloadView];
+                       });
+                   });
+    
 }
 
 - (IBAction)someAction:(id)sender {
