@@ -38,8 +38,6 @@
 		F25E136A16DFCFDC0086DE2B /* CEConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136916DFCFDC0086DE2B /* CEConstants.m */; };
 		F26293CD16F4E5A6002E0933 /* CESelfStatisticsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */; };
 		F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2720FE81704A48E00A16090 /* addDataCell.xib */; };
-		F2720FEE1704A52E00A16090 /* DropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = F2720FEB1704A52E00A16090 /* DropDown.m */; };
-		F2720FEF1704A52E00A16090 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2720FED1704A52E00A16090 /* PopoverView.m */; };
 		F286CE1F16EE366400E7FBEC /* CEHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */; };
 		F286CE2216F0ED3E00E7FBEC /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE2116F0ED3E00E7FBEC /* SideMenuViewController.m */; };
 		F286CE6016F111E600E7FBEC /* back-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F286CE5B16F111E600E7FBEC /* back-arrow.png */; };
@@ -61,8 +59,6 @@
 		F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */; };
 		F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F422E916E3B49900D55906 /* KeyboardBar.m */; };
 		F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB90EA1704A851009CD45C /* CEFriendHelper.m */; };
-		F2FB90ED1705DD54009CD45C /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F2FB90EC1705DD54009CD45C /* images.jpeg */; };
-		F2FB90EF1705DD8B009CD45C /* 0271@2x rotated.png in Resources */ = {isa = PBXBuildFile; fileRef = F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,10 +106,6 @@
 		F26293CB16F4E5A6002E0933 /* CESelfStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESelfStatisticsViewController.h; sourceTree = "<group>"; };
 		F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESelfStatisticsViewController.m; sourceTree = "<group>"; };
 		F2720FE81704A48E00A16090 /* addDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addDataCell.xib; sourceTree = "<group>"; };
-		F2720FEA1704A52E00A16090 /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDown.h; path = ../../../DiabloIIIApp/DiabloIIIApp/DropDown.h; sourceTree = "<group>"; };
-		F2720FEB1704A52E00A16090 /* DropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDown.m; path = ../../../DiabloIIIApp/DiabloIIIApp/DropDown.m; sourceTree = "<group>"; };
-		F2720FEC1704A52E00A16090 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PopoverView.h; path = ../../../DiabloIIIApp/DiabloIIIApp/PopoverView.h; sourceTree = "<group>"; };
-		F2720FED1704A52E00A16090 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PopoverView.m; path = ../../../DiabloIIIApp/DiabloIIIApp/PopoverView.m; sourceTree = "<group>"; };
 		F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEHomeViewController.h; sourceTree = "<group>"; };
 		F286CE1E16EE366400E7FBEC /* CEHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEHomeViewController.m; sourceTree = "<group>"; };
 		F286CE2016F0ED3E00E7FBEC /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SideMenuViewController.h; path = ../SideMenuViewController.h; sourceTree = "<group>"; };
@@ -150,8 +142,6 @@
 		F2F422E916E3B49900D55906 /* KeyboardBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardBar.m; path = ../KeyboardBar.m; sourceTree = "<group>"; };
 		F2FB90E91704A851009CD45C /* CEFriendHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEFriendHelper.h; sourceTree = "<group>"; };
 		F2FB90EA1704A851009CD45C /* CEFriendHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEFriendHelper.m; sourceTree = "<group>"; };
-		F2FB90EC1705DD54009CD45C /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = images.jpeg; path = ../../../../DiabloIIIApp/Resources/images.jpeg; sourceTree = "<group>"; };
-		F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "0271@2x rotated.png"; path = "../../../../DiabloIIIApp/Resources/0271@2x rotated.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,8 +271,6 @@
 		F286CE5A16F111E600E7FBEC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F2FB90EE1705DD8B009CD45C /* 0271@2x rotated.png */,
-				F2FB90EC1705DD54009CD45C /* images.jpeg */,
 				F286CE5B16F111E600E7FBEC /* back-arrow.png */,
 				F286CE5C16F111E600E7FBEC /* back-arrow@2x.png */,
 				F286CE5D16F111E600E7FBEC /* Default-568h@2x.png */,
@@ -336,10 +324,6 @@
 		F2BD8EF516EA02B9008DEF8A /* common */ = {
 			isa = PBXGroup;
 			children = (
-				F2720FEA1704A52E00A16090 /* DropDown.h */,
-				F2720FEB1704A52E00A16090 /* DropDown.m */,
-				F2720FEC1704A52E00A16090 /* PopoverView.h */,
-				F2720FED1704A52E00A16090 /* PopoverView.m */,
 				F21625C216F5D62900324637 /* MFSideMenu */,
 				F25E136516DFB15C0086DE2B /* CERequestHandler.h */,
 				F25E136616DFB15C0086DE2B /* CERequestHandler.m */,
@@ -439,8 +423,6 @@
 				D94ECE571701A55F006EB9F0 /* iTunesArtwork.png in Resources */,
 				D94ECE581701A55F006EB9F0 /* iTunesArtwork@2x.png in Resources */,
 				F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */,
-				F2FB90ED1705DD54009CD45C /* images.jpeg in Resources */,
-				F2FB90EF1705DD8B009CD45C /* 0271@2x rotated.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,8 +457,6 @@
 				F21625CB16F6004600324637 /* CESettingsViewController.m in Sources */,
 				F28B06EC16F71C050050145F /* CESynchManager.m in Sources */,
 				F28B9CAD16FC870C00CA6FBB /* DeletedCircles.m in Sources */,
-				F2720FEE1704A52E00A16090 /* DropDown.m in Sources */,
-				F2720FEF1704A52E00A16090 /* PopoverView.m in Sources */,
 				F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */,
 				F2513545170997A400800E55 /* HistoryRecord.m in Sources */,
 				F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */,

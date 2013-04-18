@@ -15,7 +15,6 @@
 #import "CESynchManager.h"
 #import "CERequestHandler.h"
 #import "CEFriendHelper.h"
-#import "DropDown.h"
 #import "Friend.h"
 #import "KeyboardBar.h"
 #import "CEHistoryViewController.h"

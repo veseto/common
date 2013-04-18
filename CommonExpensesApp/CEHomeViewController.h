@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "SideMenuViewController.h"
-#import "DropDown.h"
 
-@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DropDownDelegate>
+@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic, retain) SideMenuViewController *sideMenu;
 @property (nonatomic, retain) IBOutlet UIButton *selfViewButton;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
