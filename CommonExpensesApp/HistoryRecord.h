@@ -19,5 +19,6 @@
 @property (nonatomic, retain) NSString * user;
 @property (nonatomic, retain) NSString * circleName;
 @property (nonatomic, retain) NSNumber * circleOwner;
+@property (nonatomic, retain) NSNumber * lastServerRevision;
 
 @end

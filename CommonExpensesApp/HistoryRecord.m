@@ -18,5 +18,6 @@
 @dynamic user;
 @dynamic circleName;
 @dynamic circleOwner;
+@dynamic lastServerRevision;
 
 @end
