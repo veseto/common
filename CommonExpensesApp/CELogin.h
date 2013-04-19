@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UITextView *text;
 - (IBAction)LogIn:(id)sender;
+- (IBAction)closeView:(id)sender;
 
 @end

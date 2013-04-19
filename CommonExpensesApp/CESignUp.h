@@ -15,5 +15,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)register:(id)sender;
+- (IBAction)closeView:(id)sender;
 
 @end

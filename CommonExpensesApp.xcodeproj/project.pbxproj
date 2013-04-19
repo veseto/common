@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D923B0C71721D4A000E7A34C /* CEStartPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D923B0C61721D4A000E7A34C /* CEStartPageViewController.m */; };
 		D94ECE4F1701A55F006EB9F0 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D94ECE451701A55F006EB9F0 /* Icon-72.png */; };
 		D94ECE501701A55F006EB9F0 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94ECE461701A55F006EB9F0 /* Icon-72@2x.png */; };
 		D94ECE511701A55F006EB9F0 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D94ECE471701A55F006EB9F0 /* Icon-Small-50.png */; };
@@ -62,6 +63,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D923B0C51721D4A000E7A34C /* CEStartPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEStartPageViewController.h; sourceTree = "<group>"; };
+		D923B0C61721D4A000E7A34C /* CEStartPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEStartPageViewController.m; sourceTree = "<group>"; };
 		D94ECE451701A55F006EB9F0 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		D94ECE461701A55F006EB9F0 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		D94ECE471701A55F006EB9F0 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				F291EAD316D2B5C9006C3BD6 /* CESignUp.m */,
 				F25E136216DFAB1E0086DE2B /* CELogin.h */,
 				F25E136316DFAB1E0086DE2B /* CELogin.m */,
+				D923B0C51721D4A000E7A34C /* CEStartPageViewController.h */,
+				D923B0C61721D4A000E7A34C /* CEStartPageViewController.m */,
 			);
 			name = usrManagement;
 			sourceTree = "<group>";
@@ -460,6 +465,7 @@
 				F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */,
 				F2513545170997A400800E55 /* HistoryRecord.m in Sources */,
 				F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */,
+				D923B0C71721D4A000E7A34C /* CEStartPageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

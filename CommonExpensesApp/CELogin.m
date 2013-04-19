@@ -23,7 +23,6 @@
 @synthesize password = _password;
 @synthesize text = _text;
 @synthesize rememberUser = _rememberUser;
-KeyboardBar *bar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,14 +42,6 @@ KeyboardBar *bar;
     CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
     delegate.currentCircle = nil;
     delegate.currentUser = nil;
-    bar = [KeyboardBar new];
-    NSMutableArray *fields = [[NSMutableArray alloc] initWithObjects:_username, _password, nil];
-    for (UITextField *field in fields) {
-        [field setInputAccessoryView:bar];
-    }
-    bar.index = -1;
-    bar.field = nil;
-    bar.fields = fields;
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,6 +53,10 @@ KeyboardBar *bar;
 - (IBAction)LogIn:(id)sender {
     [self logIn];
     
+}
+
+- (IBAction)closeView:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) logIn {
@@ -145,17 +140,19 @@ KeyboardBar *bar;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [bar setField:textField];
-    bar.index = [bar.fields indexOfObject:textField];
     
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [bar setField:nil];
-    bar.index = -1;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self logIn];
+    if (textField.tag == 10) {
+        [[self.view viewWithTag:20] becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+        [self logIn];
+    }
+    
     return YES;
 }
 

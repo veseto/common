@@ -216,4 +216,7 @@ KeyboardBar *bar;
     return [emailTest evaluateWithObject:candidate];
 }
 
+- (IBAction)closeView:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
