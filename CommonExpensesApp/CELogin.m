@@ -12,6 +12,7 @@
 #import "CEAppDelegate.h"
 #import "KeyboardBar.h"
 #import "CEUser.h"
+#import "CEStartPageViewController.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface CELogin ()
@@ -21,8 +22,9 @@
 @implementation CELogin
 @synthesize username = _username;
 @synthesize password = _password;
-@synthesize text = _text;
 @synthesize rememberUser = _rememberUser;
+
+bool isLogged;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,9 +38,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 }
 -(void) viewWillAppear: (BOOL) animated {
+    isLogged = NO;
     CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
     delegate.currentCircle = nil;
     delegate.currentUser = nil;
@@ -78,7 +80,6 @@
         CEDBConnector *connector = [[CEDBConnector alloc] init];
         CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
         
-        bool isLogged = NO;
         CEUser *user = [connector getUser:_username.text];
         if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
             isLogged = YES;
@@ -105,16 +106,13 @@
             [alert show];
         } else {
             if (isLogged) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
                 delegate.currentUser = user;
                 if ([_rememberUser isOn]) {
                     [connector setDefaultUser:user.userName:user.userId];
                 } else {
                     [connector removeDefaultUser];
                 }
-                UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-                UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"home"];
-                [self.navigationController pushViewController:home animated:YES];
+                [self dismissViewControllerAnimated:YES completion:nil];
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
                                                                 message:@"Username and password don't match"
@@ -156,4 +154,9 @@
     return YES;
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    if (isLogged) {
+        [((CEStartPageViewController *)_delegate) showHomeView];
+    }
+}
 @end

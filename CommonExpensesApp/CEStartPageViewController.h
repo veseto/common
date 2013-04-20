@@ -10,6 +10,9 @@
 
 @interface CEStartPageViewController : UIViewController
 
+- (void)showHomeView;
 
+- (IBAction)showLoginView:(id)sender;
+- (IBAction)showRegisterView:(id)sender;
 
 @end

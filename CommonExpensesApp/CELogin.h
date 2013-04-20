@@ -12,8 +12,8 @@
 @property (strong, nonatomic) IBOutlet UISwitch *rememberUser;
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UITextView *text;
+@property (nonatomic, assign) id delegate;
+
 - (IBAction)LogIn:(id)sender;
 - (IBAction)closeView:(id)sender;
 

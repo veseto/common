@@ -11,6 +11,7 @@
 #import "CEDBConnector.h"
 #import "KeyboardBar.h"
 #import "CEAppDelegate.h"
+#import "CEStartPageViewController.h"
 
 @interface CESignUp ()
 
@@ -18,12 +19,10 @@
 
 @implementation CESignUp
 
-@synthesize userName = _userName;
 @synthesize password = _password;
-@synthesize confirm = _confirm;
 @synthesize email = _email;
-
-KeyboardBar *bar;
+@synthesize delegate = _delegate;
+bool isRegistered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,29 +36,8 @@ KeyboardBar *bar;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide:)
-                                                 name:UIKeyboardWillHideNotification
-                                               object:nil];
-    
 }
 
--(void) viewWillAppear: (BOOL) animated {
-    bar = [[KeyboardBar alloc] init];
-    NSMutableArray * fields = [[NSMutableArray alloc] initWithObjects:_userName, _email, _password, _confirm, nil];
-    bar.field = nil;
-    bar.index = -1;
-    for (UITextField *field in fields) {
-        [field setInputAccessoryView:bar];
-    }
-    [bar setFields:fields];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,40 +51,18 @@ KeyboardBar *bar;
 }
 
 - (void) signUp {
-    if (_userName.text.length < 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty username"
-                                                        message:@"Enter username"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else if (_userName.text.length < 4) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid username"
-                                                        message:@"Username should be at least 4 symbols"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else if (![self validateEmail:_email.text]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
-                                                        message:@"Enter valid e-mail address"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else if (_password.text.length < 1) {
+    if (_password.text.length < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty password"
                                                         message:@"Enter password"
                                                        delegate:nil
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
-    } else if ([_password.text isEqualToString:_confirm.text]) {
+    } else {
         NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-        [params setObject:_userName.text forKey:@"username"];
+        [params setObject:_email.text forKey:@"username"];
         [params setObject:_email.text forKey:@"email"];
         [params setObject:_password.text forKey:@"password"];
-        [params setObject:_confirm.text forKey:@"confirm"];
         CERequestHandler *handler = [[CERequestHandler alloc] init];
         NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
         if (json != nil &&  [json objectForKey:@"error"] != nil) {
@@ -117,6 +73,7 @@ KeyboardBar *bar;
                                                   otherButtonTitles:nil];
             [alert show];
         } else if (json != nil && json.count > 0) {
+            isRegistered = YES;
             CEDBConnector * connector = [[CEDBConnector alloc] init];
             [connector saveUser:json];
             CEUser *user = [CEUser new];
@@ -129,76 +86,36 @@ KeyboardBar *bar;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-            UIViewController *home = [self.storyboard instantiateViewControllerWithIdentifier:@"home"];
-            [self.navigationController pushViewController:home animated:YES];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration fail"
-                                                            message:[NSString stringWithFormat:@"User with username %@ already exists", _userName.text]
+                                                            message:[NSString stringWithFormat:@"Email %@ already registered", _email.text]
                                                            delegate:nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
         }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password confirmation"
-                                                        message:@"Passwords don't match"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
     }
 }
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    //CESuccessViewController *vc = [segue destinationViewController];
-    
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    bar.field = textField;
-    bar.index = [bar.fields indexOfObject:textField];
-    
-}
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-}
-
-
-- (void)keyboardWasShown:(NSNotification *)notification
-{
-    
-    // Step 1: Get the size of the keyboard.
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    
-    // Step 2: Adjust the bottom content inset of your scroll view by the keyboard height.
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    _scrollView.contentInset = contentInsets;
-    _scrollView.scrollIndicatorInsets = contentInsets;
-    
-    
-    // Step 3: Scroll the target text field into view.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= (keyboardSize.height + 15);
-    if (!CGRectContainsPoint(aRect, bar.field.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, 55);//bar.field.frame.origin.y - (keyboardSize.height-15));
-        [_scrollView setContentOffset:scrollPoint animated:YES];
-    }
-}
-
-- (void) keyboardWillHide:(NSNotification *)notification {
-    
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    _scrollView.contentInset = contentInsets;
-    _scrollView.scrollIndicatorInsets = contentInsets;
-}
-
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self signUp];
+    if (textField.tag == 10) {
+        if (![self validateEmail:_email.text]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
+                                                            message:@"Enter valid e-mail address"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        } else {
+            [self resignFirstResponder];
+            [[self.view viewWithTag:20] becomeFirstResponder];
+        }
+    } else {
+        [self signUp];
+    }
     return YES;
 }
 
@@ -218,5 +135,14 @@ KeyboardBar *bar;
 
 - (IBAction)closeView:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    isRegistered = NO;
+}
+-(void) viewWillDisappear:(BOOL)animated {
+    if (isRegistered) {
+        [((CEStartPageViewController *)_delegate) showHomeView];
+    }
 }
 @end

@@ -58,6 +58,9 @@
 		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
 		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
 		F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */; };
+		F2E31A661722B12C006D36BA /* CETextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A651722B12C006D36BA /* CETextField.m */; };
+		F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6B1722BD22006D36BA /* CEButton.m */; };
+		F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6E1722BDC4006D36BA /* CELabel.m */; };
 		F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F422E916E3B49900D55906 /* KeyboardBar.m */; };
 		F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB90EA1704A851009CD45C /* CEFriendHelper.m */; };
 /* End PBXBuildFile section */
@@ -141,6 +144,12 @@
 		F2956A5D16E535E8002128E6 /* CEDBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEDBConnector.m; sourceTree = "<group>"; };
 		F2B70D4B170A0D6E00A1C76B /* CEHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEHistoryViewController.h; path = ../CEHistoryViewController.h; sourceTree = "<group>"; };
 		F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEHistoryViewController.m; path = ../CEHistoryViewController.m; sourceTree = "<group>"; };
+		F2E31A641722B12C006D36BA /* CETextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CETextField.h; sourceTree = "<group>"; };
+		F2E31A651722B12C006D36BA /* CETextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CETextField.m; sourceTree = "<group>"; };
+		F2E31A6A1722BD22006D36BA /* CEButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEButton.h; sourceTree = "<group>"; };
+		F2E31A6B1722BD22006D36BA /* CEButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEButton.m; sourceTree = "<group>"; };
+		F2E31A6D1722BDC4006D36BA /* CELabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELabel.h; sourceTree = "<group>"; };
+		F2E31A6E1722BDC4006D36BA /* CELabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CELabel.m; sourceTree = "<group>"; };
 		F2F422E816E3B49900D55906 /* KeyboardBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardBar.h; path = ../KeyboardBar.h; sourceTree = "<group>"; };
 		F2F422E916E3B49900D55906 /* KeyboardBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardBar.m; path = ../KeyboardBar.m; sourceTree = "<group>"; };
 		F2FB90E91704A851009CD45C /* CEFriendHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEFriendHelper.h; sourceTree = "<group>"; };
@@ -327,6 +336,7 @@
 		F2BD8EF516EA02B9008DEF8A /* common */ = {
 			isa = PBXGroup;
 			children = (
+				F2E31A631722B102006D36BA /* uiFramework */,
 				F21625C216F5D62900324637 /* MFSideMenu */,
 				F25E136516DFB15C0086DE2B /* CERequestHandler.h */,
 				F25E136616DFB15C0086DE2B /* CERequestHandler.m */,
@@ -353,6 +363,19 @@
 				D923B0C61721D4A000E7A34C /* CEStartPageViewController.m */,
 			);
 			name = usrManagement;
+			sourceTree = "<group>";
+		};
+		F2E31A631722B102006D36BA /* uiFramework */ = {
+			isa = PBXGroup;
+			children = (
+				F2E31A641722B12C006D36BA /* CETextField.h */,
+				F2E31A651722B12C006D36BA /* CETextField.m */,
+				F2E31A6A1722BD22006D36BA /* CEButton.h */,
+				F2E31A6B1722BD22006D36BA /* CEButton.m */,
+				F2E31A6D1722BDC4006D36BA /* CELabel.h */,
+				F2E31A6E1722BDC4006D36BA /* CELabel.m */,
+			);
+			name = uiFramework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +489,9 @@
 				F2513545170997A400800E55 /* HistoryRecord.m in Sources */,
 				F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */,
 				D923B0C71721D4A000E7A34C /* CEStartPageViewController.m in Sources */,
+				F2E31A661722B12C006D36BA /* CETextField.m in Sources */,
+				F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */,
+				F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
