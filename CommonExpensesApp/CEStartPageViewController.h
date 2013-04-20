@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface CEStartPageViewController : UIViewController
 
@@ -14,5 +15,7 @@
 
 - (IBAction)showLoginView:(id)sender;
 - (IBAction)showRegisterView:(id)sender;
-
+- (IBAction)registerWithFacebook:(id)sender;
+@property (nonatomic, retain) ACAccountStore *accountStore;
+@property (nonatomic, retain) ACAccount *facebookAccount;
 @end

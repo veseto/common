@@ -11,6 +11,7 @@
 #import "CESignUp.h"
 #import "SideMenuViewController.h"
 #import "StartupInfo.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 @implementation CEAppDelegate
 
@@ -196,6 +197,18 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+/*
+ * If we have a valid session at the time of openURL call, we handle
+ * Facebook transitions by passing the url argument to handleOpenURL
+ */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 @end

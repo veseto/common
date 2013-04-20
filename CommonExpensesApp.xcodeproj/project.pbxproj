@@ -61,6 +61,13 @@
 		F2E31A661722B12C006D36BA /* CETextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A651722B12C006D36BA /* CETextField.m */; };
 		F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6B1722BD22006D36BA /* CEButton.m */; };
 		F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6E1722BDC4006D36BA /* CELabel.m */; };
+		F2E31A711722CD28006D36BA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A701722CD28006D36BA /* FacebookSDK.framework */; };
+		F2E31A7B1722D01D006D36BA /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */; };
+		F2E31A7D1722D05C006D36BA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A7C1722D05C006D36BA /* AdSupport.framework */; };
+		F2E31A7F1722D062006D36BA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A7E1722D062006D36BA /* Accounts.framework */; };
+		F2E31A811722D08A006D36BA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A801722D08A006D36BA /* libsqlite3.dylib */; };
+		F2E31A831722D097006D36BA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A821722D097006D36BA /* Security.framework */; };
+		F2E31A851722D0A1006D36BA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A841722D0A1006D36BA /* Social.framework */; };
 		F2F422EA16E3B49900D55906 /* KeyboardBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F422E916E3B49900D55906 /* KeyboardBar.m */; };
 		F2FB90EB1704A851009CD45C /* CEFriendHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F2FB90EA1704A851009CD45C /* CEFriendHelper.m */; };
 /* End PBXBuildFile section */
@@ -150,6 +157,13 @@
 		F2E31A6B1722BD22006D36BA /* CEButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEButton.m; sourceTree = "<group>"; };
 		F2E31A6D1722BDC4006D36BA /* CELabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELabel.h; sourceTree = "<group>"; };
 		F2E31A6E1722BDC4006D36BA /* CELabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CELabel.m; sourceTree = "<group>"; };
+		F2E31A701722CD28006D36BA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		F2E31A7C1722D05C006D36BA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		F2E31A7E1722D062006D36BA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		F2E31A801722D08A006D36BA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		F2E31A821722D097006D36BA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F2E31A841722D0A1006D36BA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		F2F422E816E3B49900D55906 /* KeyboardBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardBar.h; path = ../KeyboardBar.h; sourceTree = "<group>"; };
 		F2F422E916E3B49900D55906 /* KeyboardBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeyboardBar.m; path = ../KeyboardBar.m; sourceTree = "<group>"; };
 		F2FB90E91704A851009CD45C /* CEFriendHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEFriendHelper.h; sourceTree = "<group>"; };
@@ -161,10 +175,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2E31A851722D0A1006D36BA /* Social.framework in Frameworks */,
+				F2E31A831722D097006D36BA /* Security.framework in Frameworks */,
+				F2E31A811722D08A006D36BA /* libsqlite3.dylib in Frameworks */,
+				F2E31A7F1722D062006D36BA /* Accounts.framework in Frameworks */,
+				F2E31A7D1722D05C006D36BA /* AdSupport.framework in Frameworks */,
 				F20B326016D0094C00B70559 /* UIKit.framework in Frameworks */,
 				F20B326216D0094C00B70559 /* Foundation.framework in Frameworks */,
 				F20B326416D0094C00B70559 /* CoreGraphics.framework in Frameworks */,
 				F20B326616D0094C00B70559 /* CoreData.framework in Frameworks */,
+				F2E31A711722CD28006D36BA /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +229,13 @@
 		F20B325E16D0094C00B70559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F2E31A841722D0A1006D36BA /* Social.framework */,
+				F2E31A821722D097006D36BA /* Security.framework */,
+				F2E31A801722D08A006D36BA /* libsqlite3.dylib */,
+				F2E31A7E1722D062006D36BA /* Accounts.framework */,
+				F2E31A7C1722D05C006D36BA /* AdSupport.framework */,
+				F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */,
+				F2E31A701722CD28006D36BA /* FacebookSDK.framework */,
 				F20B325F16D0094C00B70559 /* UIKit.framework */,
 				F20B326116D0094C00B70559 /* Foundation.framework */,
 				F20B326316D0094C00B70559 /* CoreGraphics.framework */,
@@ -451,6 +478,7 @@
 				D94ECE571701A55F006EB9F0 /* iTunesArtwork.png in Resources */,
 				D94ECE581701A55F006EB9F0 /* iTunesArtwork@2x.png in Resources */,
 				F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */,
+				F2E31A7B1722D01D006D36BA /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +598,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
@@ -585,6 +617,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
 				INFOPLIST_FILE = "CommonExpensesApp/CommonExpensesApp-Info.plist";
