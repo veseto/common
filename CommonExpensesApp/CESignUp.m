@@ -22,6 +22,7 @@
 @synthesize password = _password;
 @synthesize email = _email;
 @synthesize delegate = _delegate;
+@synthesize username = _username;
 bool isRegistered;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,7 +56,7 @@ bool isRegistered;
         [alert show];
     } else {
         NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-        [params setObject:_email.text forKey:@"username"];
+        [params setObject:_username.text forKey:@"username"];
         [params setObject:_email.text forKey:@"email"];
         [params setObject:_password.text forKey:@"password"];
         CERequestHandler *handler = [[CERequestHandler alloc] init];

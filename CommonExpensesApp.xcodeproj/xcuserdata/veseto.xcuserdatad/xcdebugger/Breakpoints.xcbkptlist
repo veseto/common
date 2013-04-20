@@ -1131,7 +1131,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "76"
          endingLineNumber = "76"
-         landmarkName = "-signUp"
+         landmarkName = "-signUpLocal"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1144,7 +1144,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "63"
          endingLineNumber = "63"
-         landmarkName = "-signUp"
+         landmarkName = "-signUpLocal"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1235,7 +1235,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "145"
          endingLineNumber = "145"
-         landmarkName = "-viewWillDisappear:"
+         landmarkName = "-viewWillAppear:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

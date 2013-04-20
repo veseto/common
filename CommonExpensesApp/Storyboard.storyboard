@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -169,8 +169,9 @@
                     <navigationItem key="navigationItem" title="Register" id="U6k-0h-w3m"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
-                        <outlet property="email" destination="d8R-EV-8eG" id="qc5-Kl-9I7"/>
-                        <outlet property="password" destination="aIi-YN-pCn" id="2By-Zn-186"/>
+                        <outlet property="email" destination="aIi-YN-pCn" id="lWf-G3-Kue"/>
+                        <outlet property="password" destination="d8R-EV-8eG" id="PWB-cF-U1A"/>
+                        <outlet property="username" destination="tSM-5Q-RSa" id="ifc-BK-Umq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aL-pX-xsU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -952,6 +953,7 @@
                 <relationship kind="action" name="signUp:"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="username" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="CEStartPageViewController" superclassName="UIViewController">
