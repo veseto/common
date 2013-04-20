@@ -60,6 +60,8 @@
 		F286CEA016F22B1A00E7FBEC /* CEUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F286CE9F16F22B1A00E7FBEC /* CEUser.m */; };
 		F28B06EC16F71C050050145F /* CESynchManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B06EB16F71C050050145F /* CESynchManager.m */; };
 		F28B9CAD16FC870C00CA6FBB /* DeletedCircles.m in Sources */ = {isa = PBXBuildFile; fileRef = F28B9CAC16FC870C00CA6FBB /* DeletedCircles.m */; };
+		F28E46F317232F7800B485CB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F28E46F217232F7800B485CB /* FacebookSDK.framework */; };
+		F28E46F517232F8500B485CB /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F28E46F417232F8500B485CB /* FacebookSDKResources.bundle */; };
 		F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */; };
 		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
 		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
@@ -67,8 +69,6 @@
 		F2E31A661722B12C006D36BA /* CETextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A651722B12C006D36BA /* CETextField.m */; };
 		F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6B1722BD22006D36BA /* CEButton.m */; };
 		F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6E1722BDC4006D36BA /* CELabel.m */; };
-		F2E31A711722CD28006D36BA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A701722CD28006D36BA /* FacebookSDK.framework */; };
-		F2E31A7B1722D01D006D36BA /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */; };
 		F2E31A7D1722D05C006D36BA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A7C1722D05C006D36BA /* AdSupport.framework */; };
 		F2E31A7F1722D062006D36BA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A7E1722D062006D36BA /* Accounts.framework */; };
 		F2E31A811722D08A006D36BA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F2E31A801722D08A006D36BA /* libsqlite3.dylib */; };
@@ -156,6 +156,8 @@
 		F28B06EB16F71C050050145F /* CESynchManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESynchManager.m; sourceTree = "<group>"; };
 		F28B9CAB16FC870C00CA6FBB /* DeletedCircles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeletedCircles.h; sourceTree = "<group>"; };
 		F28B9CAC16FC870C00CA6FBB /* DeletedCircles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeletedCircles.m; sourceTree = "<group>"; };
+		F28E46F217232F7800B485CB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		F28E46F417232F8500B485CB /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		F291EAD016D2B55B006C3BD6 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		F291EAD216D2B5C9006C3BD6 /* CESignUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESignUp.h; sourceTree = "<group>"; };
 		F291EAD316D2B5C9006C3BD6 /* CESignUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESignUp.m; sourceTree = "<group>"; };
@@ -169,8 +171,6 @@
 		F2E31A6B1722BD22006D36BA /* CEButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEButton.m; sourceTree = "<group>"; };
 		F2E31A6D1722BDC4006D36BA /* CELabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELabel.h; sourceTree = "<group>"; };
 		F2E31A6E1722BDC4006D36BA /* CELabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CELabel.m; sourceTree = "<group>"; };
-		F2E31A701722CD28006D36BA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		F2E31A7C1722D05C006D36BA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		F2E31A7E1722D062006D36BA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		F2E31A801722D08A006D36BA /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -196,7 +196,7 @@
 				F20B326216D0094C00B70559 /* Foundation.framework in Frameworks */,
 				F20B326416D0094C00B70559 /* CoreGraphics.framework in Frameworks */,
 				F20B326616D0094C00B70559 /* CoreData.framework in Frameworks */,
-				F2E31A711722CD28006D36BA /* FacebookSDK.framework in Frameworks */,
+				F28E46F317232F7800B485CB /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,13 +247,13 @@
 		F20B325E16D0094C00B70559 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F28E46F417232F8500B485CB /* FacebookSDKResources.bundle */,
+				F28E46F217232F7800B485CB /* FacebookSDK.framework */,
 				F2E31A841722D0A1006D36BA /* Social.framework */,
 				F2E31A821722D097006D36BA /* Security.framework */,
 				F2E31A801722D08A006D36BA /* libsqlite3.dylib */,
 				F2E31A7E1722D062006D36BA /* Accounts.framework */,
 				F2E31A7C1722D05C006D36BA /* AdSupport.framework */,
-				F2E31A7A1722D01D006D36BA /* FacebookSDKResources.bundle */,
-				F2E31A701722CD28006D36BA /* FacebookSDK.framework */,
 				F20B325F16D0094C00B70559 /* UIKit.framework */,
 				F20B326116D0094C00B70559 /* Foundation.framework */,
 				F20B326316D0094C00B70559 /* CoreGraphics.framework */,
@@ -496,13 +496,13 @@
 				D94ECE571701A55F006EB9F0 /* iTunesArtwork.png in Resources */,
 				D94ECE581701A55F006EB9F0 /* iTunesArtwork@2x.png in Resources */,
 				F2720FE91704A48E00A16090 /* addDataCell.xib in Resources */,
-				F2E31A7B1722D01D006D36BA /* FacebookSDKResources.bundle in Resources */,
 				D993D6CD172326CB00B54733 /* icon_201.png in Resources */,
 				D993D6CE172326CB00B54733 /* icon_273.png in Resources */,
 				D993D6CF172326CB00B54733 /* icon_300.png in Resources */,
 				D993D6D31723272D00B54733 /* icon_201@2x.png in Resources */,
 				D993D6D41723272D00B54733 /* icon_273@2x.png in Resources */,
 				D993D6D51723272D00B54733 /* icon_300@2x.png in Resources */,
+				F28E46F517232F8500B485CB /* FacebookSDKResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +625,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
+					"\"$(SRCROOT)/FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
@@ -645,6 +646,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
+					"\"$(SRCROOT)/FacebookSDK\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CommonExpensesApp/CommonExpensesApp-Prefix.pch";
