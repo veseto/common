@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388096961.253712"
+         timestampString = "388184552.953821"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
+         startingLineNumber = "65"
+         endingLineNumber = "65"
          landmarkName = "-logIn"
          landmarkType = "5">
       </FileBreakpoint>
@@ -21,13 +21,39 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388097051.198019"
+         timestampString = "388184552.953821"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "63"
-         endingLineNumber = "63"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
          landmarkName = "@implementation CELogin"
          landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CELogin.m"
+         timestampString = "388184963.229332"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
+         landmarkName = "-textFieldShouldReturn:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CESignUp.m"
+         timestampString = "388185667.376093"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "99"
+         endingLineNumber = "99"
+         landmarkName = "-textFieldShouldReturn:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

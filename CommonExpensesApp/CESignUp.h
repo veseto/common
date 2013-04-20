@@ -14,5 +14,6 @@
 @property (nonatomic, assign) id delegate;
 
 - (IBAction)closeView:(id)sender;
+- (IBAction)signUp:(id)sender;
 
 @end

@@ -38,6 +38,7 @@ bool isLogged;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 }
 -(void) viewWillAppear: (BOOL) animated {
     isLogged = NO;
@@ -147,7 +148,6 @@ bool isLogged;
     if (textField.tag == 10) {
         [[self.view viewWithTag:20] becomeFirstResponder];
     } else {
-        [textField resignFirstResponder];
         [self logIn];
     }
     

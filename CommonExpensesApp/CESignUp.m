@@ -45,12 +45,7 @@ bool isRegistered;
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)register:(id)sender {
-    [self signUp];
-    
-}
-
-- (void) signUp {
+- (void) signUpLocal {
     if (_password.text.length < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty password"
                                                         message:@"Enter password"
@@ -110,11 +105,16 @@ bool isRegistered;
                                                   otherButtonTitles:nil];
             [alert show];
         } else {
-            [self resignFirstResponder];
-            [[self.view viewWithTag:20] becomeFirstResponder];
+            [textField resignFirstResponder];
+          //  [[self.view viewWithTag:20] becomeFirstResponder];
         }
+        [textField resignFirstResponder];
+
+    } else if (textField.tag == 9){
+        [textField resignFirstResponder];
+        //[[self.view viewWithTag:10] becomeFirstResponder];
     } else {
-        [self signUp];
+        [self signUpLocal];
     }
     return YES;
 }
@@ -135,6 +135,10 @@ bool isRegistered;
 
 - (IBAction)closeView:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)signUp:(id)sender {
+    [self signUpLocal];
 }
 
 -(void) viewWillAppear:(BOOL)animated {

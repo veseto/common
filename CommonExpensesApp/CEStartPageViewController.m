@@ -20,7 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grid.png"]];
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
