@@ -41,6 +41,8 @@ bool isLogged;
 {
     [super viewDidLoad];
     super.scrollView = self.scrollView;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
+
 }
 -(void) viewWillAppear: (BOOL) animated {
     isLogged = NO;
@@ -80,6 +82,7 @@ bool isLogged;
         [self presentViewController:login animated:YES completion:nil];
     }
 }
+
 
 - (void) logIn {
     if (_username.text.length < 1) {

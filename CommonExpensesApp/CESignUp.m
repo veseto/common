@@ -39,6 +39,8 @@ bool isRegistered;
 {
     [super viewDidLoad];
     super.scrollView = self.scrollView;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
+
 }
 
 
@@ -49,7 +51,24 @@ bool isRegistered;
 }
 
 - (void) signUpLocal {
-    if (_password.text.length < 1) {
+    
+    if (_username.text.length < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty username"
+                                                        message:@"Enter valid username"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [[self.view viewWithTag:9] becomeFirstResponder];
+    } else if (![self validateEmail:_email.text]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
+                                                        message:@"Enter valid e-mail address"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [[self.view viewWithTag:10] becomeFirstResponder];
+    } else if (_password.text.length < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty password"
                                                         message:@"Enter password"
                                                        delegate:nil
@@ -100,16 +119,7 @@ bool isRegistered;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField.tag == 10) {
-        if (![self validateEmail:_email.text]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
-                                                            message:@"Enter valid e-mail address"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        } else {
-            [[self.view viewWithTag:20] becomeFirstResponder];
-        }
+        [[self.view viewWithTag:20] becomeFirstResponder];
         [textField resignFirstResponder];
 
     } else if (textField.tag == 9){

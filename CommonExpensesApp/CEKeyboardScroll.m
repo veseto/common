@@ -30,6 +30,10 @@ CGSize kbSize;
     [super viewDidLoad];
     kbSize = CGSizeMake(320, 216);
     [self registerForKeyboardNotifications];
+    UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    gestureRecognizer.numberOfTapsRequired = 1;
+
+    [self.view addGestureRecognizer:gestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +66,7 @@ CGSize kbSize;
 // Called when the UIKeyboardWillHideNotification is sent
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+   // UIEdgeInsets contentInsets = UIEdgeInsetsZero;
    // self.scrollView.contentInset = contentInsets;
    // self.scrollView.scrollIndicatorInsets = contentInsets;
     [self.scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -80,8 +84,12 @@ CGSize kbSize;
     aRect.size.height -= kbSize.height;
     CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height - 90);
     [self.scrollView setContentOffset:scrollPoint animated:YES];
-    
-    
+}
+
+- (IBAction)handleTapGesture:(id)sender {
+    for(id view in self.scrollView.subviews){
+        [(UIView *)view resignFirstResponder];
+    }
 }
 
 @end

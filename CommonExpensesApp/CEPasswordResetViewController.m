@@ -28,6 +28,8 @@
 {
     [super viewDidLoad];
     super.scrollView = self.scrollView;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,23 +39,6 @@
 }
 
 - (IBAction)sendResetRequest:(id)sender {
-    CERequestHandler *handler = [CERequestHandler new];
-    NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-    [params setObject:_email.text forKey:@"email"];
-    [handler sendRequest:params :@"passResetMail.php"];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password reset"
-                                                    message:[NSString stringWithFormat:@"Change password request is sent to %@.", _email.text]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-- (IBAction)goBack:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (![self validateEmail:_email.text]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Incorrect e-mail"
                                                         message:@"Enter valid e-mail address"
@@ -62,8 +47,26 @@
                                               otherButtonTitles:nil];
         [alert show];
     } else {
-        [textField resignFirstResponder];
+        CERequestHandler *handler = [CERequestHandler new];
+        NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
+        [params setObject:_email.text forKey:@"email"];
+        [handler sendRequest:params :@"passResetMail.php"];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password reset"
+                                                        message:[NSString stringWithFormat:@"Change password request is sent to %@.", _email.text]
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
     }
+}
+
+- (IBAction)goBack:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+        [textField resignFirstResponder];
+    
     return YES;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -85,4 +88,5 @@
     
     return [emailTest evaluateWithObject:candidate];
 }
+
 @end

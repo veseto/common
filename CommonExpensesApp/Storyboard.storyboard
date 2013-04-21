@@ -549,6 +549,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <gestureRecognizers/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -693,7 +694,7 @@
                                             <action selector="sendResetRequest:" destination="sFj-ys-TQU" eventType="touchUpInside" id="KLz-F5-bud"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
+                                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
                                         <rect key="frame" x="40" y="304" width="240" height="70"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -717,6 +718,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <gestureRecognizers/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -963,6 +965,7 @@
             <relationships>
                 <relationship kind="action" name="LogIn:"/>
                 <relationship kind="action" name="closeView:"/>
+                <relationship kind="action" name="handleTapGesture:"/>
                 <relationship kind="action" name="openSignUpView:"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberUser" candidateClass="UISwitch"/>
@@ -995,6 +998,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESignUp.h"/>
             <relationships>
                 <relationship kind="action" name="closeView:"/>
+                <relationship kind="action" name="openLoginView:"/>
                 <relationship kind="action" name="signUp:"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
