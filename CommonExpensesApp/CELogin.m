@@ -45,6 +45,7 @@ bool isLogged;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
     [_forgotPassBtn setTitleColor:[UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
     [_forgotPassBtn setBackgroundColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+
 }
 -(void) viewWillAppear: (BOOL) animated {
     isLogged = NO;
@@ -85,6 +86,10 @@ bool isLogged;
     }
 }
 
+- (IBAction)loginWithFacebook:(id)sender {
+    [self openSessionWithAllowLoginUI:YES];
+}
+
 
 - (void) logIn {
     if (_username.text.length < 1) {
@@ -102,10 +107,18 @@ bool isLogged;
                                               otherButtonTitles:nil];
         [alert show];
     } else {
-        CEDBConnector *connector = [[CEDBConnector alloc] init];
-        CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
+        [self handleLogin:nil];
+    }
+}
+
+- (void) handleLogin:(NSDictionary *)usr {
+    CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
+    CEDBConnector *connector = [[CEDBConnector alloc] init];
+
+    CEUser *user = nil;
+    if (usr == nil) {
         
-        CEUser *user = [connector getUser:_username.text];
+        user = [connector getUser:_username.text];
         if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
             isLogged = YES;
         } else {
@@ -129,26 +142,72 @@ bool isLogged;
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
             [alert show];
+        } else if (!isLogged) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
+                                                            message:@"Username and password don't match"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
+    } else {
+        CEDBConnector *connector = [[CEDBConnector alloc] init];
+        
+        CEUser *user = [connector getUser:[usr objectForKey:@"name"]];
+        if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
+            isLogged = YES;
         } else {
-            if (isLogged) {
-                delegate.currentUser = user;
-                if ([_rememberUser isOn]) {
-                    [connector setDefaultUser:user.userName:user.userId];
-                } else {
-                    [connector removeDefaultUser];
-                }
-                [self dismissViewControllerAnimated:YES completion:nil];
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
-                                                                message:@"Username and password don't match"
+            CERequestHandler *handler = [[CERequestHandler alloc] init];
+            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
+            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
+            NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
+            [connector saveUser:json];
+            if ([json count] > 0) {
+                isLogged = YES;
+                user = [CEUser new];
+                user.userName = [json valueForKey:@"username"];
+                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+            }
+        }
+        if (user == nil) {
+            bool isRegistered;
+            NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
+            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
+            [params setObject:[usr objectForKey:@"email"] forKey:@"email"];
+            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
+            CERequestHandler *handler = [[CERequestHandler alloc] init];
+            NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
+            if (json != nil &&  [json objectForKey:@"error"] != nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
+                                                                message:((NSError *) [json objectForKey:@"error"]).localizedDescription
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
                 [alert show];
+            } else if (json != nil && json.count > 0) {
+                isRegistered = YES;
+                CEDBConnector * connector = [[CEDBConnector alloc] init];
+                [connector saveUser:json];
+                CEUser *user = [CEUser new];
+                user.userName = [json valueForKey:@"username"];
+                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+                ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
+                                                                message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", [usr objectForKey:@"email"]]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            } else {
                 
             }
         }
     }
+    if (isLogged) {
+        delegate.currentUser = user;
+        [connector setDefaultUser:user.userName:user.userId];
+    } 
 }
 
 -(NSString*) sha1:(NSString*)input {
@@ -187,6 +246,37 @@ bool isLogged;
 -(void) closeViews {
     [self dismissViewControllerAnimated:NO completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)me{
+    if (FBSession.activeSession.isOpen) {
+        //[self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
+        //self.userInfoTextView.hidden = NO;
+        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
+                                                               id<FBGraphUser> fbuser,
+                                                               NSError *error) {
+            if (!error) {
+                [self handleLogin:fbuser];
+            }
+        }];
+    }
+    
+    
+}
+
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
+    NSArray *permissions = [[NSArray alloc] initWithObjects:
+                            @"user_location",
+                            @"user_birthday",
+                            @"user_likes",
+                            nil];
+    return [FBSession openActiveSessionWithReadPermissions:permissions
+                                              allowLoginUI:allowLoginUI
+                                         completionHandler:^(FBSession *session,
+                                                             FBSessionState state,
+                                                             NSError *error) {
+                                             [self me];
+                                         }];
 }
 
 @end

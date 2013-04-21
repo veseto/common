@@ -1109,7 +1109,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CERequestHandler.m"
@@ -1164,19 +1164,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388246940.440448"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
-         landmarkName = "-logIn"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEStartPageViewController.m"
          timestampString = "388159190.632469"
          startingColumnNumber = "9223372036854775807"
@@ -1216,19 +1203,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEStartPageViewController.m"
-         timestampString = "388247618.724171"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "126"
-         endingLineNumber = "126"
-         landmarkName = "-openSessionWithAllowLoginUI:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CEAppDelegate.m"
          timestampString = "388165134.486256"
          startingColumnNumber = "9223372036854775807"
@@ -1239,30 +1213,17 @@
          landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CommonExpensesApp/CEStartPageViewController.m"
-         timestampString = "388247618.724171"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "61"
-         endingLineNumber = "61"
-         landmarkName = "-me"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388245601.953846"
+         timestampString = "388264051.353195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-openSignUpView:"
-         landmarkType = "5">
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "@implementation CELogin"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1327,6 +1288,19 @@
          startingLineNumber = "93"
          endingLineNumber = "93"
          landmarkName = "-handleTapGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CommonExpensesApp/CELogin.m"
+         timestampString = "388264051.353195"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
+         landmarkName = "-handleLogin:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

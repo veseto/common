@@ -81,7 +81,7 @@ CEDBConnector *connector;
     UILabel *amountLbl = (UILabel *)[cell viewWithTag:2020];
     amountLbl.text = [NSString stringWithFormat:@"%.2f", record.sum.doubleValue];
     UILabel *currencyLbl = (UILabel *)[cell viewWithTag:2030];
-    currencyLbl.text = [NSString stringWithFormat:@"%d", record.authorId.intValue];
+    currencyLbl.text = record.currency;
     return cell;
 }
 

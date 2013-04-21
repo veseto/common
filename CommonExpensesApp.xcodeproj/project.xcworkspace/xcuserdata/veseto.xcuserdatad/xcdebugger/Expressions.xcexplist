@@ -46,6 +46,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[CELogin handleLogin:]:CELogin.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(FBGraphObject *)usr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[CEDBConnector addHistoryRecords::::]:CEDBConnector.m">
          <PersistentStrings>
             <PersistentString
@@ -57,10 +65,10 @@
          contextName = "-[CESynchManager syncAllUserData:]:CESynchManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "(HistoryRecord *)[0]">
+               value = "(NSArray *)history">
             </PersistentString>
             <PersistentString
-               value = "(NSArray *)history">
+               value = "(HistoryRecord *)[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
