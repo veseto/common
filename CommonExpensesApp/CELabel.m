@@ -14,6 +14,7 @@
     if ((self = [super initWithCoder:aDecoder])) {
        // [self setBackgroundColor:[UIColor redColor]];
         [self setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
+        [self setTextColor:[UIColor colorWithRed:(73.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
     }
     return self;
 }
