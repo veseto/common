@@ -68,7 +68,7 @@
 {
   //  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"grid.png"]];
+    self.window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
     [self.window makeKeyAndVisible];
     [self setupNavigationControllerApp];
 
