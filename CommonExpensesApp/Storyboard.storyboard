@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -610,10 +610,10 @@
             </objects>
             <point key="canvasLocation" x="-1255" y="357"/>
         </scene>
-        <!--View Controller-->
+        <!--Password Reset View Controller-->
         <scene sceneID="ExW-tn-JmM">
             <objects>
-                <viewController id="sFj-ys-TQU" sceneMemberID="viewController">
+                <viewController id="sFj-ys-TQU" customClass="CEPasswordResetViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y7h-aq-QvR">
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -641,7 +641,7 @@
                                 <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                                 <connections>
-                                    <outlet property="delegate" destination="Siu-nR-7ve" id="tWe-mM-H4D"/>
+                                    <outlet property="delegate" destination="sFj-ys-TQU" id="ya7-r0-N7L"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Want to try logging in again?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSz-rr-Xz3">
@@ -660,6 +660,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="bTe-QX-nZe"/>
                                     <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="2SP-5c-RLN"/>
                                 </connections>
                             </button>
@@ -677,6 +678,7 @@
                                 </state>
                                 <connections>
                                     <action selector="LogIn:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ndQ-o3-KUn"/>
+                                    <action selector="sendResetRequest:" destination="sFj-ys-TQU" eventType="touchUpInside" id="KLz-F5-bud"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
@@ -699,11 +701,15 @@
                                 </state>
                                 <connections>
                                     <action selector="closeView:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ZEh-wa-L3U"/>
+                                    <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="or1-MY-9gn"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="b8N-3t-aO0" id="t9H-cq-7nm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzg-fw-dj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -939,6 +945,14 @@
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberUser" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="username" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CEPasswordResetViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEPasswordResetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="goBack:"/>
+                <relationship kind="action" name="sendResetRequest:"/>
+                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="CESelfStatisticsViewController" superclassName="UIViewController">
