@@ -944,6 +944,7 @@
                 <relationship kind="action" name="closeView:"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberUser" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="username" candidateClass="UITextField"/>
             </relationships>
         </class>

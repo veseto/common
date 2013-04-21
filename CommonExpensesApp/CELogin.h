@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (nonatomic, assign) id delegate;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)LogIn:(id)sender;
 - (IBAction)closeView:(id)sender;

@@ -139,7 +139,8 @@ bool isLogged;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    
+    [self.scrollView setContentOffset:CGPointMake(0, 300) animated:YES] ;
+
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 }
@@ -159,4 +160,5 @@ bool isLogged;
         [((CEStartPageViewController *)_delegate) showHomeView];
     }
 }
+
 @end
