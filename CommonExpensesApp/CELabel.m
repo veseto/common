@@ -13,6 +13,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     if ((self = [super initWithCoder:aDecoder])) {
        // [self setBackgroundColor:[UIColor redColor]];
+        [self setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
     }
     return self;
 }

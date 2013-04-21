@@ -16,6 +16,7 @@
         [self setBackgroundColor:[UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f]];
         [self.layer setBorderColor:[[UIColor colorWithRed:(96.0f/255.0f) green:(120.0f/255.0f) blue:(144.0f/255.0f) alpha:1.0f] CGColor]];
         [self.layer setBorderWidth:1.0f];
+        [self.layer setCornerRadius:3.0f];
 
     }
     return self;

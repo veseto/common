@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -16,17 +16,11 @@
                                 <rect key="frame" x="0.0" y="-20" width="340" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" id="ShJ-ED-q7z">
-                                        <rect key="frame" x="20" y="298" width="280" height="250"/>
+                                    <view contentMode="scaleToFill" id="Ikn-c7-ni8" customClass="CEView">
+                                        <rect key="frame" x="15" y="294" width="290" height="254"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.90980398654937744" green="0.87058830261230469" blue="0.73725491762161255" alpha="1" colorSpace="deviceRGB"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                            <bool key="isElement" value="NO"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000000000000009" contentMode="center" image="icon_273.png" id="QqY-VP-Ka8">
                                         <rect key="frame" x="33" y="308" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -127,12 +121,12 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Already have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SAC-As-E0B">
-                                        <rect key="frame" x="57" y="506" width="162" height="21"/>
+                                        <rect key="frame" x="57" y="505" width="162" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hVa-ew-SbP">
-                                        <rect key="frame" x="206" y="495" width="73" height="44"/>
+                                        <rect key="frame" x="206" y="494" width="73" height="44"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                         <state key="normal" title="Sign in">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -146,7 +140,7 @@
                                             <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="WFZ-3j-EIx"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JEo-jN-l3n">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JEo-jN-l3n" customClass="CEButton">
                                         <rect key="frame" x="40" y="453" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.36470588240000001" green="0.4823529412" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -415,6 +409,19 @@
                                 <rect key="frame" x="0.0" y="-20" width="340" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" id="m7s-Kf-cx4" customClass="CEView">
+                                        <rect key="frame" x="15" y="315" width="290" height="187"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" id="Qxp-Tk-1Q7" customClass="CETextField">
+                                        <rect key="frame" x="70" y="327" width="209" height="30"/>
+                                        <attributedString key="attributedText"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Fzv-0N-5ZM" id="bqm-aI-afp"/>
+                                        </connections>
+                                    </textField>
                                     <button opaque="NO" alpha="0.30000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qn1-BP-hKS">
                                         <rect key="frame" x="270" y="20" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -430,28 +437,7 @@
                                             <action selector="closeView:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="SP7-sP-VSd"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" id="aNo-8d-I8T">
-                                        <rect key="frame" x="20" y="316" width="280" height="190"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.90980398650000005" green="0.87058830259999997" blue="0.73725491759999995" alpha="1" colorSpace="deviceRGB"/>
-                                        <accessibility key="accessibilityConfiguration">
-                                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
-                                            <bool key="isElement" value="NO"/>
-                                        </accessibility>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_300.png" id="Qam-V8-dZ4">
-                                        <rect key="frame" x="32" y="372" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="JYa-2s-A18">
-                                        <rect key="frame" x="32" y="327" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="SkT-7o-rqa">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="20" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Password" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="SkT-7o-rqa" customClass="CETextField">
                                         <rect key="frame" x="70" y="372" width="209" height="30"/>
                                         <attributedString key="attributedText"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="go" secureTextEntry="YES"/>
@@ -459,19 +445,11 @@
                                             <outlet property="delegate" destination="Fzv-0N-5ZM" id="Hkd-2P-qnn"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" id="Qxp-Tk-1Q7">
-                                        <rect key="frame" x="70" y="327" width="209" height="30"/>
-                                        <attributedString key="attributedText"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="Fzv-0N-5ZM" id="bqm-aI-afp"/>
-                                        </connections>
-                                    </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="or" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jtA-Mv-N3e" customClass="CELabel">
                                         <rect key="frame" x="152" y="266" width="15" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.2823529541" green="0.2588235438" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oCT-DT-Eow">
@@ -539,7 +517,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" id="SHj-lf-3wF">
-                                        <rect key="frame" x="98.5" y="520" width="140" height="30"/>
+                                        <rect key="frame" x="89" y="518" width="140" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.55686277149999996" green="0.61960786580000005" blue="0.50980395079999996" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
@@ -554,6 +532,16 @@
                                             <segue destination="sFj-ys-TQU" kind="modal" modalTransitionStyle="coverVertical" id="CCx-A8-sb7"/>
                                         </connections>
                                     </button>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_300.png" id="Qam-V8-dZ4">
+                                        <rect key="frame" x="32" y="372" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="JYa-2s-A18">
+                                        <rect key="frame" x="32" y="327" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
                             </scrollView>
@@ -645,7 +633,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" id="fXG-CJ-ox8" customClass="CEView">
-                                        <rect key="frame" x="20" y="298" width="280" height="246"/>
+                                        <rect key="frame" x="15" y="302" width="290" height="246"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
@@ -657,7 +645,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="i8I-5M-2ic">
-                                                <rect key="frame" x="7" y="135" width="271" height="21"/>
+                                                <rect key="frame" x="7" y="140" width="271" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="-------------------------------------------------------------">
@@ -674,13 +662,13 @@
                                         <color key="backgroundColor" red="0.94901967050000002" green="0.94117653369999998" blue="0.87450987099999999" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Want to try logging in again?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSz-rr-Xz3">
-                                        <rect key="frame" x="39" y="511" width="178" height="21"/>
+                                        <rect key="frame" x="39" y="515" width="178" height="21"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                         <color key="textColor" red="0.2823529541" green="0.2588235438" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="90n-VH-4Hv">
-                                        <rect key="frame" x="215" y="500" width="73" height="44"/>
+                                        <rect key="frame" x="215" y="504" width="73" height="44"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                         <state key="normal" title="Go Back">
                                             <color key="titleColor" red="0.37647062539999998" green="0.47058826679999999" blue="0.5647059083" alpha="1" colorSpace="deviceRGB"/>
@@ -695,7 +683,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A5w-29-lgX" customClass="CEButton">
-                                        <rect key="frame" x="40" y="466" width="240" height="30"/>
+                                        <rect key="frame" x="40" y="470" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.37647062539999998" green="0.47058826679999999" blue="0.5647059083" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
@@ -756,7 +744,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzg-fw-dj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-895" y="357"/>
+            <point key="canvasLocation" x="-887" y="348"/>
         </scene>
         <!--Self Statistics View Controller-->
         <scene sceneID="Kga-AC-Rat">
@@ -942,7 +930,6 @@
         <class className="CEKeyboardScroll" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEKeyboardScroll.h"/>
             <relationships>
-                <relationship kind="action" name="handleTapGesture:"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
@@ -1002,6 +989,9 @@
                 <relationship kind="action" name="showLoginView:"/>
                 <relationship kind="action" name="showRegisterView:"/>
             </relationships>
+        </class>
+        <class className="CETextField" superclassName="UITextField">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CETextField.h"/>
         </class>
         <class className="CEView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEView.h"/>

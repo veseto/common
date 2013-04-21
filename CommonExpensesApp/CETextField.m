@@ -13,11 +13,11 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     if ((self = [super initWithCoder:aDecoder])) {
-        [self setBorderStyle:UITextBorderStyleRoundedRect];
-//        [self setBackgroundColor:[UIColor redColor]];
-        [self setTextColor:[UIColor colorWithRed:(139.0f/225.0f) green:(69.0f/225.0f) blue:(19.0f/225.0f) alpha:1.0f]];
-        [self setFont:[UIFont fontWithName:@"Gill Sans" size:18.0]];
-//        [self setAlpha:0.5];
+        [self setBorderStyle:UITextBorderStyleNone];
+        [self setBackgroundColor:[UIColor clearColor]];
+        [self setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+        [self setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
+        [self setAlpha:1.0f];
     }
     return self;
 }
