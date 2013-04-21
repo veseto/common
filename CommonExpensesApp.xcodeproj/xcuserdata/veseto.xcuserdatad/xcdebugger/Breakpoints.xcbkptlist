@@ -1217,13 +1217,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388245601.953846"
+         timestampString = "388264051.353195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "77"
-         endingLineNumber = "77"
-         landmarkName = "-openSignUpView:"
-         landmarkType = "5">
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "@implementation CELogin"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1295,11 +1295,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CommonExpensesApp/CELogin.m"
-         timestampString = "388260726.898503"
+         timestampString = "388264051.353195"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "148"
+         endingLineNumber = "148"
          landmarkName = "-handleLogin:"
          landmarkType = "5">
       </FileBreakpoint>
