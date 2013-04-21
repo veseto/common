@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="D8s-ky-gdw">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
@@ -502,7 +502,7 @@
                                             <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="uiq-vq-3U6"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bcg-dA-omH">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bcg-dA-omH" customClass="CEButton">
                                         <rect key="frame" x="39" y="423" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.36470588240000001" green="0.4823529412" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -532,10 +532,10 @@
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="SHj-lf-3wF">
-                                        <rect key="frame" x="93" y="518" width="132" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" id="SHj-lf-3wF">
+                                        <rect key="frame" x="98.5" y="520" width="140" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.49834625910000002" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.55686277149999996" green="0.61960786580000005" blue="0.50980395079999996" alpha="1" colorSpace="deviceRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <state key="normal" title="Forgot Password?">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -555,6 +555,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="forgotPassBtn" destination="SHj-lf-3wF" id="SFd-SY-PvJ"/>
                         <outlet property="password" destination="SkT-7o-rqa" id="kql-GT-I2Q"/>
                         <outlet property="scrollView" destination="zRd-gi-z85" id="mbN-nU-z2Z"/>
                         <outlet property="username" destination="Qxp-Tk-1Q7" id="bVW-V0-NJC"/>
@@ -637,36 +638,53 @@
                                 <rect key="frame" x="0.0" y="-20" width="340" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="fXG-CJ-ox8">
-                                        <rect key="frame" x="20" y="284" width="280" height="246"/>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="cLk-uc-9dg">
+                                        <rect key="frame" x="17" y="301" width="282" height="248"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.86988657069999997" green="0.84823162880000003" blue="0.8386272199" alpha="1" colorSpace="calibratedRGB"/>
+                                        <subviews>
+                                            <view userInteractionEnabled="NO" contentMode="scaleToFill" id="fXG-CJ-ox8">
+                                                <rect key="frame" x="1" y="1" width="280" height="246"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
+                                                        <rect key="frame" x="16" y="10" width="248" height="90"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <color key="textColor" red="0.2823529541" green="0.2588235438" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.30000001192092896" contentMode="left" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" id="i8I-5M-2ic">
+                                                        <rect key="frame" x="7" y="135" width="271" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="-------------------------------------------------------------">
+                                                                <attributes>
+                                                                    <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <font key="NSFont" size="13" name="Helvetica"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.94901967050000002" green="0.94117653369999998" blue="0.87450987099999999" alpha="1" colorSpace="deviceRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.66274511810000003" green="0.75686281919999998" blue="0.85098046059999999" alpha="1" colorSpace="deviceRGB"/>
                                     </view>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="MaU-Xu-MQO">
-                                        <rect key="frame" x="33" y="395" width="30" height="30"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="20" clearButtonMode="whileEditing" id="b8N-3t-aO0">
-                                        <rect key="frame" x="71" y="395" width="209" height="30"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="textColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="sFj-ys-TQU" id="ya7-r0-N7L"/>
-                                        </connections>
-                                    </textField>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Want to try logging in again?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSz-rr-Xz3">
-                                        <rect key="frame" x="41" y="497" width="170" height="21"/>
-                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="13"/>
+                                        <rect key="frame" x="39" y="511" width="178" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
+                                        <color key="textColor" red="0.2823529541" green="0.2588235438" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="90n-VH-4Hv">
-                                        <rect key="frame" x="211" y="486" width="73" height="44"/>
-                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="13"/>
+                                        <rect key="frame" x="215" y="500" width="73" height="44"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                         <state key="normal" title="Go Back">
-                                            <color key="titleColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="titleColor" red="0.37647062539999998" green="0.47058826679999999" blue="0.5647059083" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
@@ -677,13 +695,13 @@
                                             <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="2SP-5c-RLN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A5w-29-lgX">
-                                        <rect key="frame" x="40" y="448" width="240" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A5w-29-lgX" customClass="CEButton">
+                                        <rect key="frame" x="40" y="466" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.10588236149999999" green="0.078431375319999996" blue="0.050980396570000003" alpha="1" colorSpace="deviceRGB"/>
-                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="15"/>
+                                        <color key="backgroundColor" red="0.37647062539999998" green="0.47058826679999999" blue="0.5647059083" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Reset Password">
-                                            <color key="titleColor" red="0.79215693470000004" green="0.77647066119999997" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="titleColor" red="0.94901967050000002" green="0.94117653369999998" blue="0.87450987099999999" alpha="1" colorSpace="deviceRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="highlighted">
@@ -694,15 +712,8 @@
                                             <action selector="sendResetRequest:" destination="sFj-ys-TQU" eventType="touchUpInside" id="KLz-F5-bud"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
-                                        <rect key="frame" x="40" y="304" width="240" height="70"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sxU-LH-n6O">
-                                        <rect key="frame" x="258" y="37" width="50" height="50"/>
+                                        <rect key="frame" x="270" y="20" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <state key="normal" title="X">
@@ -717,7 +728,23 @@
                                             <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="or1-MY-9gn"/>
                                         </connections>
                                     </button>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="MaU-Xu-MQO">
+                                        <rect key="frame" x="33" y="410" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="20" clearButtonMode="whileEditing" id="b8N-3t-aO0">
+                                        <rect key="frame" x="71" y="410" width="209" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.55686277149999996" green="0.61960786580000005" blue="0.50980395079999996" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sFj-ys-TQU" id="ya7-r0-N7L"/>
+                                        </connections>
+                                    </textField>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                             </scrollView>
                         </subviews>
@@ -875,104 +902,6 @@
         <image name="icon_273.png" width="30" height="30"/>
         <image name="icon_300.png" width="30" height="30"/>
     </resources>
-    <classes>
-        <class className="CEAddCircleViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEAddCircleViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="add:"/>
-                <relationship kind="action" name="createCircle:"/>
-                <relationship kind="action" name="submitName:"/>
-                <relationship kind="outlet" name="circleNameLbl" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="friendName" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="friendNameLbl" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="name" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="navItem" candidateClass="UINavigationItem"/>
-                <relationship kind="outlet" name="okButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="plusButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CEHistoryViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHistoryViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeHistoryView:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CEHomeViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHomeViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="addHistoryRecords:" candidateClass="UIButton"/>
-                <relationship kind="action" name="handleGesture:"/>
-                <relationship kind="action" name="showSelfStatistics:"/>
-                <relationship kind="action" name="someAction:"/>
-                <relationship kind="action" name="sync:"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="CEKeyboardScroll" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEKeyboardScroll.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CELabel" superclassName="UILabel">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CELabel.h"/>
-        </class>
-        <class className="CELogin" superclassName="CEKeyboardScroll">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CELogin.h"/>
-            <relationships>
-                <relationship kind="action" name="LogIn:"/>
-                <relationship kind="action" name="closeView:"/>
-                <relationship kind="action" name="openSignUpView:"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="rememberUser" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="username" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CEPasswordResetViewController" superclassName="CEKeyboardScroll">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEPasswordResetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="goBack:"/>
-                <relationship kind="action" name="sendResetRequest:"/>
-                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-            </relationships>
-        </class>
-        <class className="CESelfStatisticsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CESelfStatisticsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="close:"/>
-            </relationships>
-        </class>
-        <class className="CESettingsViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CESettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeView:"/>
-            </relationships>
-        </class>
-        <class className="CESignUp" superclassName="CEKeyboardScroll">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CESignUp.h"/>
-            <relationships>
-                <relationship kind="action" name="closeView:"/>
-                <relationship kind="action" name="openLoginView:"/>
-                <relationship kind="action" name="signUp:"/>
-                <relationship kind="outlet" name="email" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="password" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="username" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="CEStartPageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CEStartPageViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="registerWithFacebook:"/>
-                <relationship kind="action" name="showLoginView:"/>
-                <relationship kind="action" name="showRegisterView:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

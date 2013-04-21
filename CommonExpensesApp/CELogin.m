@@ -24,6 +24,7 @@
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize rememberUser = _rememberUser;
+@synthesize forgotPassBtn = _forgotPassBtn;
 
 
 bool isLogged;
@@ -42,7 +43,7 @@ bool isLogged;
     [super viewDidLoad];
     super.scrollView = self.scrollView;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
-
+    [_forgotPassBtn setTitleColor:[UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
 }
 -(void) viewWillAppear: (BOOL) animated {
     isLogged = NO;

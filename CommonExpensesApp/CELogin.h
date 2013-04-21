@@ -15,6 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (nonatomic, assign) id delegate;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIButton *forgotPassBtn;
 
 - (IBAction)LogIn:(id)sender;
 - (IBAction)closeView:(id)sender;
