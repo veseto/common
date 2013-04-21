@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CEKeyboardScroll.h"
 
-@interface CESignUp : UIViewController <UITextFieldDelegate>
+@interface CESignUp : CEKeyboardScroll <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *password;
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (nonatomic, assign) id delegate;
 @property (strong, nonatomic) IBOutlet UITextField *username;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)closeView:(id)sender;
 - (IBAction)signUp:(id)sender;

@@ -71,6 +71,7 @@
 		F291EAD416D2B5C9006C3BD6 /* CESignUp.m in Sources */ = {isa = PBXBuildFile; fileRef = F291EAD316D2B5C9006C3BD6 /* CESignUp.m */; };
 		F2956A5E16E535E8002128E6 /* CEDBConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2956A5D16E535E8002128E6 /* CEDBConnector.m */; };
 		F2B70D4D170A0D6E00A1C76B /* CEHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */; };
+		F2DD808A1724151C00ADFC02 /* CEKeyboardScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = F2DD80891724151C00ADFC02 /* CEKeyboardScroll.m */; };
 		F2E31A661722B12C006D36BA /* CETextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A651722B12C006D36BA /* CETextField.m */; };
 		F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6B1722BD22006D36BA /* CEButton.m */; };
 		F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2E31A6E1722BDC4006D36BA /* CELabel.m */; };
@@ -176,6 +177,8 @@
 		F2956A5D16E535E8002128E6 /* CEDBConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEDBConnector.m; sourceTree = "<group>"; };
 		F2B70D4B170A0D6E00A1C76B /* CEHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CEHistoryViewController.h; path = ../CEHistoryViewController.h; sourceTree = "<group>"; };
 		F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CEHistoryViewController.m; path = ../CEHistoryViewController.m; sourceTree = "<group>"; };
+		F2DD80881724151C00ADFC02 /* CEKeyboardScroll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEKeyboardScroll.h; sourceTree = "<group>"; };
+		F2DD80891724151C00ADFC02 /* CEKeyboardScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEKeyboardScroll.m; sourceTree = "<group>"; };
 		F2E31A641722B12C006D36BA /* CETextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CETextField.h; sourceTree = "<group>"; };
 		F2E31A651722B12C006D36BA /* CETextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CETextField.m; sourceTree = "<group>"; };
 		F2E31A6A1722BD22006D36BA /* CEButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEButton.h; sourceTree = "<group>"; };
@@ -408,6 +411,8 @@
 				F25E136916DFCFDC0086DE2B /* CEConstants.m */,
 				F28B06EA16F71C050050145F /* CESynchManager.h */,
 				F28B06EB16F71C050050145F /* CESynchManager.m */,
+				F2DD80881724151C00ADFC02 /* CEKeyboardScroll.h */,
+				F2DD80891724151C00ADFC02 /* CEKeyboardScroll.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -566,6 +571,7 @@
 				F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */,
 				F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */,
 				F22A03C01723EBC9000D0EFB /* CEPasswordResetViewController.m in Sources */,
+				F2DD808A1724151C00ADFC02 /* CEKeyboardScroll.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

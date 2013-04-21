@@ -24,7 +24,6 @@
 @synthesize password = _password;
 @synthesize rememberUser = _rememberUser;
 
-CGSize kbSize;
 
 bool isLogged;
 
@@ -40,8 +39,7 @@ bool isLogged;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerForKeyboardNotifications];
-    kbSize = CGSizeMake(320, 216);
+    super.scrollView = self.scrollView;
 }
 -(void) viewWillAppear: (BOOL) animated {
     isLogged = NO;
@@ -142,7 +140,7 @@ bool isLogged;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self scrollViewToField:textField];
+    [super scrollViewToField:textField];
 
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -164,47 +162,5 @@ bool isLogged;
     }
 }
 
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-    
-}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    NSDictionary* info = [aNotification userInfo];
-    kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-}
-
--(void) scrollViewToField: (UITextField *) activeField {
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= kbSize.height;
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height - 90);
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
-    
-
-}
 
 @end

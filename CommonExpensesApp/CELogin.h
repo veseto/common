@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CEKeyboardScroll.h"
 
-@interface CELogin : UIViewController <UITextFieldDelegate>
+@interface CELogin : CEKeyboardScroll <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UISwitch *rememberUser;
 @property (strong, nonatomic) IBOutlet UITextField *username;
 @property (strong, nonatomic) IBOutlet UITextField *password;

@@ -37,6 +37,7 @@ bool isRegistered;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    super.scrollView = self.scrollView;
 }
 
 
@@ -106,14 +107,12 @@ bool isRegistered;
                                                   otherButtonTitles:nil];
             [alert show];
         } else {
-            [textField resignFirstResponder];
-          //  [[self.view viewWithTag:20] becomeFirstResponder];
+            [[self.view viewWithTag:20] becomeFirstResponder];
         }
         [textField resignFirstResponder];
 
     } else if (textField.tag == 9){
-        [textField resignFirstResponder];
-        //[[self.view viewWithTag:10] becomeFirstResponder];
+        [[self.view viewWithTag:10] becomeFirstResponder];
     } else {
         [self signUpLocal];
     }
@@ -149,5 +148,10 @@ bool isRegistered;
     if (isRegistered) {
         [((CEStartPageViewController *)_delegate) showHomeView];
     }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [super scrollViewToField:textField];
+    
 }
 @end
