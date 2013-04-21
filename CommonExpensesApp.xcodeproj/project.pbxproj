@@ -43,6 +43,7 @@
 		F21625C716F5D62900324637 /* MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C416F5D62900324637 /* MFSideMenu.m */; };
 		F21625C816F5D62900324637 /* UINavigationController+MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C616F5D62900324637 /* UINavigationController+MFSideMenu.m */; };
 		F21625CB16F6004600324637 /* CESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625CA16F6004600324637 /* CESettingsViewController.m */; };
+		F22A03C01723EBC9000D0EFB /* CEPasswordResetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F22A03BF1723EBC9000D0EFB /* CEPasswordResetViewController.m */; };
 		F2513545170997A400800E55 /* HistoryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = F2513544170997A400800E55 /* HistoryRecord.m */; };
 		F25E136416DFAB1E0086DE2B /* CELogin.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136316DFAB1E0086DE2B /* CELogin.m */; };
 		F25E136716DFB15C0086DE2B /* CERequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F25E136616DFB15C0086DE2B /* CERequestHandler.m */; };
@@ -128,6 +129,8 @@
 		F21625C616F5D62900324637 /* UINavigationController+MFSideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+MFSideMenu.m"; sourceTree = "<group>"; };
 		F21625C916F6004500324637 /* CESettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESettingsViewController.h; sourceTree = "<group>"; };
 		F21625CA16F6004600324637 /* CESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESettingsViewController.m; sourceTree = "<group>"; };
+		F22A03BE1723EBC9000D0EFB /* CEPasswordResetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEPasswordResetViewController.h; sourceTree = "<group>"; };
+		F22A03BF1723EBC9000D0EFB /* CEPasswordResetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEPasswordResetViewController.m; sourceTree = "<group>"; };
 		F2513543170997A400800E55 /* HistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecord.h; sourceTree = "<group>"; };
 		F2513544170997A400800E55 /* HistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecord.m; sourceTree = "<group>"; };
 		F25E136216DFAB1E0086DE2B /* CELogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELogin.h; sourceTree = "<group>"; };
@@ -418,6 +421,8 @@
 				F25E136316DFAB1E0086DE2B /* CELogin.m */,
 				D923B0C51721D4A000E7A34C /* CEStartPageViewController.h */,
 				D923B0C61721D4A000E7A34C /* CEStartPageViewController.m */,
+				F22A03BE1723EBC9000D0EFB /* CEPasswordResetViewController.h */,
+				F22A03BF1723EBC9000D0EFB /* CEPasswordResetViewController.m */,
 			);
 			name = usrManagement;
 			sourceTree = "<group>";
@@ -560,6 +565,7 @@
 				F2E31A661722B12C006D36BA /* CETextField.m in Sources */,
 				F2E31A6C1722BD22006D36BA /* CEButton.m in Sources */,
 				F2E31A6F1722BDC5006D36BA /* CELabel.m in Sources */,
+				F22A03C01723EBC9000D0EFB /* CEPasswordResetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
