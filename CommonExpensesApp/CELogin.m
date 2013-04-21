@@ -153,8 +153,8 @@ bool isLogged;
     } else {
         CEDBConnector *connector = [[CEDBConnector alloc] init];
         
-        CEUser *user = [connector getUser:[usr objectForKey:@"name"]];
-        if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
+        user = [connector getUser:[usr objectForKey:@"name"]];
+        if (user != nil && [user.password isEqualToString:[self sha1:[usr objectForKey:@"id"]]]) {
             isLogged = YES;
         } else {
             CERequestHandler *handler = [[CERequestHandler alloc] init];
@@ -179,7 +179,7 @@ bool isLogged;
             CERequestHandler *handler = [[CERequestHandler alloc] init];
             NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
             if (json != nil &&  [json objectForKey:@"error"] != nil) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed"
                                                                 message:((NSError *) [json objectForKey:@"error"]).localizedDescription
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -207,7 +207,8 @@ bool isLogged;
     if (isLogged) {
         delegate.currentUser = user;
         [connector setDefaultUser:user.userName:user.userId];
-    } 
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 -(NSString*) sha1:(NSString*)input {
@@ -253,7 +254,7 @@ bool isLogged;
         //[self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
         //self.userInfoTextView.hidden = NO;
         [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                                               id<FBGraphUser> fbuser,
+                                                               NSMutableDictionary<FBGraphUser> *fbuser,
                                                                NSError *error) {
             if (!error) {
                 [self handleLogin:fbuser];

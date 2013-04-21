@@ -20,4 +20,5 @@
 - (IBAction)signUp:(id)sender;
 - (IBAction)openLoginView:(id)sender;
 - (void) closeViews;
+- (IBAction)signUpWithFacebook:(id)sender;
 @end
