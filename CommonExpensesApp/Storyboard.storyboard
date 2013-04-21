@@ -116,6 +116,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signUpWithFacebook:" destination="Siu-nR-7ve" eventType="touchUpInside" id="73u-H9-x9c"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Already have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SAC-As-E0B">
                                         <rect key="frame" x="57" y="505" width="162" height="21"/>
@@ -449,7 +452,7 @@
                                         <color key="textColor" red="0.2823529541" green="0.2588235438" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oCT-DT-Eow">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oCT-DT-Eow">
                                         <rect key="frame" x="59" y="219" width="200" height="30"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Log in with Facebook">
@@ -459,6 +462,9 @@
                                         <state key="highlighted">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="loginWithFacebook:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="1dK-Mt-j6o"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Fp-rc-mSm">
                                         <rect key="frame" x="63" y="467" width="162" height="21"/>
