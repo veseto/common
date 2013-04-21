@@ -632,91 +632,98 @@
                         <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view userInteractionEnabled="NO" contentMode="scaleToFill" id="fXG-CJ-ox8">
-                                <rect key="frame" x="20" y="48" width="280" height="246"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="nyv-HB-q8H">
+                                <rect key="frame" x="0.0" y="-20" width="340" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.86988657069999997" green="0.84823162880000003" blue="0.8386272199" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="MaU-Xu-MQO">
-                                <rect key="frame" x="33" y="159" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="20" clearButtonMode="whileEditing" id="b8N-3t-aO0">
-                                <rect key="frame" x="71" y="159" width="209" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
-                                <connections>
-                                    <outlet property="delegate" destination="sFj-ys-TQU" id="ya7-r0-N7L"/>
-                                </connections>
-                            </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Want to try logging in again?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSz-rr-Xz3">
-                                <rect key="frame" x="41" y="261" width="170" height="21"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="13"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="90n-VH-4Hv">
-                                <rect key="frame" x="211" y="250" width="73" height="44"/>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="13"/>
-                                <state key="normal" title="Go Back">
-                                    <color key="titleColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="bTe-QX-nZe"/>
-                                    <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="2SP-5c-RLN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A5w-29-lgX">
-                                <rect key="frame" x="40" y="212" width="240" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.10588236149999999" green="0.078431375319999996" blue="0.050980396570000003" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="15"/>
-                                <state key="normal" title="Reset Password">
-                                    <color key="titleColor" red="0.79215693470000004" green="0.77647066119999997" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="LogIn:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ndQ-o3-KUn"/>
-                                    <action selector="sendResetRequest:" destination="sFj-ys-TQU" eventType="touchUpInside" id="KLz-F5-bud"/>
-                                </connections>
-                            </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
-                                <rect key="frame" x="40" y="68" width="240" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sxU-LH-n6O">
-                                <rect key="frame" x="270" y="0.0" width="50" height="50"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <state key="normal" title="X">
-                                    <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeView:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ZEh-wa-L3U"/>
-                                    <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="or1-MY-9gn"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <view userInteractionEnabled="NO" contentMode="scaleToFill" id="fXG-CJ-ox8">
+                                        <rect key="frame" x="20" y="284" width="280" height="246"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.86988657069999997" green="0.84823162880000003" blue="0.8386272199" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" alpha="0.60000002384185791" contentMode="center" image="icon_201.png" id="MaU-Xu-MQO">
+                                        <rect key="frame" x="33" y="395" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </imageView>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="20" clearButtonMode="whileEditing" id="b8N-3t-aO0">
+                                        <rect key="frame" x="71" y="395" width="209" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="sFj-ys-TQU" id="ya7-r0-N7L"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Want to try logging in again?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FSz-rr-Xz3">
+                                        <rect key="frame" x="41" y="497" width="170" height="21"/>
+                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="13"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="90n-VH-4Hv">
+                                        <rect key="frame" x="211" y="486" width="73" height="44"/>
+                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="13"/>
+                                        <state key="normal" title="Go Back">
+                                            <color key="titleColor" red="0.72941178080000002" green="0.1647058874" blue="0.16078431900000001" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="bTe-QX-nZe"/>
+                                            <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="2SP-5c-RLN"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="A5w-29-lgX">
+                                        <rect key="frame" x="40" y="448" width="240" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.10588236149999999" green="0.078431375319999996" blue="0.050980396570000003" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="15"/>
+                                        <state key="normal" title="Reset Password">
+                                            <color key="titleColor" red="0.79215693470000004" green="0.77647066119999997" blue="0.76470595600000002" alpha="1" colorSpace="deviceRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="LogIn:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ndQ-o3-KUn"/>
+                                            <action selector="sendResetRequest:" destination="sFj-ys-TQU" eventType="touchUpInside" id="KLz-F5-bud"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Have you forgotten your password? Enter your email in the form below and we will help you reset it." textAlignment="center" id="tYY-QV-pJW">
+                                        <rect key="frame" x="40" y="304" width="240" height="70"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" alpha="0.30000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="sxU-LH-n6O">
+                                        <rect key="frame" x="258" y="37" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeView:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="ZEh-wa-L3U"/>
+                                            <action selector="goBack:" destination="sFj-ys-TQU" eventType="touchUpInside" id="or1-MY-9gn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="email" destination="b8N-3t-aO0" id="t9H-cq-7nm"/>
+                        <outlet property="scrollView" destination="nyv-HB-q8H" id="xLA-QX-rK8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzg-fw-dj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -962,12 +969,13 @@
                 <relationship kind="outlet" name="username" candidateClass="UITextField"/>
             </relationships>
         </class>
-        <class className="CEPasswordResetViewController" superclassName="UIViewController">
+        <class className="CEPasswordResetViewController" superclassName="CEKeyboardScroll">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEPasswordResetViewController.h"/>
             <relationships>
                 <relationship kind="action" name="goBack:"/>
                 <relationship kind="action" name="sendResetRequest:"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
         <class className="CESelfStatisticsViewController" superclassName="UIViewController">
@@ -982,13 +990,14 @@
                 <relationship kind="action" name="closeView:"/>
             </relationships>
         </class>
-        <class className="CESignUp" superclassName="UIViewController">
+        <class className="CESignUp" superclassName="CEKeyboardScroll">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESignUp.h"/>
             <relationships>
                 <relationship kind="action" name="closeView:"/>
                 <relationship kind="action" name="signUp:"/>
                 <relationship kind="outlet" name="email" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="username" candidateClass="UITextField"/>
             </relationships>
         </class>

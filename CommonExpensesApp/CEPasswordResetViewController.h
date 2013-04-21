@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CEKeyboardScroll.h"
 
-@interface CEPasswordResetViewController : UIViewController
+@interface CEPasswordResetViewController : CEKeyboardScroll
 @property (strong, nonatomic) IBOutlet UITextField *email;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 - (IBAction)sendResetRequest:(id)sender;
 - (IBAction)goBack:(id)sender;
 
