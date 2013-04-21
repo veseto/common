@@ -20,9 +20,10 @@
         [self setTitleColor:[UIColor colorWithRed:(73.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f] forState:UIControlStateHighlighted];
         [self setTitleColor:[UIColor colorWithRed:(241.0f/255.0f) green:(209.0f/255.0f) blue:(134.0f/255.0f) alpha:0.03f] forState:UIControlStateDisabled];
         [self.titleLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
+        [self.layer setCornerRadius:3.0f];
     }
     return self;
-}
+}  
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
