@@ -88,7 +88,11 @@ CGSize kbSize;
 
 - (IBAction)handleTapGesture:(id)sender {
     for(id view in self.scrollView.subviews){
-        [(UIView *)view resignFirstResponder];
+        if ([view isKindOfClass:[UITextField class]]) {
+            NSString *tmp = ((UITextField *)view).text;
+            [view resignFirstResponder];
+            (   (UITextField *)view).text = tmp;
+        }
     }
 }
 

@@ -11,7 +11,6 @@
 
 @interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (nonatomic, retain) SideMenuViewController *sideMenu;
-@property (nonatomic, retain) IBOutlet UIButton *selfViewButton;
 @property (nonatomic, retain) IBOutlet UITableView *tableView;
 
 - (IBAction)showSelfStatistics:(id)sender;

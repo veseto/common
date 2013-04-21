@@ -24,7 +24,6 @@
 @end
 
 @implementation CEHomeViewController
-@synthesize selfViewButton = _selfViewButton;
 @synthesize tableView = _tableView;
 
 CEAppDelegate *delegate;
@@ -62,7 +61,6 @@ UITextView *scroll;
     
     //Add init with default circle
     [self reloadView];
-    [_selfViewButton setTitle:delegate.currentUser.userName forState:UIControlStateNormal];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveReloadNotification:)
@@ -94,6 +92,10 @@ UITextView *scroll;
 
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    self.navigationController.navigationBarHidden = NO;
+}
+
 -(UIView *) createTableView {
     UIView *viewToRemove = [self.view viewWithTag:2000];
     [[viewToRemove subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -112,6 +114,8 @@ UITextView *scroll;
     tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
     
     scroll = [[UITextView alloc] initWithFrame:newFrame];
+    scroll.editable = NO;
+    scroll.userInteractionEnabled = NO;
     NSMutableString *text = [NSMutableString new];
     for (Friend *fr in tmp) {
         [text appendString:fr.friendName];
@@ -220,6 +224,8 @@ UITextView *scroll;
             self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
             break;
     }
+    self.navigationItem.rightBarButtonItem = [self rightMenuBarItem];
+
 }
 
 - (UIBarButtonItem *)leftMenuBarButtonItem {
@@ -228,7 +234,12 @@ UITextView *scroll;
             target:self.navigationController.sideMenu
             action:@selector(toggleLeftSideMenu)];
 }
-
+- (UIBarButtonItem *)rightMenuBarItem {
+    return [[UIBarButtonItem alloc]
+            initWithImage:[UIImage imageNamed:@"menu-icon.png"] style:UIBarButtonItemStyleBordered
+            target:self
+            action:@selector(someAction:)];
+}
 
 - (void)backButtonPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
