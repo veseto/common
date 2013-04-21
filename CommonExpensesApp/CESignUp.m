@@ -12,6 +12,7 @@
 #import "KeyboardBar.h"
 #import "CEAppDelegate.h"
 #import "CEStartPageViewController.h"
+#import "CELogin.h"
 
 @interface CESignUp ()
 
@@ -134,11 +135,29 @@ bool isRegistered;
 }
 
 - (IBAction)closeView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.delegate isKindOfClass:[CELogin class]]) {
+        [self.delegate closeViews];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (IBAction)signUp:(id)sender {
     [self signUpLocal];
+}
+
+- (IBAction)openLoginView:(id)sender {
+    if ([self.delegate isKindOfClass:[CELogin class]]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+        CELogin *login = [sb instantiateViewControllerWithIdentifier:@"emailLogin"];
+        login.delegate = self;
+        [login setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        
+        [self presentViewController:login animated:YES completion:nil];
+    }
+
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -153,5 +172,10 @@ bool isRegistered;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [super scrollViewToField:textField];
     
+}
+
+-(void) closeViews {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end

@@ -14,6 +14,7 @@
 #import "CEUser.h"
 #import "CEStartPageViewController.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "CESignUp.h"
 
 @interface CELogin ()
 
@@ -60,7 +61,24 @@ bool isLogged;
 }
 
 - (IBAction)closeView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.delegate isKindOfClass:[CESignUp class]]) {
+        [self.delegate closeViews];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+- (IBAction)openSignUpView:(id)sender {
+    if ([self.delegate isKindOfClass:[CESignUp class]]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+        CELogin *login = [sb instantiateViewControllerWithIdentifier:@"CESignUp"];
+        login.delegate = self;
+        [login setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+        
+        [self presentViewController:login animated:YES completion:nil];
+    }
 }
 
 - (void) logIn {
@@ -141,7 +159,7 @@ bool isLogged;
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [super scrollViewToField:textField];
-
+    
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
 }
@@ -161,6 +179,9 @@ bool isLogged;
         [((CEStartPageViewController *)_delegate) showHomeView];
     }
 }
-
+-(void) closeViews {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

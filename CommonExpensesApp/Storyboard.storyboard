@@ -139,8 +139,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="openLoginView:" destination="Siu-nR-7ve" eventType="touchUpInside" id="LT1-1K-EZd"/>
                                             <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="WFZ-3j-EIx"/>
-                                            <segue destination="Fzv-0N-5ZM" kind="modal" modalTransitionStyle="flipHorizontal" id="O8x-J8-zhu"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JEo-jN-l3n">
@@ -498,8 +498,8 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="openSignUpView:" destination="Fzv-0N-5ZM" eventType="touchUpInside" id="1Bb-lT-ZPm"/>
                                             <action selector="showLoginView:" destination="H2e-zA-86K" eventType="touchUpInside" id="uiq-vq-3U6"/>
-                                            <segue destination="Siu-nR-7ve" kind="modal" modalTransitionStyle="flipHorizontal" id="xR2-WA-tpQ"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bcg-dA-omH">
@@ -963,6 +963,7 @@
             <relationships>
                 <relationship kind="action" name="LogIn:"/>
                 <relationship kind="action" name="closeView:"/>
+                <relationship kind="action" name="openSignUpView:"/>
                 <relationship kind="outlet" name="password" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="rememberUser" candidateClass="UISwitch"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>

@@ -18,5 +18,7 @@
 
 - (IBAction)LogIn:(id)sender;
 - (IBAction)closeView:(id)sender;
+- (IBAction)openSignUpView:(id)sender;
 
+-(void) closeViews;
 @end
