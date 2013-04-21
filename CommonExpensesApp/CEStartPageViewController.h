@@ -15,7 +15,4 @@
 
 - (IBAction)showLoginView:(id)sender;
 - (IBAction)showRegisterView:(id)sender;
-- (IBAction)registerWithFacebook:(id)sender;
-@property (nonatomic, retain) ACAccountStore *accountStore;
-@property (nonatomic, retain) ACAccount *facebookAccount;
 @end
