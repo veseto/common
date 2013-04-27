@@ -18,17 +18,20 @@
 #import "Friend.h"
 #import "KeyboardBar.h"
 #import "CEHistoryViewController.h"
+#import "LHDropDownControlView.h"
+#import <QuartzCore/QuartzCore.h>
+#define REFRESH_HEADER_HEIGHT 52.0f
 
 @interface CEHomeViewController ()
 
 @end
 
 @implementation CEHomeViewController
-@synthesize tableView = _tableView;
+@synthesize scrollViewContainer = _scrollViewContainer;
+@synthesize textPull, textRelease, textLoading, refreshHeaderView, refreshLabel, refreshArrow, refreshSpinner;
 
 CEAppDelegate *delegate;
 NSArray *tmp;
-NSMutableArray *friends;
 CEDBConnector *connector;
 KeyboardBar *bar;
 UITextView *scroll;
@@ -47,21 +50,23 @@ UITextView *scroll;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return YES;
+    return NO;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setupStrings];
+    [self addPullToRefreshHeader];
+    
     self.navigationController.sideMenu.openMenuEnabled = YES;
     delegate = [[UIApplication sharedApplication] delegate];
     connector = [CEDBConnector new];
     [self setupMenuBarButtonItems];
-    friends = [[NSMutableArray alloc] init];
     bar = [KeyboardBar new];
     
     //Add init with default circle
-    [self reloadView];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
@@ -89,131 +94,13 @@ UITextView *scroll;
         
         [weakSelf setupMenuBarButtonItems];
     };
-
+    [self createHomeView];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     self.navigationController.navigationBarHidden = NO;
 }
 
--(UIView *) createTableView {
-    UIView *viewToRemove = [self.view viewWithTag:2000];
-    [[viewToRemove subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [viewToRemove removeFromSuperview];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-
-    CGRect newFrame3 = CGRectMake(0, 0, 0, 0);
-    newFrame3.size = CGSizeMake(screenWidth, screenHeight - 110);
-    UIView *container = [[UIView alloc] initWithFrame:newFrame3];
-  //  [container setBackgroundColor:[UIColor redColor]];
-    
-    CGRect newFrame = CGRectMake(0, 0, 0, 0);
-    newFrame.size = CGSizeMake(screenWidth, 100);
-    tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
-    
-    scroll = [[UITextView alloc] initWithFrame:newFrame];
-    scroll.editable = NO;
-    scroll.userInteractionEnabled = NO;
-    NSMutableString *text = [NSMutableString new];
-    for (Friend *fr in tmp) {
-        [text appendString:fr.friendName];
-        [text appendString:@"   "];
-        [text appendString:[NSString stringWithFormat:@"%.2f", fr.balanceInCircle.doubleValue]];
-        [text appendString:@"\n"];
-    }
-    scroll.text = text;
-    scroll.backgroundColor = [UIColor clearColor];
-    [container addSubview:scroll];
-    
-    
-    CGRect newFrame2 = CGRectMake(0, 100, 0, 0);
-    newFrame2.size = CGSizeMake(screenWidth, screenHeight - 265);
-    _tableView = [[UITableView alloc] initWithFrame:newFrame2 style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.tag = 1000;
-    _tableView.backgroundColor = [UIColor clearColor];
-    
-    [container addSubview:_tableView];
-    
-    CGRect newFrame4 = CGRectMake(screenWidth - 120, screenHeight - 155, 0, 0);
-    newFrame4.size = CGSizeMake(70, 42);
-    UIButton *okButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
-    [okButton setFrame:newFrame4];
-    [okButton addTarget:self
-               action:@selector(addHistoryRecords:)
-     forControlEvents:UIControlEventTouchDown];
-    [okButton setTitle:@"OK" forState:UIControlStateNormal];
-    [okButton actionsForTarget:okButton forControlEvent:UIControlEventTouchUpInside];
-
-    [container addSubview:okButton];
-    container.tag = 3003;
-    return container;
-}
-
--(UIView *) createView {
-    UIView *viewToRemove = [self.view viewWithTag:3003];
-    _tableView = nil;
-    [[viewToRemove subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [viewToRemove removeFromSuperview];
-    
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-
-    CGRect newFrame = CGRectMake(0, 0, 0, 0);
-    newFrame.size = CGSizeMake(screenWidth, screenHeight - 165);
-    UIView *view = [[UIView alloc] initWithFrame:newFrame];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, screenWidth, 30)];
-    label.text = @"You don't have circles";
-    [view addSubview:label];
-    view.tag = 2000;
-    return view;
-}
-
-- (void) reloadView{
-    
-    if (delegate.currentCircle != nil && delegate.currentCircle.name.length >0) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
-        friends = [NSMutableArray new];
-        tmp = [[NSMutableArray alloc] initWithArray:[connector getFriendsInCircle:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
-        for (Friend *f in tmp) {
-            [friends addObject:[[CEFriendHelper alloc] initWithName:f.friendName]];
-        }
-        if (_tableView == nil) {
-            [self.view addSubview:[self createTableView]];
-        }
-        [self reloadData:delegate.currentCircle];
-
-    } else {
-        [self.view addSubview:[self createView]];
-        self.navigationItem.title = @"";
-    }
-}
-
-- (void) reloadData: (CircleDefinition *)def {
-    [_tableView reloadData];
-    tmp = [connector getFriendsInCircle:def.name :def.ownerId];
-    NSMutableString *text = [NSMutableString new];
-    for (Friend *fr in tmp) {
-        [text appendString:fr.friendName];
-        [text appendString:@"   "];
-        [text appendString:[NSString stringWithFormat:@"%.2f", fr.balanceInCircle.doubleValue]];
-        [text appendString:@"\n"];
-    }
-    scroll.text = text;
-}
-
-- (void) receiveReloadNotification:(NSNotification *) notification {
-    [self reloadView];
-}
-
--(void) showStatsView: (NSNotification *) notification {
-    [self showStatView];
-}
 
 - (void)setupMenuBarButtonItems {
     switch (self.navigationController.sideMenu.menuState) {
@@ -238,36 +125,81 @@ UITextView *scroll;
     return [[UIBarButtonItem alloc]
             initWithImage:[UIImage imageNamed:@"menu-icon.png"] style:UIBarButtonItemStyleBordered
             target:self
-            action:@selector(someAction:)];
-}
-
-- (void)backButtonPressed:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+            action:@selector(showHistoryView:)];
 }
 
 
+#pragma mark - end of view setup
 
-- (IBAction)showSelfStatistics:(id)sender {
+
+
+#pragma mark - delegate methods
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+//    UITableViewCell *cell = (UITableViewCell *) textField.superview.superview;
+//    CEFriendHelper *friend = [friends objectAtIndex:cell.tag - 10000];
+//    
+//    if (textField.tag == 1020) {
+//        friend.amount = textField.text;
+//    }
+//    friend.currency = ((UITextField *)[cell viewWithTag:1030]).text;
+//    
+    
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    bar.field = textField;
+}
+
+
+#pragma mark - Drop Down Selector Delegate
+
+- (void)dropDownControlViewWillBecomeActive:(LHDropDownControlView *)view  {
+    self.navigationController.sideMenu.openMenuEnabled = NO;
+
+    [self.scrollViewContainer setScrollEnabled:NO];
+    [self.scrollViewContainer setUserInteractionEnabled:NO];
+    for (UIView *v in view.superview.subviews) {
+        if ([v isKindOfClass:[UIScrollView class]]) {
+            v.userInteractionEnabled = NO;
+            [((UIScrollView *)v) setScrollEnabled:NO];
+        }
+    }
+}
+
+- (void)dropDownControlView:(LHDropDownControlView *)view didFinishWithSelection:(id)selection {
+    self.navigationController.sideMenu.openMenuEnabled = YES;
+
+    view.title = [NSString stringWithFormat:@"%@", selection ? : @"-"];
+    [self.scrollViewContainer setScrollEnabled:YES];
+    [self.scrollViewContainer setUserInteractionEnabled:YES];
+    for (UIView *v in view.superview.subviews) {
+        if ([v isKindOfClass:[UIScrollView class]]) {
+            v.userInteractionEnabled = YES;
+            [((UIScrollView *)v) setScrollEnabled:YES];
+        }
+    }
+}
+
+#pragma mark - handle reload notifications
+- (void) receiveReloadNotification:(NSNotification *) notification {
+    [self createHomeView];
+}
+
+-(void) showStatsView: (NSNotification *) notification {
     [self showStatView];
 }
 
 -(void) showStatView{
     UIViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"statistics"];
-    [self presentViewController:stats animated:YES completion:nil];
-
+    [self.navigationController pushViewController:stats animated:YES];
+    
 }
 
+#pragma action handling private methods
+
 - (IBAction)sync:(id)sender {
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-
-    spinner.center = CGPointMake(screenWidth/2, screenHeight/2 - 35);
-    spinner.color = [UIColor blackColor];
-    [self.view addSubview:spinner];
-    [spinner startAnimating];
-
+    
     dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     // it's not, so we will start a background process to calculate it and not block the UI
     dispatch_async(workingQueue,
@@ -285,7 +217,7 @@ UITextView *scroll;
                            }
                        }
                        dispatch_async(dispatch_get_main_queue(), ^{
-                           [spinner stopAnimating];
+                           [self stopLoading];
                            if ([data objectForKey:@"error"] != nil) {
                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account is not active"
                                                                                message:@"You have to activate your account first"
@@ -295,87 +227,205 @@ UITextView *scroll;
                                [alert show];
                            }
                            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-                           [self reloadView];
                        });
                    });
     
 }
 
-- (IBAction)someAction:(id)sender {
+- (IBAction)showHistoryView:(id)sender {
     CEHistoryViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"history"];
     stats.definition = delegate.currentCircle;
-    [self presentViewController:stats animated:YES completion:nil];
+    [self.navigationController pushViewController:stats animated:YES];
     
-}
-
-- (IBAction)handleGesture:(UIPanGestureRecognizer *)sender {
-    //TODO:
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return friends.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"addDataCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-        cell = [topLevelObjects objectAtIndex:0];
-    }
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    CEFriendHelper *fHelper = [friends objectAtIndex:indexPath.row];
-    ((UILabel *)[cell viewWithTag:1010]).text = fHelper.userName;
-
-    UITextField *amount = (UITextField *)[cell viewWithTag:1020];
-    [amount setDelegate:self];
-    [amount setInputAccessoryView:bar];
-    [bar.fields insertObject:amount atIndex:indexPath.row];
-    if (fHelper.amount != nil && fHelper.amount.length > 0) {
-        amount.text = fHelper.amount;
-    } else {
-        amount.text = @"";
-    }
-    UITextField *dropDown = (UITextField *)[cell viewWithTag:1030];
-    [dropDown setDelegate:self];
-    
-    if (fHelper.currency != nil && [fHelper.currency isEqualToString:@"Select"]) {
-        dropDown.text = fHelper.currency;
-    }
-    
-    cell.tag = 10000 + indexPath.row;
-    
-    return cell;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    UITableViewCell *cell = (UITableViewCell *) textField.superview.superview;
-    CEFriendHelper *friend = [friends objectAtIndex:cell.tag - 10000];
-    
-    if (textField.tag == 1020) {
-        friend.amount = textField.text;
-    }
-    friend.currency = ((UITextField *)[cell viewWithTag:1030]).text;
-    
-    
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
-    bar.field = textField;
 }
 
 -(IBAction) addHistoryRecords:(UIButton *) sender {
+    NSMutableArray *friends = [NSMutableArray new];
+    for (int i = 0; i < delegate.currentCircle.numberOfFriends.intValue; i ++) {
+        
+        UIScrollView *inputView = (UIScrollView *)[self.scrollViewContainer viewWithTag:1000];
+        NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
+        NSString *amount = ((UITextField *)[inputView viewWithTag:1200 + i]).text;
+        NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
+        CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
+        h.amount = amount;
+        h.currency = currency;
+        [friends addObject:h];
+    }
     [connector addHistoryRecords:friends :delegate.currentCircle.name :delegate.currentCircle.ownerId :delegate.currentUser.userId];
-    [self reloadView];
+    [self createHomeView];
+}
+
+#pragma mark - create empty circle list view and circle view view
+
+-(void) createHomeView {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    if (delegate.currentCircle != nil) {
+        UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
+        inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
+        NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];
+        NSMutableString *str = [[NSMutableString alloc] init];
+        LHDropDownControlView *currency = [[LHDropDownControlView alloc] initWithFrame:CGRectMake(200, 20, 70, 30)];
+        [currency setTitle:@"Select"];
+        NSArray *currencyArr = [[NSArray alloc] initWithObjects:@"EUR", @"BGN", @"USD", nil];
+        [currency setSelectionOptions:currencyArr withTitles:currencyArr];
+        currency.delegate = self;
+        currency.tag = 1300;
+        [inputView addSubview:currency];
+
+        for (int i = 0; i < tmp.count; i ++) {
+            Friend *f = [tmp objectAtIndex:i];
+            
+            [str appendString:f.friendName];
+            [str appendString:@"  "];
+            [str appendString:[NSString stringWithFormat:@"%0.2f\n", f.balanceInCircle.doubleValue]];
+            
+            UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30 + i*20 + 60, 80, 30)];
+            nameLbl.text = f.friendName;
+            nameLbl.tag = 1100 + i;
+            [inputView addSubview:nameLbl];
+            
+            UITextField *amount = [[UITextField alloc] initWithFrame:CGRectMake(120, i*30 + i*20 + 60, 70, 30)];
+            amount.borderStyle = UITextBorderStyleRoundedRect;
+            amount.tag = 1200 + i;
+            amount.delegate = self;
+            [inputView addSubview:amount];
+            
+        }
+        inputView.tag = 1000;
+        [self.scrollViewContainer addSubview:inputView];
+
+        scroll = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 50)];
+        scroll.text = str;
+        scroll.editable = NO;
+        [self.scrollViewContainer addSubview:scroll];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [button addTarget:self
+                   action:@selector(addHistoryRecords:)
+         forControlEvents:UIControlEventTouchDown];
+        [button setTitle:@"Add record" forState:UIControlStateNormal];
+        button.frame = CGRectMake(200, screenHeight - 150, 90, 40);
+        [self.scrollViewContainer addSubview:button];
+    } else {
+        UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
+        l.text = @"No selected circle";
+        [self.scrollViewContainer addSubview:l];
+    }
+}
+
+- (void)setupStrings{
+    textPull = @"Pull down to refresh...";
+    textRelease = @"Release to refresh...";
+    textLoading = @"Loading...";
+}
+
+- (void)addPullToRefreshHeader {
+    refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, 320, REFRESH_HEADER_HEIGHT)];
+    refreshHeaderView.backgroundColor = [UIColor clearColor];
+    
+    refreshLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, REFRESH_HEADER_HEIGHT)];
+    refreshLabel.backgroundColor = [UIColor clearColor];
+    refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
+    refreshLabel.textAlignment = NSTextAlignmentCenter;
+    
+    refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+    refreshArrow.frame = CGRectMake(floorf((REFRESH_HEADER_HEIGHT - 27) / 2),
+                                    (floorf(REFRESH_HEADER_HEIGHT - 44) / 2),
+                                    27, 44);
+    
+    refreshSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    refreshSpinner.frame = CGRectMake(floorf(floorf(REFRESH_HEADER_HEIGHT - 20) / 2), floorf((REFRESH_HEADER_HEIGHT - 20) / 2), 20, 20);
+    refreshSpinner.hidesWhenStopped = YES;
+    
+    [refreshHeaderView addSubview:refreshLabel];
+    [refreshHeaderView addSubview:refreshArrow];
+    [refreshHeaderView addSubview:refreshSpinner];
+    [self.scrollViewContainer addSubview:refreshHeaderView];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    if (isLoading) return;
+    isDragging = YES;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (isLoading) {
+        // Update the content inset, good for section headers
+        if (scrollView.contentOffset.y > 0)
+            self.scrollViewContainer.contentInset = UIEdgeInsetsZero;
+        else if (scrollView.contentOffset.y >= -REFRESH_HEADER_HEIGHT)
+            self.scrollViewContainer.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (isDragging && scrollView.contentOffset.y < 0) {
+        // Update the arrow direction and label
+        [UIView animateWithDuration:0.25 animations:^{
+            if (scrollView.contentOffset.y < -REFRESH_HEADER_HEIGHT) {
+                // User is scrolling above the header
+                refreshLabel.text = self.textRelease;
+                [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI, 0, 0, 1);
+            } else {
+                // User is scrolling somewhere within the header
+                refreshLabel.text = self.textPull;
+                [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+            }
+        }];
+    }
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if (isLoading) return;
+    isDragging = NO;
+    if (scrollView.contentOffset.y <= -REFRESH_HEADER_HEIGHT) {
+        // Released above the header
+        [self startLoading];
+    }
+}
+
+- (void)startLoading {
+    isLoading = YES;
+    
+    // Show the header
+    [UIView animateWithDuration:0.3 animations:^{
+        self.scrollViewContainer.contentInset = UIEdgeInsetsMake(REFRESH_HEADER_HEIGHT, 0, 0, 0);
+        refreshLabel.text = self.textLoading;
+        refreshArrow.hidden = YES;
+        [refreshSpinner startAnimating];
+    }];
+    
+    // Refresh action!
+    [self refresh];
+}
+
+- (void)stopLoading {
+    isLoading = NO;
+    
+    // Hide the header
+    [UIView animateWithDuration:0.3 animations:^{
+        self.scrollViewContainer.contentInset = UIEdgeInsetsZero;
+        [refreshArrow layer].transform = CATransform3DMakeRotation(M_PI * 2, 0, 0, 1);
+    }
+                     completion:^(BOOL finished) {
+                         [self performSelector:@selector(stopLoadingComplete)];
+                     }];
+}
+
+- (void)stopLoadingComplete {
+    // Reset the header
+    refreshLabel.text = self.textPull;
+    refreshArrow.hidden = NO;
+    [refreshSpinner stopAnimating];
+}
+
+- (void)refresh {
+    // This is just a demo. Override this method with your custom reload action.
+    // Don't forget to call stopLoading at the end.
+    [self performSelector:@selector(sync:) withObject:nil afterDelay:2.0];
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

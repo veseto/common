@@ -7,17 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LHDropDownControlView.h"
 #import "SideMenuViewController.h"
 
-@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-@property (nonatomic, retain) SideMenuViewController *sideMenu;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
+@interface CEHomeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, LHDropDownControlViewDelegate>{
+    UIView *refreshHeaderView;
+    UILabel *refreshLabel;
+    UIImageView *refreshArrow;
+    UIActivityIndicatorView *refreshSpinner;
+    BOOL isDragging;
+    BOOL isLoading;
+    NSString *textPull;
+    NSString *textRelease;
+    NSString *textLoading;
+}
 
-- (IBAction)showSelfStatistics:(id)sender;
+@property (nonatomic, retain) UIView *refreshHeaderView;
+@property (nonatomic, retain) UILabel *refreshLabel;
+@property (nonatomic, retain) UIImageView *refreshArrow;
+@property (nonatomic, retain) UIActivityIndicatorView *refreshSpinner;
+@property (nonatomic, copy) NSString *textPull;
+@property (nonatomic, copy) NSString *textRelease;
+@property (nonatomic, copy) NSString *textLoading;
+@property (nonatomic, retain) SideMenuViewController *sideMenu;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
+
 - (IBAction)sync:(id)sender;
-- (IBAction)someAction:(id)sender;
-- (IBAction)handleGesture:(id)sender;
-- (void) showStatView;
+- (IBAction)showHistoryView:(id)sender;
 -(IBAction) addHistoryRecords:(UIButton *) sender;
 
 @end
