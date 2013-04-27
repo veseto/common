@@ -8,6 +8,7 @@
 
 #import "CEHistoryViewController.h"
 #import "CEDBConnector.h"
+#import "CEAppDelegate.h"
 #import "HistoryRecord.h"
 
 @interface CEHistoryViewController ()
@@ -15,11 +16,11 @@
 @end
 
 @implementation CEHistoryViewController
-@synthesize definition = _definition;
 @synthesize tableView = _tableView;
 
 NSArray *history;
 CEDBConnector *connector;
+CEAppDelegate *delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,13 +35,14 @@ CEDBConnector *connector;
 {
     [super viewDidLoad];
     connector = [CEDBConnector new];
-    history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:_definition.name :_definition.ownerId]];
+    delegate = [[UIApplication sharedApplication] delegate];
+    history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:_definition.name :_definition.ownerId]];
+    history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
     [_tableView reloadData];
     
 }

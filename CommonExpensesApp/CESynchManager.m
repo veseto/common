@@ -90,15 +90,6 @@
     [dict setObject:jsonCircles forKey:@"circles"];
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error];
-    NSString* newStr = [[NSString alloc] initWithData:jsonData
-                                              encoding:NSUTF8StringEncoding];
-    if (!jsonData) {
-        NSLog(@"JSON error: %@", error);
-    } else {
-        NSLog(newStr);
-    }
-    
-    
     return jsonData;
 }
 

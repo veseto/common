@@ -32,8 +32,6 @@
     if (error) {
         return [NSDictionary dictionaryWithObject:error forKey:@"error"];
     } else {
-        NSString *test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(test);
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:
                           NSJSONReadingMutableContainers error:&error];
         return json;
@@ -52,8 +50,6 @@
     if (error) {
         return [NSDictionary dictionaryWithObject:error forKey:@"error"];
     } else {
-        NSString *test = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(test);
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:
                               NSJSONReadingMutableContainers error:&error];
         return json;

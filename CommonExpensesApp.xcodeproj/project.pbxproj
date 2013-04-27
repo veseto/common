@@ -37,7 +37,6 @@
 		F20B327216D0094C00B70559 /* CEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F20B327116D0094C00B70559 /* CEAppDelegate.m */; };
 		F20B327416D0094C00B70559 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F20B327316D0094C00B70559 /* Default.png */; };
 		F20B327616D0094C00B70559 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20B327516D0094C00B70559 /* Default@2x.png */; };
-		F20B327816D0094C00B70559 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F20B327716D0094C00B70559 /* Default-568h@2x.png */; };
 		F20B327B16D0094C00B70559 /* CommonExpensesApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F20B327916D0094C00B70559 /* CommonExpensesApp.xcdatamodeld */; };
 		F21625C116F4F85200324637 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C016F4F85200324637 /* Friend.m */; };
 		F21625C716F5D62900324637 /* MFSideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = F21625C416F5D62900324637 /* MFSideMenu.m */; };
@@ -536,7 +535,6 @@
 				F20B326C16D0094C00B70559 /* InfoPlist.strings in Resources */,
 				F20B327416D0094C00B70559 /* Default.png in Resources */,
 				F20B327616D0094C00B70559 /* Default@2x.png in Resources */,
-				F20B327816D0094C00B70559 /* Default-568h@2x.png in Resources */,
 				F291EAD116D2B55B006C3BD6 /* Storyboard.storyboard in Resources */,
 				F286CE6016F111E600E7FBEC /* back-arrow.png in Resources */,
 				F286CE6116F111E600E7FBEC /* back-arrow@2x.png in Resources */,

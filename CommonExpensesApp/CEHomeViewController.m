@@ -170,7 +170,7 @@ UITextView *scroll;
 - (void)dropDownControlView:(LHDropDownControlView *)view didFinishWithSelection:(id)selection {
     self.navigationController.sideMenu.openMenuEnabled = YES;
 
-    view.title = [NSString stringWithFormat:@"%@", selection ? : @"-"];
+    view.title = [NSString stringWithFormat:@"%@", selection ? : @"EUR"];
     [self.scrollViewContainer setScrollEnabled:YES];
     [self.scrollViewContainer setUserInteractionEnabled:YES];
     for (UIView *v in view.superview.subviews) {
@@ -234,7 +234,6 @@ UITextView *scroll;
 
 - (IBAction)showHistoryView:(id)sender {
     CEHistoryViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"history"];
-    stats.definition = delegate.currentCircle;
     [self.navigationController pushViewController:stats animated:YES];
     
 }
@@ -242,15 +241,16 @@ UITextView *scroll;
 -(IBAction) addHistoryRecords:(UIButton *) sender {
     NSMutableArray *friends = [NSMutableArray new];
     for (int i = 0; i < delegate.currentCircle.numberOfFriends.intValue; i ++) {
-        
         UIScrollView *inputView = (UIScrollView *)[self.scrollViewContainer viewWithTag:1000];
-        NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
         NSString *amount = ((UITextField *)[inputView viewWithTag:1200 + i]).text;
-        NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
-        CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
-        h.amount = amount;
-        h.currency = currency;
-        [friends addObject:h];
+        if (amount.length > 0) {
+            NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
+            NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
+            CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
+            h.amount = amount;
+            h.currency = currency;
+            [friends addObject:h];
+        }
     }
     [connector addHistoryRecords:friends :delegate.currentCircle.name :delegate.currentCircle.ownerId :delegate.currentUser.userId];
     [self createHomeView];
@@ -262,13 +262,15 @@ UITextView *scroll;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
+    [[self.scrollViewContainer viewWithTag:1000].subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+    [self.scrollViewContainer.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
     if (delegate.currentCircle != nil) {
         UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
         inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
         NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];
         NSMutableString *str = [[NSMutableString alloc] init];
         LHDropDownControlView *currency = [[LHDropDownControlView alloc] initWithFrame:CGRectMake(200, 20, 70, 30)];
-        [currency setTitle:@"Select"];
+        [currency setTitle:@"EUR"];
         NSArray *currencyArr = [[NSArray alloc] initWithObjects:@"EUR", @"BGN", @"USD", nil];
         [currency setSelectionOptions:currencyArr withTitles:currencyArr];
         currency.delegate = self;

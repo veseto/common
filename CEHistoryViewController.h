@@ -12,6 +12,5 @@
 @interface CEHistoryViewController : UIViewController
 - (IBAction)closeHistoryView:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property CircleDefinition *definition;
 
 @end
