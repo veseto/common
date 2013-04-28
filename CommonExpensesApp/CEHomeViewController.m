@@ -66,7 +66,7 @@ UITextView *scroll;
     bar = [KeyboardBar new];
     
     //Add init with default circle
-        
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
@@ -87,6 +87,11 @@ UITextView *scroll;
             case MFSideMenuStateEventMenuDidOpen:
                 break;
             case MFSideMenuStateEventMenuWillClose:
+            {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"hideKeyboardNotification"
+                 object:weakSelf];
+            }
                 break;
             case MFSideMenuStateEventMenuDidClose:
                 break;
@@ -112,7 +117,7 @@ UITextView *scroll;
             break;
     }
     self.navigationItem.rightBarButtonItem = [self rightMenuBarItem];
-
+    
 }
 
 - (UIBarButtonItem *)leftMenuBarButtonItem {
@@ -136,14 +141,14 @@ UITextView *scroll;
 #pragma mark - delegate methods
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-//    UITableViewCell *cell = (UITableViewCell *) textField.superview.superview;
-//    CEFriendHelper *friend = [friends objectAtIndex:cell.tag - 10000];
-//    
-//    if (textField.tag == 1020) {
-//        friend.amount = textField.text;
-//    }
-//    friend.currency = ((UITextField *)[cell viewWithTag:1030]).text;
-//    
+    //    UITableViewCell *cell = (UITableViewCell *) textField.superview.superview;
+    //    CEFriendHelper *friend = [friends objectAtIndex:cell.tag - 10000];
+    //
+    //    if (textField.tag == 1020) {
+    //        friend.amount = textField.text;
+    //    }
+    //    friend.currency = ((UITextField *)[cell viewWithTag:1030]).text;
+    //
     
 }
 
@@ -156,7 +161,7 @@ UITextView *scroll;
 
 - (void)dropDownControlViewWillBecomeActive:(LHDropDownControlView *)view  {
     self.navigationController.sideMenu.openMenuEnabled = NO;
-
+    
     [self.scrollViewContainer setScrollEnabled:NO];
     [self.scrollViewContainer setUserInteractionEnabled:NO];
     for (UIView *v in view.superview.subviews) {
@@ -169,7 +174,7 @@ UITextView *scroll;
 
 - (void)dropDownControlView:(LHDropDownControlView *)view didFinishWithSelection:(id)selection {
     self.navigationController.sideMenu.openMenuEnabled = YES;
-
+    
     view.title = [NSString stringWithFormat:@"%@", selection ? : @"EUR"];
     [self.scrollViewContainer setScrollEnabled:YES];
     [self.scrollViewContainer setUserInteractionEnabled:YES];
@@ -248,12 +253,12 @@ UITextView *scroll;
         NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
         NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
         
-//        [text appendString:name];
-//        [text appendString:@"-"];
-//        [text appendString:amount.length > 0 ?@"0" :amount];
-//        [text appendString:currency];
-//        [text appendString:@" "];
-//        
+        //        [text appendString:name];
+        //        [text appendString:@"-"];
+        //        [text appendString:amount.length > 0 ?@"0" :amount];
+        //        [text appendString:currency];
+        //        [text appendString:@" "];
+        //
         if (amount.length > 0) {
             CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
             h.amount = amount;
@@ -269,12 +274,12 @@ UITextView *scroll;
 #pragma mark - create empty circle list view and circle view view
 
 -(void) createHomeView {
-
+    
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     [[self.scrollViewContainer viewWithTag:1000].subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-
+    
     for (UIView *view in self.scrollViewContainer.subviews) {
         if (view != refreshHeaderView) {
             [view removeFromSuperview];
@@ -282,52 +287,58 @@ UITextView *scroll;
     }
     
     if (delegate.currentCircle != nil) {
-        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
-        UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
-        inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
-        NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];
-        NSMutableString *str = [[NSMutableString alloc] init];
-        LHDropDownControlView *currency = [[LHDropDownControlView alloc] initWithFrame:CGRectMake(200, 20, 70, 30)];
-        [currency setTitle:@"EUR"];
-        NSArray *currencyArr = [[NSArray alloc] initWithObjects:@"EUR", @"BGN", @"USD", nil];
-        [currency setSelectionOptions:currencyArr withTitles:currencyArr];
-        currency.delegate = self;
-        currency.tag = 1300;
-        [inputView addSubview:currency];
-
-        for (int i = 0; i < tmp.count; i ++) {
-            Friend *f = [tmp objectAtIndex:i];
+        if (delegate.currentCircle.numberOfFriends.intValue > 1) {
+            self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
+            UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
+            inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
+            NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];
+            NSMutableString *str = [[NSMutableString alloc] init];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [button addTarget:self
+                       action:@selector(addHistoryRecords:)
+             forControlEvents:UIControlEventTouchDown];
+            [button setTitle:@"+" forState:UIControlStateNormal];
+            button.frame = CGRectMake(290, 20, 30, 30);
+            [inputView addSubview:button];
+            LHDropDownControlView *currency = [[LHDropDownControlView alloc] initWithFrame:CGRectMake(200, 20, 85, 35)];
+            [currency setTitle:@"EUR"];
+            NSArray *currencyArr = [[NSArray alloc] initWithObjects:@"EUR", @"BGN", @"USD", nil];
+            [currency setSelectionOptions:currencyArr withTitles:currencyArr];
+            currency.delegate = self;
+            currency.tag = 1300;
+            [inputView addSubview:currency];
             
-            [str appendString:f.friendName];
-            [str appendString:@"  "];
-            [str appendString:[NSString stringWithFormat:@"%0.2f BGN\n", f.balanceInCircle.doubleValue]];
+            for (int i = 0; i < tmp.count; i ++) {
+                Friend *f = [tmp objectAtIndex:i];
+                
+                [str appendString:f.friendName];
+                [str appendString:@"  "];
+                [str appendString:[NSString stringWithFormat:@"%0.2f BGN\n", f.balanceInCircle.doubleValue]];
+                
+                UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30 + i*20 + 60, 80, 30)];
+                nameLbl.text = f.friendName;
+                nameLbl.tag = 1100 + i;
+                [inputView addSubview:nameLbl];
+                
+                UITextField *amount = [[UITextField alloc] initWithFrame:CGRectMake(120, i*30 + i*20 + 60, 70, 30)];
+                amount.borderStyle = UITextBorderStyleRoundedRect;
+                amount.tag = 1200 + i;
+                amount.delegate = self;
+                [inputView addSubview:amount];
+                
+            }
+            inputView.tag = 1000;
+            [self.scrollViewContainer addSubview:inputView];
             
-            UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30 + i*20 + 60, 80, 30)];
-            nameLbl.text = f.friendName;
-            nameLbl.tag = 1100 + i;
-            [inputView addSubview:nameLbl];
-            
-            UITextField *amount = [[UITextField alloc] initWithFrame:CGRectMake(120, i*30 + i*20 + 60, 70, 30)];
-            amount.borderStyle = UITextBorderStyleRoundedRect;
-            amount.tag = 1200 + i;
-            amount.delegate = self;
-            [inputView addSubview:amount];
-            
+            scroll = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 50)];
+            scroll.text = str;
+            scroll.editable = NO;
+            [self.scrollViewContainer addSubview:scroll];
+        } else {
+            UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
+            l.text = @"You are the only one in circle";
+            [self.scrollViewContainer addSubview:l];
         }
-        inputView.tag = 1000;
-        [self.scrollViewContainer addSubview:inputView];
-
-        scroll = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 50)];
-        scroll.text = str;
-        scroll.editable = NO;
-        [self.scrollViewContainer addSubview:scroll];
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [button addTarget:self
-                   action:@selector(addHistoryRecords:)
-         forControlEvents:UIControlEventTouchDown];
-        [button setTitle:@"Add record" forState:UIControlStateNormal];
-        button.frame = CGRectMake(200, screenHeight - 150, 90, 40);
-        [self.scrollViewContainer addSubview:button];
     } else {
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
         l.text = @"No selected circle";

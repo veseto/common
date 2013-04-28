@@ -28,7 +28,7 @@
     [super viewDidLoad];
     self.navigationController.sideMenu.openMenuEnabled = YES;
     __weak CESelfStatisticsViewController *weakSelf = self;
-
+    
     self.navigationController.sideMenu.menuStateEventBlock = ^(MFSideMenuStateEvent event) {
         NSLog(@"event occurred: %@", weakSelf.navigationItem.title);
         switch (event) {
@@ -37,8 +37,13 @@
             case MFSideMenuStateEventMenuDidOpen:
                 break;
             case MFSideMenuStateEventMenuWillClose:
+            {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"hideKeyboardNotification"
+                 object:weakSelf];
+            }
                 break;
-            case MFSideMenuStateEventMenuDidClose:
+            case MFSideMenuStateEventMenuDidClose: 
                 break;
         }
         
@@ -54,7 +59,7 @@
         case MFSideMenuStateLeftMenuOpen:
             self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
             break;
-    }    
+    }
 }
 
 - (UIBarButtonItem *)leftMenuBarButtonItem {
@@ -72,6 +77,6 @@
 
 - (IBAction)close:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 @end

@@ -27,6 +27,10 @@ int count;
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadTableNotification"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(hideKeyboard:)
+                                                 name:@"hideKeyboardNotification"
+                                               object:nil];
     return [self initWithStyle:UITableViewStyleGrouped];
 }
 
@@ -35,8 +39,14 @@ int count;
     if (!circles) {
         circles = [[NSMutableArray alloc] init];
     }
+    count = circles.count;
     [tableView reloadData];
 }
+
+-(void)hideKeyboard:(NSNotification *)hideKeyboardNotification {
+    [self cancelAdd];
+}
+
 - (void) viewDidLoad {
     newRow = NO;
     [super viewDidLoad];
@@ -107,6 +117,7 @@ int count;
                     [name becomeFirstResponder];
                     UIButton *ok = (UIButton *)[cell viewWithTag:3200];
                     [ok setEnabled:(name.text.length > 0)];
+                    [ok setHidden:(name.text.length < 1)];
                     [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchUpInside];
                     [((UIButton *)[cell viewWithTag:3300]) addTarget:self action:@selector(cancelAdd) forControlEvents:UIControlEventTouchUpInside];
                 } else {
@@ -193,8 +204,12 @@ int count;
 #pragma mark - UISearchBarDelegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CircleDefinition *d = [circles objectAtIndex:indexPath.row];
+    int row = indexPath.row;
+    if (newRow) {
+        [self cancelAdd];
+        row -= 1;
+    }
+    CircleDefinition *d = [circles objectAtIndex:row];
     if (d.circleId != nil) {
         [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
     }
@@ -219,7 +234,7 @@ int count;
         } else {
             return YES;
         }
-    } 
+    }
     return NO;
 }
 
@@ -288,44 +303,58 @@ int count;
     UITextField *name = (UITextField *)[cell viewWithTag:3100];
     [name resignFirstResponder];
     if (name.text.length > 0) {
-        CEUser *user = delegate.currentUser;
-        NSArray *friends = [[NSArray alloc] initWithObjects:user.userName, nil];
-        CEDBConnector *connector = [CEDBConnector new];
-        delegate.currentCircle = [connector createCircle:friends :user.userId :name.text :nil];
-        newRow = NO;
-        
-        [self.tableView beginUpdates];
-        count -=1;
-        NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
-        
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
-        circles = [[NSMutableArray alloc] initWithArray:[connector getCirclesForUser:delegate.currentUser.userId]];
-        count = circles.count;
-        [tableView reloadData];
-        
+        if ([connector circleExistsForUser:name.text :((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser.userId]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Circle exists"
+                                                            message:[NSString stringWithFormat:@"Circle with name %@ already exists", name.text]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [name becomeFirstResponder];
+        } else {
+            CEUser *user = delegate.currentUser;
+            NSArray *friends = [[NSArray alloc] initWithObjects:user.userName, nil];
+            CEDBConnector *connector = [CEDBConnector new];
+            delegate.currentCircle = [connector createCircle:friends :user.userId :name.text :nil];
+            newRow = NO;
+            
+            [self.tableView beginUpdates];
+            count -=1;
+            NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
+            
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView endUpdates];
+            circles = [[NSMutableArray alloc] initWithArray:[connector getCirclesForUser:delegate.currentUser.userId]];
+            count = circles.count;
+            [tableView reloadData];
+            
+        }
     } else {
         [self cancelAdd];
     }
 }
 
 -(void) cancelAdd {
-    newRow = NO;
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    [((UITextField *)[cell viewWithTag:3100]) resignFirstResponder];
-    [self.tableView beginUpdates];
-    count -=1;
-    NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
-    
-    [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationRight];
-    [self.tableView endUpdates];
-    
+    if (newRow) {
+        newRow = NO;
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+        [((UITextField *)[cell viewWithTag:3100]) resignFirstResponder];
+        [self.tableView beginUpdates];
+        count -=1;
+        NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
+        
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationRight];
+        [self.tableView endUpdates];
+    }
 }
 -(void) textFieldDidChange {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
     UITextField *name = (UITextField *)[cell viewWithTag:3100];
     
     [(UIButton *)[cell viewWithTag:3200] setEnabled:(name.text.length > 0)];
+    [(UIButton *)[cell viewWithTag:3200] setHidden:(name.text.length < 1)];
     
 }
+
+
 @end

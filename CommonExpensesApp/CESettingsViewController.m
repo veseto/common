@@ -36,7 +36,11 @@
                 break;
             case MFSideMenuStateEventMenuDidOpen:
                 break;
-            case MFSideMenuStateEventMenuWillClose:
+            case MFSideMenuStateEventMenuWillClose:{
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"hideKeyboardNotification"
+                 object:weakSelf];
+            }
                 break;
             case MFSideMenuStateEventMenuDidClose:
                 break;
