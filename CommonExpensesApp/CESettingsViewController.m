@@ -26,8 +26,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.navigationController.sideMenu.openMenuEnabled = YES;
+    __weak CESettingsViewController *weakSelf = self;
+    
+    self.navigationController.sideMenu.menuStateEventBlock = ^(MFSideMenuStateEvent event) {
+        NSLog(@"event occurred: %@", weakSelf.navigationItem.title);
+        switch (event) {
+            case MFSideMenuStateEventMenuWillOpen:
+                break;
+            case MFSideMenuStateEventMenuDidOpen:
+                break;
+            case MFSideMenuStateEventMenuWillClose:
+                break;
+            case MFSideMenuStateEventMenuDidClose:
+                break;
+        }
+        
+        [weakSelf setupMenuBarButtonItems];
+    };}
+
+- (void)setupMenuBarButtonItems {
+    switch (self.navigationController.sideMenu.menuState) {
+        case MFSideMenuStateClosed:
+            self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
+            break;
+        case MFSideMenuStateLeftMenuOpen:
+            self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
+            break;
+    }
+    
 }
+
+- (UIBarButtonItem *)leftMenuBarButtonItem {
+    return [[UIBarButtonItem alloc]
+            initWithImage:[UIImage imageNamed:@"menu-icon.png"] style:UIBarButtonItemStyleBordered
+            target:self.navigationController.sideMenu
+            action:@selector(toggleLeftSideMenu)];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -126,9 +126,9 @@ CEDBConnector *connector;
     switch (indexPath.section) {
         case 0:
             if (indexPath.row == 0){
-                [[NSNotificationCenter defaultCenter]
-                 postNotificationName:@"ShowStatsViewNotification"
-                 object:self];
+                UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"statistics"];
+                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
             }
             break;
         case 1:
@@ -138,6 +138,10 @@ CEDBConnector *connector;
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                 delegate.currentCircle = c;
+                UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
+                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
+
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"ReloadHomeViewNotification"
                  object:self];
@@ -146,7 +150,8 @@ CEDBConnector *connector;
         case 2:
             if (indexPath.row == 0) {
                 UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
-                [self.sideMenu.navigationController presentViewController:settings animated:YES completion:nil];
+                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:settings, nil];
+                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
             } else if (indexPath.row == 1) {
                 delegate.currentUser = nil;
                 self.sideMenu.openMenuEnabled = NO;

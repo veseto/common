@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SideMenuViewController.h"
 
 @interface CESelfStatisticsViewController : UIViewController
-- (IBAction)close:(id)sender;
+@property (nonatomic, retain) SideMenuViewController *sideMenu;
 
 @end

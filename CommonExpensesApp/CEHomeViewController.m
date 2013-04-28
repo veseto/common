@@ -234,7 +234,8 @@ UITextView *scroll;
 
 - (IBAction)showHistoryView:(id)sender {
     CEHistoryViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"history"];
-    [self.navigationController pushViewController:stats animated:YES];
+    self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     
 }
 
