@@ -91,7 +91,6 @@ int count;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    
     switch (indexPath.section) {
         case 0:
             cell.textLabel.text = delegate.currentUser.userName;
@@ -104,8 +103,10 @@ int count;
                     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                     UITextField *name = (UITextField *)[cell viewWithTag:3100];
                     name.delegate = self;
+                    [name addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
                     [name becomeFirstResponder];
                     UIButton *ok = (UIButton *)[cell viewWithTag:3200];
+                    [ok setEnabled:(name.text.length > 0)];
                     [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchUpInside];
                     [((UIButton *)[cell viewWithTag:3300]) addTarget:self action:@selector(cancelAdd) forControlEvents:UIControlEventTouchUpInside];
                 } else {
@@ -136,6 +137,12 @@ int count;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    
+    if (newRow) {
+        [self cancelAdd];
+    }
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     switch (indexPath.section) {
         case 0:
@@ -186,6 +193,7 @@ int count;
 #pragma mark - UISearchBarDelegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     CircleDefinition *d = [circles objectAtIndex:indexPath.row];
     if (d.circleId != nil) {
         [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
@@ -205,45 +213,68 @@ int count;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) return YES;
+    if (indexPath.section == 1) {
+        if (newRow && indexPath.row == 0) {
+            return NO;
+        } else {
+            return YES;
+        }
+    } 
     return NO;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 1) {
-        CGRect screenRect = [[UIScreen mainScreen] bounds];
-        CGFloat screenWidth = screenRect.size.width;
-        
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenWidth, 44)]; // x,y,width,height
-        
-        UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        reportButton.frame = CGRectMake(screenWidth - 100, 0, 30, 30); // x,y,width,height
-        [reportButton setTitle:@"+" forState:UIControlStateNormal];
-        [reportButton addTarget:self
-                         action:@selector(addCircle)
-               forControlEvents:UIControlEventTouchDown];
-        
-        [headerView addSubview:reportButton];
-        return headerView;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenWidth, 44)]; // x,y,width,height
+    
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 40)];
+    lbl.backgroundColor =[UIColor clearColor];
+    switch (section) {
+        case 0: {
+            return nil;
+        }
+        case 1: {
+            lbl.text = @"Circles";
+            UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            reportButton.frame = CGRectMake(screenWidth - 100, 0, 30, 30); // x,y,width,height
+            [reportButton setTitle:@"+" forState:UIControlStateNormal];
+            [reportButton addTarget:self
+                             action:@selector(addCircle)
+                   forControlEvents:UIControlEventTouchDown];
+            
+            [headerView addSubview:reportButton];
+        }
+            break;
+        case 2:
+            lbl.text = @"---";
+            break;
+        default:
+            break;
     }
-    return [[UIView alloc] init];
+    [headerView addSubview:lbl];
+    return headerView;
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)path
+{
+    if (path.section == 1 && path.row == 0 && newRow) {
+        return nil;
+    }
+    
+    return path;
+}
 
 -(void) addCircle {
     newRow = YES;
     count += 1;
     [self.tableView beginUpdates];
     NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
-    //you may add as many row as you want here.
     
     [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationLeft];
     [self.tableView endUpdates];
     
-    
-    //shouldHideRow = NO;
-    //[self.tableView reloadData];
 }
 
 
@@ -273,7 +304,6 @@ int count;
         count = circles.count;
         [tableView reloadData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self];
     } else {
         [self cancelAdd];
     }
@@ -289,6 +319,13 @@ int count;
     
     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationRight];
     [self.tableView endUpdates];
+    
+}
+-(void) textFieldDidChange {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    UITextField *name = (UITextField *)[cell viewWithTag:3100];
+    
+    [(UIButton *)[cell viewWithTag:3200] setEnabled:(name.text.length > 0)];
     
 }
 @end

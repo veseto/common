@@ -919,7 +919,6 @@
         <class className="CEKeyboardScroll" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEKeyboardScroll.h"/>
             <relationships>
-                <relationship kind="action" name="handleTapGesture:"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
             </relationships>
         </class>
@@ -951,15 +950,9 @@
         </class>
         <class className="CESelfStatisticsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESelfStatisticsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="close:"/>
-            </relationships>
         </class>
         <class className="CESettingsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="closeView:"/>
-            </relationships>
         </class>
         <class className="CESignUp" superclassName="CEKeyboardScroll">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CESignUp.h"/>
