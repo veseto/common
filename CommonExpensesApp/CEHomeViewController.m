@@ -282,6 +282,7 @@ UITextView *scroll;
     }
     
     if (delegate.currentCircle != nil) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
         UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
         inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
         NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];

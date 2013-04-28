@@ -2,7 +2,7 @@
 //  CircleDefinition.m
 //  CommonExpensesApp
 //
-//  Created by veseto on 14.03.13.
+//  Created by veseto on 28.04.13.
 //  Copyright (c) 2013 г. Vesela Popova. All rights reserved.
 //
 
@@ -12,9 +12,10 @@
 @implementation CircleDefinition
 
 @dynamic circleId;
+@dynamic lastServerRevision;
 @dynamic name;
 @dynamic numberOfFriends;
 @dynamic ownerId;
-@dynamic lastServerRevision;
+@dynamic lastUpdated;
 
 @end

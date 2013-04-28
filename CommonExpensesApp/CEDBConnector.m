@@ -84,6 +84,10 @@ NSManagedObjectContext *context;
     [NSEntityDescription entityForName:@"CircleDefinition"
                 inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]
+                              initWithKey:@"lastUpdated" ascending:NO];
+    [request setSortDescriptors:[NSArray arrayWithObject:sort]];
+
     [request setPredicate:[NSPredicate predicateWithFormat:@"ownerId == %@", userId]];
     [request setEntity:entityDesc];
     NSError *error; 
@@ -102,6 +106,7 @@ NSManagedObjectContext *context;
     circleDef.ownerId = ownerId;
     circleDef.circleId = circleId;
     circleDef.lastServerRevision = 0;
+    circleDef.lastUpdated = [NSDate date];
     for (int i = 0; i < friends.count; i ++) {
         Friend *f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
         f.circleName = circleName;
@@ -145,6 +150,7 @@ NSManagedObjectContext *context;
     circleDef.ownerId = ownerId;
     circleDef.circleId = circleId;
     circleDef.lastServerRevision = lastRevision;
+    circleDef.lastUpdated = [NSDate date];
     for (int i = 0; i < friends.count; i ++) {
         NSDictionary *dict = [friends objectAtIndex:i];
         NSEntityDescription *entityDescFr = [NSEntityDescription entityForName:@"Friend" inManagedObjectContext:context];
@@ -312,6 +318,18 @@ NSManagedObjectContext *context;
 }
 
 -(void) addHistoryRecords: (NSArray *) friendsArray :(NSString  *) circleName :(NSNumber *) circleOwner :(NSNumber *)authorId {
+    
+    NSEntityDescription *entityDesc =
+    [NSEntityDescription entityForName:@"CircleDefinition"
+                inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"ownerId == %@ && name == %@", circleOwner, circleName]];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    CircleDefinition *circleDef = [result objectAtIndex:0];
+    circleDef.lastUpdated = [NSDate date];
+    
     NSArray *friendsInCircle = [[NSArray alloc] initWithArray:[self getFriendsInCircle:circleName :circleOwner]];
     for (CEFriendHelper *frHelper in friendsArray) {
         if (authorId != nil && frHelper.amount > 0) {
@@ -340,7 +358,6 @@ NSManagedObjectContext *context;
         }
     }
 
-    NSError *error;
     [context save:&error];
     
 }
