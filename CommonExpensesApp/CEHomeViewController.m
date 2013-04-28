@@ -240,12 +240,20 @@ UITextView *scroll;
 
 -(IBAction) addHistoryRecords:(UIButton *) sender {
     NSMutableArray *friends = [NSMutableArray new];
+    NSMutableString *text = [NSMutableString new];
     for (int i = 0; i < delegate.currentCircle.numberOfFriends.intValue; i ++) {
         UIScrollView *inputView = (UIScrollView *)[self.scrollViewContainer viewWithTag:1000];
         NSString *amount = ((UITextField *)[inputView viewWithTag:1200 + i]).text;
+        NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
+        NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
+        
+//        [text appendString:name];
+//        [text appendString:@"-"];
+//        [text appendString:amount.length > 0 ?@"0" :amount];
+//        [text appendString:currency];
+//        [text appendString:@" "];
+//        
         if (amount.length > 0) {
-            NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
-            NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
             CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
             h.amount = amount;
             h.currency = currency;
@@ -253,17 +261,25 @@ UITextView *scroll;
         }
     }
     [connector addHistoryRecords:friends :delegate.currentCircle.name :delegate.currentCircle.ownerId :delegate.currentUser.userId];
+    self.lastTransactionInfo.text = text;
     [self createHomeView];
 }
 
 #pragma mark - create empty circle list view and circle view view
 
 -(void) createHomeView {
+
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
     [[self.scrollViewContainer viewWithTag:1000].subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    [self.scrollViewContainer.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+
+    for (UIView *view in self.scrollViewContainer.subviews) {
+        if (view != refreshHeaderView) {
+            [view removeFromSuperview];
+        }
+    }
+    
     if (delegate.currentCircle != nil) {
         UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
         inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
@@ -282,7 +298,7 @@ UITextView *scroll;
             
             [str appendString:f.friendName];
             [str appendString:@"  "];
-            [str appendString:[NSString stringWithFormat:@"%0.2f\n", f.balanceInCircle.doubleValue]];
+            [str appendString:[NSString stringWithFormat:@"%0.2f BGN\n", f.balanceInCircle.doubleValue]];
             
             UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30 + i*20 + 60, 80, 30)];
             nameLbl.text = f.friendName;

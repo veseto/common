@@ -37,16 +37,17 @@ CEAppDelegate *delegate;
     connector = [CEDBConnector new];
     delegate = [[UIApplication sharedApplication] delegate];
     history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveReloadNotification:)
+                                                 name:@"ReloadHomeViewNotification"
+                                               object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
+
+- (void) receiveReloadNotification:(NSNotification *) notification {
     history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
     [_tableView reloadData];
-    
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -77,7 +78,7 @@ CEAppDelegate *delegate;
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    HistoryRecord *record = [history objectAtIndex:indexPath.row];
+    HistoryRecord *record = [history objectAtIndex:history.count - indexPath.row - 1];
     UILabel *nameLbl = (UILabel *)[cell viewWithTag:2010];
     nameLbl.text = record.user;
     UILabel *amountLbl = (UILabel *)[cell viewWithTag:2020];

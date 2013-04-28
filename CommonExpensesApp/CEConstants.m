@@ -10,5 +10,9 @@
 
 @implementation CEConstants
 NSString *const BASE_URL = @"http://bibilicious.com/commonexpenses/commonApp/";
+NSString *const BGN = @"1";
+NSString *const EUR = @"0.51";
+NSString *const USD = @"0.67";
+
 
 @end

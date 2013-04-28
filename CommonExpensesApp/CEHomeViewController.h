@@ -22,6 +22,7 @@
     NSString *textLoading;
 }
 
+@property (strong, nonatomic) IBOutlet UITextView *lastTransactionInfo;
 @property (nonatomic, retain) UIView *refreshHeaderView;
 @property (nonatomic, retain) UILabel *refreshLabel;
 @property (nonatomic, retain) UIImageView *refreshArrow;

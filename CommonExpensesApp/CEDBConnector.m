@@ -15,6 +15,7 @@
 #import "DeletedCircles.h"
 #import "CEFriendHelper.h"
 #import "HistoryRecord.h"
+#import "CEConstants.h"
 
 @implementation CEDBConnector
 
@@ -323,7 +324,16 @@ NSManagedObjectContext *context;
             record.authorId = authorId;
             for (Friend *f in friendsInCircle) {
                 if ([f.friendName isEqualToString:record.user]) {
-                    f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + record.sum.doubleValue];
+                    if ([record.currency isEqualToString:@"EUR"]) {
+                        f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + (record.sum.doubleValue * EUR.doubleValue)];
+
+                    } else if ([record.currency isEqualToString:@"BGN"]) {
+                        f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + (record.sum.doubleValue * BGN.doubleValue)];
+
+                    } else if ([record.currency isEqualToString:@"USD"]) {
+                        f.balanceInCircle = [NSNumber numberWithDouble:f.balanceInCircle.doubleValue + (record.sum.doubleValue * USD.doubleValue)];
+
+                    }
                     break;
                 }
             }

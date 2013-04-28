@@ -783,7 +783,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Some stats here" id="bkt-SD-7na">
+                            <textView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" text="Some stats here" id="bkt-SD-7na">
                                 <rect key="frame" x="0.0" y="470" width="320" height="34"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.99959552302998389" green="1" blue="0.83191852587206738" alpha="1" colorSpace="calibratedRGB"/>
@@ -802,6 +802,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Jtp-eW-o0z"/>
                     <connections>
+                        <outlet property="lastTransactionInfo" destination="bkt-SD-7na" id="9xZ-7H-J6F"/>
                         <outlet property="scrollViewContainer" destination="kG3-Z6-QKA" id="WO7-6R-bBw"/>
                     </connections>
                 </viewController>
@@ -911,6 +912,7 @@
                 <relationship kind="action" name="addHistoryRecords:" candidateClass="UIButton"/>
                 <relationship kind="action" name="showHistoryView:"/>
                 <relationship kind="action" name="sync:"/>
+                <relationship kind="outlet" name="lastTransactionInfo" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="scrollViewContainer" candidateClass="UIScrollView"/>
             </relationships>
         </class>

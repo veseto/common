@@ -10,7 +10,7 @@
 
 @interface CEConstants : NSObject
 FOUNDATION_EXPORT NSString *const BASE_URL;
-FOUNDATION_EXPORT NSNumber *const BGN;
-FOUNDATION_EXPORT NSNumber *const EUR;
-FOUNDATION_EXPORT NSNumber *const USD;
+FOUNDATION_EXPORT NSString *const BGN;
+FOUNDATION_EXPORT NSString *const EUR;
+FOUNDATION_EXPORT NSString *const USD;
 @end
