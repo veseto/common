@@ -10,6 +10,7 @@
 #import "CEHomeViewController.h"
 #import "CEDBConnector.h"
 #import "CircleDefinition.h"
+#import "CESearchViewController.h"
 
 @implementation SideMenuViewController
 
@@ -19,7 +20,8 @@ UITableView *tableView;
 CEAppDelegate *delegate;
 NSMutableArray *circles;
 CEDBConnector *connector;
-BOOL newRow;
+CESearchViewController *resListView;
+BOOL newRow, search;
 int count;
 
 - (id) init {
@@ -45,11 +47,16 @@ int count;
 
 -(void)hideKeyboard:(NSNotification *)hideKeyboardNotification {
     [self cancelAdd];
+    if (search) {
+        [self toggleSearch];
+    }
 }
 
 - (void) viewDidLoad {
-    newRow = NO;
+    
     [super viewDidLoad];
+    newRow = NO;
+    search = NO;
     tableView = self.tableView;
     delegate = [[UIApplication sharedApplication] delegate];
     connector = [CEDBConnector new];
@@ -82,7 +89,7 @@ int count;
 {
     switch (section) {
         case 0:
-            return 1;
+            return search?2:1;
         case 1:
             return count;
         case 2:
@@ -102,8 +109,26 @@ int count;
     }
     
     switch (indexPath.section) {
-        case 0:
-            cell.textLabel.text = delegate.currentUser.userName;
+        case 0: {
+            if (indexPath.row == 0) {
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"profileCell" owner:self options:nil];
+                cell = [topLevelObjects objectAtIndex:0];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                UIButton *settings = (UIButton *)[cell viewWithTag:4100];
+                UIButton *search = (UIButton *)[cell viewWithTag:4300];
+                [search addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
+
+                [settings addTarget:self action:@selector(openSettingsView) forControlEvents:UIControlEventTouchUpInside];
+            } else if (indexPath.row == 1) {
+                if (search) {
+                    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"searchCell" owner:self options:nil];
+                    cell = [topLevelObjects objectAtIndex:0];
+                    UISearchBar *searchBar = (UISearchBar *)[cell viewWithTag:5000];
+                    searchBar.delegate = self;
+                }
+            }
+            
+        }
             break;
         case 1:
             if (newRow) {
@@ -180,10 +205,6 @@ int count;
             break;
         case 2:
             if (indexPath.row == 0) {
-                UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
-                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:settings
-                                                                      , nil];
-                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
             } else if (indexPath.row == 1) {
                 delegate.currentUser = nil;
                 self.sideMenu.openMenuEnabled = NO;
@@ -274,11 +295,16 @@ int count;
 
 - (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)path
 {
-    if (path.section == 1 && path.row == 0 && newRow) {
+    if ((path.section == 1 && path.row == 0 && newRow) || (path.section == 0 && path.row == 1)){
         return nil;
     }
     
     return path;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0 && indexPath.row == 0) return 80;
+    return 44.0;
 }
 
 -(void) addCircle {
@@ -356,5 +382,50 @@ int count;
     
 }
 
+-(void) openSettingsView {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    
+    UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
+    self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:settings
+                                                          , nil];
+    [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
+    [self.sideMenu setMenuState:MFSideMenuStateClosed];
+    
+    
+}
 
+-(void) toggleSearch {
+    if (search) {
+        search = !search;
+        [self.tableView beginUpdates];
+        NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView endUpdates];
+    } else {
+        search = !search;
+        [self.tableView beginUpdates];
+        NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationBottom];
+        [self.tableView endUpdates];
+    }
+}
+
+-(BOOL) searchBarShouldBeginEditing:(UISearchBar *)searchBar {
+    resListView = [[CESearchViewController alloc] initWithStyle:UITableViewStylePlain];
+    [self.view addSubview:resListView.tableView];
+    [self.view bringSubviewToFront:resListView.tableView];
+    return YES;
+}
+
+-(BOOL) searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    [resListView.tableView removeFromSuperview];
+    return YES;
+}
+
+-(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+    [self.sideMenu setMenuState:MFSideMenuStateLeftMenuOpen];
+
+    [self toggleSearch];
+}
 @end
