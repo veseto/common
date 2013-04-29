@@ -190,6 +190,7 @@ UITextView *scroll;
 
 #pragma mark - handle reload notifications
 - (void) receiveReloadNotification:(NSNotification *) notification {
+    [self.navigationController.sideMenu setMenuState:MFSideMenuStateClosed];
     [self createHomeView];
 }
 
@@ -289,8 +290,9 @@ UITextView *scroll;
     }
     
     if (delegate.currentCircle != nil) {
+        self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
+
         if (delegate.currentCircle.numberOfFriends.intValue > 1) {
-            self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
             UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
             inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
             NSMutableArray *tmp = [connector getFriendsInCircle:delegate.currentCircle.name: delegate.currentCircle.ownerId];

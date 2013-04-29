@@ -26,6 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupMenuBarButtonItems];
     self.navigationController.sideMenu.openMenuEnabled = YES;
     __weak CESettingsViewController *weakSelf = self;
     
@@ -45,9 +46,8 @@
             case MFSideMenuStateEventMenuDidClose:
                 break;
         }
-        
-        [weakSelf setupMenuBarButtonItems];
-    };}
+    };
+}
 
 - (void)setupMenuBarButtonItems {
     switch (self.navigationController.sideMenu.menuState) {

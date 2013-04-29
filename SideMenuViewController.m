@@ -23,6 +23,8 @@ CEDBConnector *connector;
 CESearchViewController *resListView;
 BOOL newRow, search;
 int count;
+CGRect screenRect;
+
 
 - (id) init {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -55,6 +57,7 @@ int count;
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    screenRect = [[UIScreen mainScreen] bounds];
     newRow = NO;
     search = NO;
     tableView = self.tableView;
@@ -93,7 +96,7 @@ int count;
         case 1:
             return count;
         case 2:
-            return 2;
+            return 1;
         default:
             return 0;
     }
@@ -117,7 +120,7 @@ int count;
                 UIButton *settings = (UIButton *)[cell viewWithTag:4100];
                 UIButton *search = (UIButton *)[cell viewWithTag:4300];
                 [search addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
-
+                
                 [settings addTarget:self action:@selector(openSettingsView) forControlEvents:UIControlEventTouchUpInside];
             } else if (indexPath.row == 1) {
                 if (search) {
@@ -156,8 +159,6 @@ int count;
             break;
         case 2:
             if (indexPath.row == 0) {
-                cell.textLabel.text = @"Settings";
-            } else if (indexPath.row == 1) {
                 cell.textLabel.text = @"Log out";
             }
             break;
@@ -200,12 +201,10 @@ int count;
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"ReloadHomeViewNotification"
              object:self];
-            [self.sideMenu setMenuState:MFSideMenuStateClosed];
         }
             break;
         case 2:
             if (indexPath.row == 0) {
-            } else if (indexPath.row == 1) {
                 delegate.currentUser = nil;
                 self.sideMenu.openMenuEnabled = NO;
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
@@ -261,7 +260,6 @@ int count;
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenWidth, 44)]; // x,y,width,height
     
@@ -401,6 +399,7 @@ int count;
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationTop];
         [self.tableView endUpdates];
+        [[self.view viewWithTag:10100] removeFromSuperview];
     } else {
         search = !search;
         [self.tableView beginUpdates];
@@ -412,8 +411,8 @@ int count;
 
 -(BOOL) searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     resListView = [[CESearchViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self.view addSubview:resListView.tableView];
-    [self.view bringSubviewToFront:resListView.tableView];
+    [resListView setSearchStrings:circles];
+    
     return YES;
 }
 
@@ -422,10 +421,31 @@ int count;
     return YES;
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length == 0){
+        [resListView.tableView removeFromSuperview];
+        [[self.view viewWithTag:10100] removeFromSuperview];
+    } else {
+        if (searchText.length == 1 && [self.view viewWithTag:10100] == nil) {
+            UIView *halfTransparentBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 135, screenRect.size.width, 200)];
+            halfTransparentBackgroundView.backgroundColor = [UIColor blackColor]; //or whatever...
+            halfTransparentBackgroundView.alpha = 0.5;
+            [halfTransparentBackgroundView setUserInteractionEnabled:NO];
+
+            halfTransparentBackgroundView.tag = 10100;
+            [self.view addSubview:halfTransparentBackgroundView];
+            [self.view addSubview:resListView.tableView];
+            [self.view bringSubviewToFront:resListView.tableView];
+        }
+        [resListView performSearch:searchText];
+    }
+}
+
+
 -(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [searchBar resignFirstResponder];
     [self.sideMenu setMenuState:MFSideMenuStateLeftMenuOpen];
-
+    
     [self toggleSearch];
 }
 @end

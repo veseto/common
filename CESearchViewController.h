@@ -10,4 +10,6 @@
 
 @interface CESearchViewController : UITableViewController
 
+@property (nonatomic, retain) NSArray *searchStrings;
+-(void) performSearch:(NSString *) searchString;
 @end

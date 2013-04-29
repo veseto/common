@@ -7,12 +7,17 @@
 //
 
 #import "CESearchViewController.h"
+#import "CircleDefinition.h"
+#import "CEAppDelegate.h"
 
 @interface CESearchViewController ()
 
 @end
 
 @implementation CESearchViewController
+@synthesize searchStrings = _searchStrings;
+
+NSMutableArray *displayList;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -25,8 +30,9 @@
 
 - (void)viewDidLoad
 {
+    displayList = [NSMutableArray new];
     [super viewDidLoad];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,9 +51,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 3;
+    return displayList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -58,7 +63,7 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    [cell setBackgroundColor:[UIColor redColor]];
+    cell.textLabel.text = [displayList objectAtIndex:indexPath.row];
     return cell;
 }
 
@@ -103,15 +108,39 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *name = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
+    for (CircleDefinition *c in _searchStrings) {
+        if ([c.name isEqualToString:name]) {
+
+            ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentCircle = c;
+            UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+
+            UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
+            self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"ReloadHomeViewNotification"
+             object:self];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"hideKeyboardNotification"
+             object:self];
+        }
+    }
+}
+
+-(void) performSearch:(NSString *) searchString {
+    [displayList removeAllObjects];
+    for (CircleDefinition *s in _searchStrings) {
+        if ([s.name rangeOfString:searchString].location != NSNotFound) {
+            [displayList addObject:s.name];
+        }
+    }
+    CGRect old = self.tableView.frame;
+    [self.tableView setFrame:CGRectMake(old.origin.x, old.origin.y, old.size.width, displayList.count * 44)];
+    
+    [displayList sortUsingSelector: @selector(localizedCaseInsensitiveCompare:)];
+    [self.tableView reloadData];
 }
 
 @end

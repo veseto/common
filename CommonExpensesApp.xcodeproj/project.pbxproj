@@ -160,8 +160,8 @@
 		F25E136916DFCFDC0086DE2B /* CEConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEConstants.m; sourceTree = "<group>"; };
 		F26293CB16F4E5A6002E0933 /* CESelfStatisticsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESelfStatisticsViewController.h; sourceTree = "<group>"; };
 		F26293CC16F4E5A6002E0933 /* CESelfStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESelfStatisticsViewController.m; sourceTree = "<group>"; };
-		F26CFAB6172E7D6A007DA4FC /* CESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CESearchViewController.h; sourceTree = "<group>"; };
-		F26CFAB7172E7D6A007DA4FC /* CESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CESearchViewController.m; sourceTree = "<group>"; };
+		F26CFAB6172E7D6A007DA4FC /* CESearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CESearchViewController.h; path = ../CESearchViewController.h; sourceTree = "<group>"; };
+		F26CFAB7172E7D6A007DA4FC /* CESearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CESearchViewController.m; path = ../CESearchViewController.m; sourceTree = "<group>"; };
 		F26CFAB9172E7F4A007DA4FC /* clear.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = clear.xib; sourceTree = "<group>"; };
 		F2720FE81704A48E00A16090 /* addDataCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = addDataCell.xib; sourceTree = "<group>"; };
 		F286CE1D16EE366400E7FBEC /* CEHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEHomeViewController.h; sourceTree = "<group>"; };
@@ -276,8 +276,6 @@
 		F20B325316D0094C00B70559 = {
 			isa = PBXGroup;
 			children = (
-				F26CFAB6172E7D6A007DA4FC /* CESearchViewController.h */,
-				F26CFAB7172E7D6A007DA4FC /* CESearchViewController.m */,
 				F20B326716D0094C00B70559 /* CommonExpensesApp */,
 				F20B325E16D0094C00B70559 /* Frameworks */,
 				F20B325D16D0094C00B70559 /* Products */,
@@ -314,6 +312,8 @@
 		F20B326716D0094C00B70559 /* CommonExpensesApp */ = {
 			isa = PBXGroup;
 			children = (
+				F26CFAB6172E7D6A007DA4FC /* CESearchViewController.h */,
+				F26CFAB7172E7D6A007DA4FC /* CESearchViewController.m */,
 				F2B70D4B170A0D6E00A1C76B /* CEHistoryViewController.h */,
 				F2B70D4C170A0D6E00A1C76B /* CEHistoryViewController.m */,
 				F2720FE71704A46100A16090 /* history */,
