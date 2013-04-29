@@ -172,7 +172,6 @@ bool isLogged;
             }
         }
         if (user == nil) {
-            bool isRegistered;
             NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
             [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
             [params setObject:[usr objectForKey:@"email"] forKey:@"email"];
@@ -187,7 +186,6 @@ bool isLogged;
                                                       otherButtonTitles:nil];
                 [alert show];
             } else if (json != nil && json.count > 0) {
-                isRegistered = YES;
                 CEDBConnector * connector = [[CEDBConnector alloc] init];
                 [connector saveUser:json];
                 CEUser *user = [CEUser new];

@@ -41,6 +41,27 @@ CEAppDelegate *delegate;
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
                                                object:nil];
+    self.navigationController.sideMenu.openMenuEnabled = YES;
+    self.navigationItem.title = delegate.currentCircle.name;
+    [self setupMenuBarButtonItems];
+}
+
+- (void)setupMenuBarButtonItems {
+    switch (self.navigationController.sideMenu.menuState) {
+        case MFSideMenuStateClosed:
+            self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
+            break;
+        case MFSideMenuStateLeftMenuOpen:
+            self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
+            break;
+    }
+}
+
+- (UIBarButtonItem *)leftMenuBarButtonItem {
+    return [[UIBarButtonItem alloc]
+            initWithImage:[UIImage imageNamed:@"menu-icon.png"] style:UIBarButtonItemStyleBordered
+            target:self.navigationController.sideMenu
+            action:@selector(toggleLeftSideMenu)];
 }
 
 
@@ -54,11 +75,6 @@ CEAppDelegate *delegate;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)closeHistoryView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

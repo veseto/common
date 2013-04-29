@@ -116,7 +116,9 @@ UITextView *scroll;
             self.navigationItem.leftBarButtonItem = [self leftMenuBarButtonItem];
             break;
     }
-    self.navigationItem.rightBarButtonItem = [self rightMenuBarItem];
+    if (delegate.currentCircle != nil) {
+        self.navigationItem.rightBarButtonItem = [self rightMenuBarItem];
+    }
     
 }
 

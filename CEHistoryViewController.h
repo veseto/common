@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "CircleDefinition.h"
+#import "SideMenuViewController.h"
 
 @interface CEHistoryViewController : UIViewController
-- (IBAction)closeHistoryView:(id)sender;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, retain) SideMenuViewController *sideMenu;
 
 @end
