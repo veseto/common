@@ -45,6 +45,9 @@ CEAppDelegate *appDelegate;
     appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.currentUser = nil;
     appDelegate.currentCircle = nil;
+    CEDBConnector * connector = [[CEDBConnector alloc] init];
+    [connector removeDefaultUser];
+
 
 }
 
@@ -104,7 +107,7 @@ CEAppDelegate *appDelegate;
                                dispatch_async(dispatch_get_main_queue(), ^{
                                    if (json != nil &&  [json objectForKey:@"error"] != nil) {
                                        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
-                                                                                       message:((NSError *) [json objectForKey:@"error"]).localizedDescription
+                                                                                       message:((NSError *) [json objectForKey:@"error"]).description
                                                                                       delegate:nil
                                                                              cancelButtonTitle:@"OK"
                                                                              otherButtonTitles:nil];

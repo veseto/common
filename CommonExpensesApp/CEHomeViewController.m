@@ -83,17 +83,29 @@ UITextView *scroll;
         NSLog(@"event occurred: %@", weakSelf.navigationItem.title);
         switch (event) {
             case MFSideMenuStateEventMenuWillOpen:
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"disableTouchNotification"
+                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuDidOpen:
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"enableTouchNotification"
+                 object:weakSelf];
                 break;
             case MFSideMenuStateEventMenuWillClose:
             {
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"hideKeyboardNotification"
                  object:weakSelf];
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"disableTouchNotification"
+                 object:weakSelf];
             }
                 break;
             case MFSideMenuStateEventMenuDidClose:
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"enableTouchNotification"
+                 object:weakSelf];
                 break;
         }
         

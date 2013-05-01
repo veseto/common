@@ -258,7 +258,7 @@ typedef enum {
 
 - (void) handleRightPan:(UIPanGestureRecognizer *)recognizer {
     if(!self.leftSideMenuViewController) return;
-  //  [self sendMenuStateEventNotification:MFSideMenuStateEventMenuWillOpen];
+    [self sendMenuStateEventNotification:MFSideMenuStateEventMenuWillOpen];
     
     UIView *view = self.rootViewController.view;
     
@@ -312,6 +312,7 @@ typedef enum {
     if(self.menuState == MFSideMenuStateClosed) {
         return;
     }
+    [self sendMenuStateEventNotification:MFSideMenuStateEventMenuWillClose];
 
     UIView *view = self.rootViewController.view;
     
@@ -586,6 +587,7 @@ typedef enum {
     
     rootController.view.frame = frame;
 }
+
 
 - (void) dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];

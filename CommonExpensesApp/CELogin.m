@@ -30,6 +30,7 @@
 
 bool isLogged;
 CEAppDelegate *appDelegate;
+CEDBConnector *connector;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +43,11 @@ CEAppDelegate *appDelegate;
 
 - (void)viewDidLoad
 {
+    connector = [[CEDBConnector alloc] init];
+    isLogged = NO;
     [super viewDidLoad];
+    [connector removeDefaultUser];
+    
     appDelegate =[[UIApplication sharedApplication] delegate];
     appDelegate.currentUser = nil;
     appDelegate.currentCircle = nil;
@@ -107,7 +112,6 @@ CEAppDelegate *appDelegate;
 }
 
 - (void) handleLogin:(NSDictionary *)usr {
-    CEDBConnector *connector = [[CEDBConnector alloc] init];
     UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
@@ -117,30 +121,45 @@ CEAppDelegate *appDelegate;
     spinner.color = [UIColor blackColor];
     [self.view addSubview:spinner];
     [spinner startAnimating];
+    NSString *username = _username.text;
+    NSString *password = _password.text;
     dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(workingQueue,
                    ^{
                        CEUser *user = nil;
-                       user = [connector getUser:_username.text];
-                       if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
+                       user = [connector getUser:username];
+                       NSString *error = nil;
+                       if (user != nil && [user.password isEqualToString:[self sha1:password]]) {
                            isLogged = YES;
                        } else {
                            CERequestHandler *handler = [[CERequestHandler alloc] init];
                            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-                           [params setObject:_username.text forKey:@"username"];
-                           [params setObject:_password.text forKey:@"password"];
+                           [params setObject:username forKey:@"username"];
+                           [params setObject:password forKey:@"password"];
                            NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
-                           [connector saveUser:json];
                            if ([json count] > 0) {
-                               isLogged = YES;
-                               user = [CEUser new];
-                               user.userName = [json valueForKey:@"username"];
-                               user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+                               if ([json objectForKey:@"error"] == nil) {
+                                   isLogged = YES;
+                                   [connector saveUser:json];
+                                   user = [CEUser new];
+                                   user.userName = [json valueForKey:@"username"];
+                                   user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+                               } else {
+                                   error = [json objectForKey:@"error"];
+                               }
                            }
                        }
                        
                        dispatch_async(dispatch_get_main_queue(), ^{
-                           if (user == nil) {
+                           if (error != nil) {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
+                                                                               message:@"Username and password don't match"
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                               [alert show];
+
+                           } else if (user == nil) {
                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"User does not exists"
                                                                                message:[NSString stringWithFormat:@"Username %@ is not registered", _username.text]
                                                                               delegate:nil

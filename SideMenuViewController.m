@@ -16,6 +16,7 @@
 
 @synthesize sideMenu;
 @synthesize search;
+@synthesize tap;
 
 UITableView *tableView;
 CEAppDelegate *delegate;
@@ -36,6 +37,15 @@ UIButton *btn;
                                              selector:@selector(hideKeyboard:)
                                                  name:@"hideKeyboardNotification"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(disableTouch:)
+                                                 name:@"disableTouchNotification"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(enableTouch:)
+                                                 name:@"enableTouchNotification"
+                                               object:nil];
+
     return [self initWithStyle:UITableViewStyleGrouped];
 }
 
@@ -55,6 +65,14 @@ UIButton *btn;
     }
 }
 
+-(void)enableTouch:(NSNotification *)hideKeyboardNotification {
+    [self.tableView setUserInteractionEnabled:YES];
+    
+}
+-(void)disableTouch:(NSNotification *)hideKeyboardNotification {
+    [self.tableView setUserInteractionEnabled:NO];
+}
+
 - (void) viewDidLoad {
     
     [super viewDidLoad];
@@ -69,6 +87,10 @@ UIButton *btn;
     if (!circles) {
         circles = [[NSMutableArray alloc] init];
     }
+    tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(hideKeyboard:)];
+
 }
 
 
@@ -143,6 +165,7 @@ UIButton *btn;
                     UITextField *name = (UITextField *)[cell viewWithTag:3100];
                     name.delegate = self;
                     [name addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
+
                     [name becomeFirstResponder];
                     UIButton *ok = (UIButton *)[cell viewWithTag:3200];
                     [ok setEnabled:(name.text.length > 0)];
@@ -207,6 +230,7 @@ UIButton *btn;
         case 2:
             if (indexPath.row == 0) {
                 delegate.currentUser = nil;
+                [connector removeDefaultUser];
                 self.sideMenu.openMenuEnabled = NO;
                 UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
                 UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
@@ -315,6 +339,7 @@ UIButton *btn;
         [self toggleSearch];
     }
     if (!newRow) {
+        [self.view addGestureRecognizer:tap];
         newRow = YES;
         count += 1;
         [self.tableView beginUpdates];
@@ -371,6 +396,7 @@ UIButton *btn;
 
 -(void) cancelAdd {
     if (newRow) {
+        [self.view removeGestureRecognizer:tap];
         newRow = NO;
         btn.titleLabel.text = @"+";
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
@@ -409,6 +435,7 @@ UIButton *btn;
         [self toggleCircleAdd];
     }
     if (search) {
+        [self.view removeGestureRecognizer:tap];
         search = !search;
         [self.tableView beginUpdates];
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
@@ -417,6 +444,7 @@ UIButton *btn;
         [[self.view viewWithTag:10100] removeFromSuperview];
     } else {
         search = !search;
+        [self.view addGestureRecognizer:tap];
         [self.tableView beginUpdates];
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationBottom];
@@ -448,11 +476,6 @@ UIButton *btn;
             halfTransparentBackgroundView.backgroundColor = [UIColor blackColor]; //or whatever...
             halfTransparentBackgroundView.alpha = 0.5;
             halfTransparentBackgroundView.tag = 10100;
-            UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
-            gestureRecognizer.numberOfTapsRequired = 1;
-            
-            [halfTransparentBackgroundView addGestureRecognizer:gestureRecognizer];
-
             [self.view addSubview:halfTransparentBackgroundView];
             [self.view addSubview:resListView.tableView];
             [self.view bringSubviewToFront:resListView.tableView];

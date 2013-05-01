@@ -11,5 +11,5 @@
 
 @property (nonatomic, assign) MFSideMenu *sideMenu;
 @property (nonatomic, assign) BOOL search;
-
+@property (nonatomic, retain) UITapGestureRecognizer *tap;
 @end

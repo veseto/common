@@ -32,6 +32,7 @@
     if (error) {
         return [NSDictionary dictionaryWithObject:error forKey:@"error"];
     } else {
+        NSLog([[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:
                           NSJSONReadingMutableContainers error:&error];
         return json;
