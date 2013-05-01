@@ -279,7 +279,8 @@ typedef enum {
         CGPoint velocity = [recognizer velocityInView:view];
         CGFloat finalX = translatedPoint.x + (.35*velocity.x);
         CGFloat viewWidth = [self widthAdjustedForInterfaceOrientation:view];
-        
+        [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
+
         if(self.menuState == MFSideMenuStateClosed) {
             BOOL showMenu = (finalX > viewWidth/2);
             if(showMenu) {
@@ -296,6 +297,8 @@ typedef enum {
             if(hideMenu) {
                 self.panGestureVelocity = velocity.x;
                 [self setMenuState:MFSideMenuStateClosed];
+                [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
+
             } else {
                 self.panGestureVelocity = 0;
                 [UIView beginAnimations:nil context:NULL];
@@ -334,7 +337,8 @@ typedef enum {
 	if(recognizer.state == UIGestureRecognizerStateEnded) {
         CGPoint velocity = [recognizer velocityInView:view];
         CGFloat finalX = translatedPoint.x + (.35*velocity.x);
-        
+        [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
+
         if(self.menuState == MFSideMenuStateClosed) {
             return;
         } else {
@@ -342,6 +346,7 @@ typedef enum {
             if(hideMenu) {
                 self.panGestureVelocity = velocity.x;
                 [self setMenuState:MFSideMenuStateClosed];
+
             } else {
                 self.panGestureVelocity = 0;
                 [UIView beginAnimations:nil context:NULL];
@@ -355,6 +360,8 @@ typedef enum {
 - (void) navigationControllerTapped:(id)sender {
     if(self.menuState != MFSideMenuStateClosed) {
         [self setMenuState:MFSideMenuStateClosed];
+        [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
+
     }
 }
 
