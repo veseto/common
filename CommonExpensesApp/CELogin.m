@@ -108,48 +108,62 @@ CEAppDelegate *appDelegate;
 
 - (void) handleLogin:(NSDictionary *)usr {
     CEDBConnector *connector = [[CEDBConnector alloc] init];
-
-    CEUser *user = nil;
-    if (usr == nil) {
-        
-        user = [connector getUser:_username.text];
-        if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
-            isLogged = YES;
-        } else {
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-            [params setObject:_username.text forKey:@"username"];
-            [params setObject:_password.text forKey:@"password"];
-            NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
-            [connector saveUser:json];
-            if ([json count] > 0) {
-                isLogged = YES;
-                user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-            }
-        }
-        if (user == nil) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"User does not exists"
-                                                            message:[NSString stringWithFormat:@"Username %@ is not registered", _username.text]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        } else if (!isLogged) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
-                                                            message:@"Username and password don't match"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        }
-    } 
-    if (isLogged) {
-        appDelegate.currentUser = user;
-        [connector setDefaultUser:user.userName:user.userId];
-        [self closeView:self];
-    }
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    
+    spinner.center = CGPointMake(screenWidth/2, screenHeight/2 - 35);
+    spinner.color = [UIColor blackColor];
+    [self.view addSubview:spinner];
+    [spinner startAnimating];
+    dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(workingQueue,
+                   ^{
+                       CEUser *user = nil;
+                       user = [connector getUser:_username.text];
+                       if (user != nil && [user.password isEqualToString:[self sha1:_password.text]]) {
+                           isLogged = YES;
+                       } else {
+                           CERequestHandler *handler = [[CERequestHandler alloc] init];
+                           NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+                           [params setObject:_username.text forKey:@"username"];
+                           [params setObject:_password.text forKey:@"password"];
+                           NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
+                           [connector saveUser:json];
+                           if ([json count] > 0) {
+                               isLogged = YES;
+                               user = [CEUser new];
+                               user.userName = [json valueForKey:@"username"];
+                               user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+                           }
+                       }
+                       
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           if (user == nil) {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"User does not exists"
+                                                                               message:[NSString stringWithFormat:@"Username %@ is not registered", _username.text]
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                               [alert show];
+                           } else if (!isLogged) {
+                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong credentials"
+                                                                               message:@"Username and password don't match"
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"OK"
+                                                                     otherButtonTitles:nil];
+                               [alert show];
+                           }
+                           
+                           if (isLogged) {
+                               appDelegate.currentUser = user;
+                               [connector setDefaultUser:user.userName:user.userId];
+                               [self closeView:self];
+                           }
+                           [spinner stopAnimating];
+                       });
+                   });
 }
 
 -(NSString*) sha1:(NSString*)input {

@@ -81,45 +81,66 @@ CEAppDelegate *appDelegate;
                                                   otherButtonTitles:nil];
             [alert show];
         } else {
-            NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-            [params setObject:_username.text forKey:@"username"];
-            [params setObject:_email.text forKey:@"email"];
-            [params setObject:_password.text forKey:@"password"];
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
-            if (json != nil &&  [json objectForKey:@"error"] != nil) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
-                                                                message:((NSError *) [json objectForKey:@"error"]).localizedDescription
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else if (json != nil && json.count > 0) {
-                isRegistered = YES;
-                CEDBConnector * connector = [[CEDBConnector alloc] init];
-                [connector saveUser:json];
-                CEUser *user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-                appDelegate.currentUser= user;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
-                                                                message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", _email.text]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-                
-                [self closeView:self];
-                
-            } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration fail"
-                                                                message:[NSString stringWithFormat:@"Email %@ already registered", _email.text]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-                
-            }
+            
+            UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            CGRect screenRect = [[UIScreen mainScreen] bounds];
+            CGFloat screenWidth = screenRect.size.width;
+            CGFloat screenHeight = screenRect.size.height;
+            
+            spinner.center = CGPointMake(screenWidth/2, screenHeight/2 - 35);
+            spinner.color = [UIColor blackColor];
+            [self.view addSubview:spinner];
+            [spinner startAnimating];
+            dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_async(workingQueue,
+                           ^{
+                               NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
+                               [params setObject:_username.text forKey:@"username"];
+                               [params setObject:_email.text forKey:@"email"];
+                               [params setObject:_password.text forKey:@"password"];
+                               CERequestHandler *handler = [[CERequestHandler alloc] init];
+                               NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
+                               
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   if (json != nil &&  [json objectForKey:@"error"] != nil) {
+                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection failed"
+                                                                                       message:((NSError *) [json objectForKey:@"error"]).localizedDescription
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"OK"
+                                                                             otherButtonTitles:nil];
+                                       [alert show];
+                                   } else if (json != nil && json.count > 0) {
+                                       isRegistered = YES;
+                                       CEDBConnector * connector = [[CEDBConnector alloc] init];
+                                       [connector saveUser:json];
+                                       CEUser *user = [CEUser new];
+                                       user.userName = [json valueForKey:@"username"];
+                                       user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
+                                       appDelegate.currentUser= user;
+                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
+                                                                                       message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", _email.text]
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"OK"
+                                                                             otherButtonTitles:nil];
+                                       [alert show];
+                                       
+                                       [self closeView:self];
+                                       
+                                   } else {
+                                       UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration fail"
+                                                                                       message:[NSString stringWithFormat:@"Email %@ already registered", _email.text]
+                                                                                      delegate:nil
+                                                                             cancelButtonTitle:@"OK"
+                                                                             otherButtonTitles:nil];
+                                       [alert show];
+                                       
+                                   }
+                                   
+                                   [spinner stopAnimating];
+                               });
+                           });
+            
+            
             
         }
     }
