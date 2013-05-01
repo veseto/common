@@ -177,10 +177,14 @@ UIButton *btn;
                 } else {
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
                     cell.textLabel.text = c.name;
+                    cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+
                 }
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row];
                 cell.textLabel.text = c.name;
+                cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+
             }
             break;
         case 2:
