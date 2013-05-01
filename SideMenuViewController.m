@@ -45,7 +45,7 @@ UIButton *btn;
                                              selector:@selector(enableTouch:)
                                                  name:@"enableTouchNotification"
                                                object:nil];
-
+    
     return [self initWithStyle:UITableViewStyleGrouped];
 }
 
@@ -71,6 +71,8 @@ UIButton *btn;
 }
 -(void)disableTouch:(NSNotification *)hideKeyboardNotification {
     [self.tableView setUserInteractionEnabled:NO];
+    [self.tableView setEditing:NO animated:NO];
+    
 }
 
 - (void) viewDidLoad {
@@ -88,9 +90,9 @@ UIButton *btn;
         circles = [[NSMutableArray alloc] init];
     }
     tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(hideKeyboard:)];
-
+           initWithTarget:self
+           action:@selector(hideKeyboard:)];
+    
 }
 
 
@@ -165,13 +167,13 @@ UIButton *btn;
                     UITextField *name = (UITextField *)[cell viewWithTag:3100];
                     name.delegate = self;
                     [name addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
-
+                    
                     [name becomeFirstResponder];
                     UIButton *ok = (UIButton *)[cell viewWithTag:3200];
                     [ok setEnabled:(name.text.length > 0)];
                     [ok setHidden:(name.text.length < 1)];
                     [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchUpInside];
-
+                    
                 } else {
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
                     cell.textLabel.text = c.name;
@@ -184,6 +186,7 @@ UIButton *btn;
         case 2:
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Log out";
+              //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             break;
         default:
@@ -192,6 +195,7 @@ UIButton *btn;
     if (search) {
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
+    cell.accessoryView = [UIView new];
     return cell;
 }
 
@@ -228,51 +232,62 @@ UIButton *btn;
         }
             break;
         case 2:
-            if (indexPath.row == 0) {
-                delegate.currentUser = nil;
-                [connector removeDefaultUser];
-                self.sideMenu.openMenuEnabled = NO;
-                UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
-                UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
-                NSArray *controllers = [NSArray arrayWithObject:home];
-                self.sideMenu.navigationController.viewControllers = controllers;
-                [nav pushViewController:home animated:YES];
-                
-            }
-            [self.sideMenu setMenuState:MFSideMenuStateClosed];
             break;
         default:
             break;
     }
 }
 
+-(void) logout {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    delegate.currentUser = nil;
+    [connector removeDefaultUser];
+    self.sideMenu.openMenuEnabled = NO;
+    UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
+    UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
+    NSArray *controllers = [NSArray arrayWithObject:home];
+    self.sideMenu.navigationController.viewControllers = controllers;
+    [nav pushViewController:home animated:YES];
+    [self.sideMenu setMenuState:MFSideMenuStateClosed];
+
+
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int row = indexPath.row;
-    if (newRow) {
-        [self cancelAdd];
-        row -= 1;
+//    if (newRow) {
+//        [self cancelAdd];
+//        row -= 1;
+//    }
+//    if (search) {
+//        [self toggleSearch];
+//    }
+    if (indexPath.section == 1) {
+        CircleDefinition *d = [circles objectAtIndex:row];
+        if (delegate.currentCircle == d) {
+            delegate.currentCircle = nil;
+        }
+        if (d.circleId != nil) {
+            [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
+        }
+        [connector deleteCircle:d.name :delegate.currentUser.userId];
+        count -= 1;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
+        
+        
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"ReloadHomeViewNotification"
+         object:self
+         userInfo:nil];
+    } else if (indexPath.section == 2) {
+        [self logout];
     }
-    CircleDefinition *d = [circles objectAtIndex:row];
-    if (delegate.currentCircle == d) {
-        delegate.currentCircle = nil;
-    }
-    if (d.circleId != nil) {
-        [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
-    }
-    [connector deleteCircle:d.name :delegate.currentUser.userId];
-    count -= 1;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-    
-    
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"ReloadHomeViewNotification"
-     object:self
-     userInfo:nil];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (search || newRow) return NO;
     if (indexPath.section == 1) {
         if (newRow && indexPath.row == 0) {
             return NO;
@@ -280,6 +295,7 @@ UIButton *btn;
             return YES;
         }
     }
+    if (indexPath.section == 2) return YES;
     return NO;
 }
 
@@ -305,7 +321,7 @@ UIButton *btn;
             }
             [btn addTarget:self
                     action:@selector(toggleCircleAdd)
-                   forControlEvents:UIControlEventTouchDown];
+          forControlEvents:UIControlEventTouchDown];
             
             [headerView addSubview:btn];
         }
@@ -486,6 +502,13 @@ UIButton *btn;
 
 - (IBAction)handleTapGesture:(id)sender {
     [self toggleSearch];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 0) {
+        return @"Logout";
+    }
+    return @"Delete";
 }
 
 
