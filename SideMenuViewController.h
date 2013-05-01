@@ -10,4 +10,6 @@
 @interface SideMenuViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UISearchBarDelegate>
 
 @property (nonatomic, assign) MFSideMenu *sideMenu;
+@property (nonatomic, assign) BOOL search;
+
 @end

@@ -26,6 +26,7 @@
 @synthesize delegate = _delegate;
 @synthesize username = _username;
 bool isRegistered;
+CEAppDelegate *appDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +42,10 @@ bool isRegistered;
     [super viewDidLoad];
     super.scrollView = self.scrollView;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
-    
+    appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = nil;
+    appDelegate.currentCircle = nil;
+
 }
 
 
@@ -52,7 +56,6 @@ bool isRegistered;
 }
 
 - (void) signUpLocal:(NSDictionary *) usr {
-    
     if (usr == nil) {
         if (_username.text.length < 1) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty username"
@@ -98,7 +101,7 @@ bool isRegistered;
                 CEUser *user = [CEUser new];
                 user.userName = [json valueForKey:@"username"];
                 user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-                ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
+                appDelegate.currentUser= user;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
                                                                 message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", _email.text]
                                                                delegate:nil
@@ -106,7 +109,7 @@ bool isRegistered;
                                                       otherButtonTitles:nil];
                 [alert show];
                 
-                [self dismissViewControllerAnimated:YES completion:nil];
+                [self closeView:self];
                 
             } else {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Registration fail"
@@ -115,64 +118,14 @@ bool isRegistered;
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
                 [alert show];
-            }
-        }
-    } else {
-        CEDBConnector *connector = [[CEDBConnector alloc] init];
-        CEUser *user = [connector getUser:[usr objectForKey:@"name"]];
-        if (user != nil && [user.password isEqualToString:[self sha1:[usr objectForKey:@"id"]]]) {
-            ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
-            [connector setDefaultUser:user.userName:user.userId];
-        } else {
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
-            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
-            NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
-            [connector saveUser:json];
-            if ([json count] > 0) {
-                isRegistered = YES;
-                user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-            }
-        }
-        if (user == nil) {
-            NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
-            [params setObject:[usr objectForKey:@"email"] forKey:@"email"];
-            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
-            if (json != nil &&  [json objectForKey:@"error"] != nil) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed"
-                                                                message:((NSError *) [json objectForKey:@"error"]).localizedDescription
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else if (json != nil && json.count > 0) {
-                isRegistered = YES;
-                CEDBConnector * connector = [[CEDBConnector alloc] init];
-                [connector saveUser:json];
-                CEUser *user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-                ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
-                [connector setDefaultUser:user.userName:user.userId];
-
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
-                                                                message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", [usr objectForKey:@"email"]]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else {
                 
             }
+            
         }
-    }      
-    [self dismissViewControllerAnimated:YES completion:nil];
+    }
+
+    
+  //  [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
@@ -244,7 +197,13 @@ bool isRegistered;
     isRegistered = NO;
 }
 -(void) viewWillDisappear:(BOOL)animated {
-    if (isRegistered) {
+    if (appDelegate.currentUser != nil) {
+        [((CEStartPageViewController *)_delegate) showHomeView];
+    }
+}
+
+-(void) showHomeView {
+    if (appDelegate.currentUser != nil) {
         [((CEStartPageViewController *)_delegate) showHomeView];
     }
 }
@@ -259,36 +218,4 @@ bool isRegistered;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)signUpWithFacebook:(id)sender {
-    [self openSessionWithAllowLoginUI:YES];
-}
-
-- (void)me{
-    if (FBSession.activeSession.isOpen) {
-        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                                               NSMutableDictionary<FBGraphUser> *fbuser,
-                                                               NSError *error) {
-            if (!error) {
-                [self signUpLocal:fbuser];
-            }
-        }];
-    }
-    
-    
-}
-
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    NSArray *permissions = [[NSArray alloc] initWithObjects:
-                            @"user_location",
-                            @"user_birthday",
-                            @"user_likes",
-                            nil];
-    return [FBSession openActiveSessionWithReadPermissions:permissions
-                                              allowLoginUI:allowLoginUI
-                                         completionHandler:^(FBSession *session,
-                                                             FBSessionState state,
-                                                             NSError *error) {
-                                             [self me];
-                                         }];
-}
 @end

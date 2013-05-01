@@ -190,7 +190,9 @@ UITextView *scroll;
 
 #pragma mark - handle reload notifications
 - (void) receiveReloadNotification:(NSNotification *) notification {
-    [self.navigationController.sideMenu setMenuState:MFSideMenuStateClosed];
+    if (notification.userInfo != nil) {
+        [self.navigationController.sideMenu setMenuState:MFSideMenuStateClosed];
+    }
     [self createHomeView];
 }
 

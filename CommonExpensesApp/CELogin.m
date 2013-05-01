@@ -29,6 +29,7 @@
 
 
 bool isLogged;
+CEAppDelegate *appDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,17 +43,14 @@ bool isLogged;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appDelegate =[[UIApplication sharedApplication] delegate];
+    appDelegate.currentUser = nil;
+    appDelegate.currentCircle = nil;
     super.scrollView = self.scrollView;
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"dust.png"]];
     [_forgotPassBtn setTitleColor:[UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f] forState:UIControlStateNormal];
     [_forgotPassBtn setBackgroundColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
     [_forgotPassBtn.layer setCornerRadius:3.0f];
-}
--(void) viewWillAppear: (BOOL) animated {
-    isLogged = NO;
-    CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
-    delegate.currentCircle = nil;
-    delegate.currentUser = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,10 +85,6 @@ bool isLogged;
     }
 }
 
-- (IBAction)loginWithFacebook:(id)sender {
-    [self openSessionWithAllowLoginUI:YES];
-}
-
 
 - (void) logIn {
     if (_username.text.length < 1) {
@@ -113,7 +107,6 @@ bool isLogged;
 }
 
 - (void) handleLogin:(NSDictionary *)usr {
-    CEAppDelegate *delegate =[[UIApplication sharedApplication] delegate];
     CEDBConnector *connector = [[CEDBConnector alloc] init];
 
     CEUser *user = nil;
@@ -151,62 +144,11 @@ bool isLogged;
                                                   otherButtonTitles:nil];
             [alert show];
         }
-    } else {
-        CEDBConnector *connector = [[CEDBConnector alloc] init];
-        
-        user = [connector getUser:[usr objectForKey:@"name"]];
-        if (user != nil && [user.password isEqualToString:[self sha1:[usr objectForKey:@"id"]]]) {
-            isLogged = YES;
-        } else {
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
-            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
-            NSDictionary *json = [handler sendRequest:params :@"usrlogin.php"];
-            [connector saveUser:json];
-            if ([json count] > 0) {
-                isLogged = YES;
-                user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-            }
-        }
-        if (user == nil) {
-            NSMutableDictionary *params = [[NSMutableDictionary     alloc] init];
-            [params setObject:[usr objectForKey:@"name"] forKey:@"username"];
-            [params setObject:[usr objectForKey:@"email"] forKey:@"email"];
-            [params setObject:[usr objectForKey:@"id"] forKey:@"password"];
-            CERequestHandler *handler = [[CERequestHandler alloc] init];
-            NSDictionary *json = [handler sendRequest:params :@"usrregister.php"];
-            if (json != nil &&  [json objectForKey:@"error"] != nil) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Login failed"
-                                                                message:((NSError *) [json objectForKey:@"error"]).localizedDescription
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else if (json != nil && json.count > 0) {
-                CEDBConnector * connector = [[CEDBConnector alloc] init];
-                [connector saveUser:json];
-                CEUser *user = [CEUser new];
-                user.userName = [json valueForKey:@"username"];
-                user.userId = [NSNumber numberWithInt:[[json valueForKey:@"userid"] intValue]];
-                ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser= user;
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Pending activation"
-                                                                message:[NSString stringWithFormat:@"Activation e-mail was sent to %@. You won't be able to sync data until account is not activated", [usr objectForKey:@"email"]]
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-                [alert show];
-            } else {
-                
-            }
-        }
-    }
+    } 
     if (isLogged) {
-        delegate.currentUser = user;
+        appDelegate.currentUser = user;
         [connector setDefaultUser:user.userName:user.userId];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self closeView:self];
     }
 }
 
@@ -239,7 +181,7 @@ bool isLogged;
 }
 
 -(void) viewWillDisappear:(BOOL)animated {
-    if (isLogged) {
+    if (appDelegate.currentUser != nil) {
         [((CEStartPageViewController *)_delegate) showHomeView];
     }
 }
@@ -247,36 +189,10 @@ bool isLogged;
     [self dismissViewControllerAnimated:NO completion:nil];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-- (void)me{
-    if (FBSession.activeSession.isOpen) {
-        //[self.authButton setTitle:@"Logout" forState:UIControlStateNormal];
-        //self.userInfoTextView.hidden = NO;
-        [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection,
-                                                               NSMutableDictionary<FBGraphUser> *fbuser,
-                                                               NSError *error) {
-            if (!error) {
-                [self handleLogin:fbuser];
-            }
-        }];
+-(void) showHomeView {
+    if (appDelegate.currentUser != nil) {
+        [((CEStartPageViewController *)_delegate) showHomeView];
     }
-    
-    
-}
-
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    NSArray *permissions = [[NSArray alloc] initWithObjects:
-                            @"user_location",
-                            @"user_birthday",
-                            @"user_likes",
-                            nil];
-    return [FBSession openActiveSessionWithReadPermissions:permissions
-                                              allowLoginUI:allowLoginUI
-                                         completionHandler:^(FBSession *session,
-                                                             FBSessionState state,
-                                                             NSError *error) {
-                                             [self me];
-                                         }];
 }
 
 @end

@@ -888,7 +888,6 @@
         <class className="CEHistoryViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CEHistoryViewController.h"/>
             <relationships>
-                <relationship kind="action" name="closeHistoryView:"/>
                 <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
             </relationships>
         </class>

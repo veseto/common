@@ -15,16 +15,17 @@
 @implementation SideMenuViewController
 
 @synthesize sideMenu;
+@synthesize search;
 
 UITableView *tableView;
 CEAppDelegate *delegate;
 NSMutableArray *circles;
 CEDBConnector *connector;
 CESearchViewController *resListView;
-BOOL newRow, search;
+BOOL newRow;
 int count;
 CGRect screenRect;
-
+UIButton *btn;
 
 - (id) init {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -118,8 +119,8 @@ CGRect screenRect;
                 cell = [topLevelObjects objectAtIndex:0];
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 UIButton *settings = (UIButton *)[cell viewWithTag:4100];
-                UIButton *search = (UIButton *)[cell viewWithTag:4300];
-                [search addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
+                UIButton *searchBtn = (UIButton *)[cell viewWithTag:4300];
+                [searchBtn addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
                 
                 [settings addTarget:self action:@selector(openSettingsView) forControlEvents:UIControlEventTouchUpInside];
             } else if (indexPath.row == 1) {
@@ -147,7 +148,7 @@ CGRect screenRect;
                     [ok setEnabled:(name.text.length > 0)];
                     [ok setHidden:(name.text.length < 1)];
                     [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchUpInside];
-                    [((UIButton *)[cell viewWithTag:3300]) addTarget:self action:@selector(cancelAdd) forControlEvents:UIControlEventTouchUpInside];
+
                 } else {
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
                     cell.textLabel.text = c.name;
@@ -165,7 +166,9 @@ CGRect screenRect;
         default:
             break;
     }
-    
+    if (search) {
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    }
     return cell;
 }
 
@@ -197,10 +200,8 @@ CGRect screenRect;
             UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
             self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
             [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
-            
-            [[NSNotificationCenter defaultCenter]
-             postNotificationName:@"ReloadHomeViewNotification"
-             object:self];
+            [self.sideMenu setMenuState:MFSideMenuStateClosed];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         }
             break;
         case 2:
@@ -230,6 +231,9 @@ CGRect screenRect;
         row -= 1;
     }
     CircleDefinition *d = [circles objectAtIndex:row];
+    if (delegate.currentCircle == d) {
+        delegate.currentCircle = nil;
+    }
     if (d.circleId != nil) {
         [connector addDeletedCircle:d.circleId :delegate.currentUser.userId];
     }
@@ -237,10 +241,7 @@ CGRect screenRect;
     count -= 1;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
     
-    if (circles.count > 0) {
-        CircleDefinition *c = [circles objectAtIndex:0];
-        delegate.currentCircle = c;
-    }
+    
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"ReloadHomeViewNotification"
      object:self
@@ -271,14 +272,18 @@ CGRect screenRect;
         }
         case 1: {
             lbl.text = @"Circles";
-            UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            reportButton.frame = CGRectMake(screenWidth - 100, 0, 30, 30); // x,y,width,height
-            [reportButton setTitle:@"+" forState:UIControlStateNormal];
-            [reportButton addTarget:self
-                             action:@selector(addCircle)
+            btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            btn.frame = CGRectMake(screenWidth - 100, 0, 30, 30); // x,y,width,height
+            if (newRow) {
+                [btn setTitle:@"-" forState:UIControlStateNormal];
+            } else {
+                [btn setTitle:@"+" forState:UIControlStateNormal];
+            }
+            [btn addTarget:self
+                    action:@selector(toggleCircleAdd)
                    forControlEvents:UIControlEventTouchDown];
             
-            [headerView addSubview:reportButton];
+            [headerView addSubview:btn];
         }
             break;
         case 2:
@@ -293,7 +298,7 @@ CGRect screenRect;
 
 - (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)path
 {
-    if ((path.section == 1 && path.row == 0 && newRow) || (path.section == 0 && path.row == 1)){
+    if ((search) || (path.section == 1 && path.row == 0 && newRow) || (path.section == 0 && path.row == 1)){
         return nil;
     }
     
@@ -305,15 +310,21 @@ CGRect screenRect;
     return 44.0;
 }
 
--(void) addCircle {
-    newRow = YES;
-    count += 1;
-    [self.tableView beginUpdates];
-    NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
-    
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationLeft];
-    [self.tableView endUpdates];
-    
+-(IBAction) toggleCircleAdd{
+    if (search) {
+        [self toggleSearch];
+    }
+    if (!newRow) {
+        newRow = YES;
+        count += 1;
+        [self.tableView beginUpdates];
+        NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
+        
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationLeft];
+        [self.tableView endUpdates];
+    } else {
+        [self cancelAdd];
+    }
 }
 
 
@@ -361,6 +372,7 @@ CGRect screenRect;
 -(void) cancelAdd {
     if (newRow) {
         newRow = NO;
+        btn.titleLabel.text = @"+";
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
         [((UITextField *)[cell viewWithTag:3100]) resignFirstResponder];
         [self.tableView beginUpdates];
@@ -393,6 +405,9 @@ CGRect screenRect;
 }
 
 -(void) toggleSearch {
+    if (newRow) {
+        [self toggleCircleAdd];
+    }
     if (search) {
         search = !search;
         [self.tableView beginUpdates];
@@ -406,6 +421,7 @@ CGRect screenRect;
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:1 inSection:0];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationBottom];
         [self.tableView endUpdates];
+        [((UISearchBar *)[[self.tableView cellForRowAtIndexPath:row1] viewWithTag:5000]) becomeFirstResponder];
     }
 }
 
@@ -424,15 +440,19 @@ CGRect screenRect;
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     if (searchText.length == 0){
         [resListView.tableView removeFromSuperview];
+        [self.tableView setUserInteractionEnabled:YES];
         [[self.view viewWithTag:10100] removeFromSuperview];
     } else {
         if (searchText.length == 1 && [self.view viewWithTag:10100] == nil) {
-            UIView *halfTransparentBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 135, screenRect.size.width, 200)];
+            UIView *halfTransparentBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 135, screenRect.size.width, 300)];
             halfTransparentBackgroundView.backgroundColor = [UIColor blackColor]; //or whatever...
             halfTransparentBackgroundView.alpha = 0.5;
-            [halfTransparentBackgroundView setUserInteractionEnabled:NO];
-
             halfTransparentBackgroundView.tag = 10100;
+            UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+            gestureRecognizer.numberOfTapsRequired = 1;
+            
+            [halfTransparentBackgroundView addGestureRecognizer:gestureRecognizer];
+
             [self.view addSubview:halfTransparentBackgroundView];
             [self.view addSubview:resListView.tableView];
             [self.view bringSubviewToFront:resListView.tableView];
@@ -441,11 +461,9 @@ CGRect screenRect;
     }
 }
 
-
--(void) searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    [searchBar resignFirstResponder];
-    [self.sideMenu setMenuState:MFSideMenuStateLeftMenuOpen];
-    
+- (IBAction)handleTapGesture:(id)sender {
     [self toggleSearch];
 }
+
+
 @end

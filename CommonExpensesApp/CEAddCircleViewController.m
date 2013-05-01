@@ -137,7 +137,7 @@ CEAppDelegate *delegate;
         CircleDefinition *def = [connector createCircle:friends :user.userId :_name.text :nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
         delegate.currentCircle = def;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     

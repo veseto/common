@@ -121,7 +121,7 @@ NSMutableArray *displayList;
             [self.navigationController popToRootViewControllerAnimated:NO];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"ReloadHomeViewNotification"
-             object:self];
+             object:self userInfo:[[NSDictionary alloc] init]];
             [[NSNotificationCenter defaultCenter]
              postNotificationName:@"hideKeyboardNotification"
              object:self];
