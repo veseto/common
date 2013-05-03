@@ -134,13 +134,15 @@ UIButton *btn;
         case 0: {
             if (indexPath.row == 0) {
                 NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"profileCell" owner:self options:nil];
-                cell = [topLevelObjects objectAtIndex:0];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                UIButton *settings = (UIButton *)[cell viewWithTag:4100];
-                UIButton *searchBtn = (UIButton *)[cell viewWithTag:4300];
+                UITableViewCell *cell1 = [topLevelObjects objectAtIndex:0];
+                [cell1.contentView setBackgroundColor:[UIColor colorWithRed:(96.0f/255.0f) green:(120.0f/255.0f) blue:(144.0f/255.0f) alpha:1.0f]];
+                [cell1 setSelectionStyle:UITableViewCellSelectionStyleNone];
+                UIButton *settings = (UIButton *)[cell1 viewWithTag:4100];
+                UIButton *searchBtn = (UIButton *)[cell1 viewWithTag:4300];
                 [searchBtn addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
                 
                 [settings addTarget:self action:@selector(openSettingsView) forControlEvents:UIControlEventTouchUpInside];
+                return cell1;
             } else if (indexPath.row == 1) {
                 if (search) {
                     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"searchCell" owner:self options:nil];

@@ -46,7 +46,7 @@ typedef enum {
 - (id) init {
     self = [super init];
     if(self) {
-        _shadowEnabled = YES;
+        _shadowEnabled = NO;
         
         CGRect applicationFrame = [[UIApplication sharedApplication].delegate window].screen.applicationFrame;
         self.menuContainerView = [[UIView alloc] initWithFrame:applicationFrame];
@@ -304,6 +304,7 @@ typedef enum {
                 [UIView beginAnimations:nil context:NULL];
                 [self setRootControllerOffset:adjustedOrigin.x];
                 [UIView commitAnimations];
+                [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidOpen];
             }
         }
         
@@ -346,12 +347,14 @@ typedef enum {
             if(hideMenu) {
                 self.panGestureVelocity = velocity.x;
                 [self setMenuState:MFSideMenuStateClosed];
-
+                [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
             } else {
                 self.panGestureVelocity = 0;
                 [UIView beginAnimations:nil context:NULL];
                 [self setRootControllerOffset:adjustedOrigin.x];
                 [UIView commitAnimations];
+                [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidOpen];
+
             }
         }
 	}
@@ -458,20 +461,27 @@ typedef enum {
 
 - (void)setMenuState:(MFSideMenuState)menuState {
     switch (menuState) {
-        case MFSideMenuStateClosed:
+        case MFSideMenuStateClosed:{
+            [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
             [self closeSideMenu];
+        }
             break;
-        case MFSideMenuStateLeftMenuOpen:
+        case MFSideMenuStateLeftMenuOpen: {
             if(!self.leftSideMenuViewController) return;
+            [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidOpen];
             [self openLeftSideMenu];
+        }
             break;
+            
         default:
             break;
     }
     
-    if (self.navigationController.isViewLoaded)
+    if (self.navigationController.isViewLoaded) {
       self.navigationController.view.accessibilityViewIsModal = menuState == MFSideMenuStateClosed;
-    
+        [self sendMenuStateEventNotification:MFSideMenuStateEventMenuDidClose];
+
+    }
     _menuState = menuState;
 }
 
