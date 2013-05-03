@@ -94,25 +94,13 @@ UIButton *btn;
            initWithTarget:self
            action:@selector(hideKeyboard:)];
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor colorWithRed:(202.0f/255.0f) green:(204.0f/255.0f) blue:(182.0f/255.0f) alpha:1.0f];
-    self.tableView.separatorColor = [UIColor colorWithRed:(96/255.0f) green:(120/255.0f) blue:(144/255.0f) alpha:1.0f];
+    self.tableView.backgroundColor = [UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f];
+    self.tableView.separatorColor = [UIColor colorWithRed:(202.0f/255.0f) green:(204.0f/255.0f) blue:(182.0f/255.0f) alpha:1.0f];
     //96,120,144
 
 
 }
 
-
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    switch (section) {
-        case 0:
-            return @"";
-        case 1:
-            return @"Circles";
-        default:
-            return @"--";
-    }
-}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -324,10 +312,14 @@ UIButton *btn;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGFloat screenWidth = screenRect.size.width;
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)]; // x,y,width,height
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, screenWidth, 25)]; // x,y,width,height
+    headerView.bounds = CGRectInset(headerView.frame,0.0f,3.0f);
     [headerView setBackgroundColor:[UIColor colorWithRed:(142/255.0f) green:(158/255.0f) blue:(130/255.0f) alpha:1.0f]];
+    [headerView setAutoresizesSubviews:YES];
+    [headerView setClipsToBounds:YES];
     //142,158,130
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, -3, 100, 25)];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 100, headerView.frame.size.height)];
+    [lbl setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
     lbl.backgroundColor =[UIColor clearColor];
     switch (section) {
         case 0: {
@@ -336,7 +328,7 @@ UIButton *btn;
         case 1: {
             lbl.text = @"Circles";
             btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            btn.frame = CGRectMake(screenWidth - 80, -3, 25, 25); // x,y,width,height
+            btn.frame = CGRectMake(screenWidth - 72, 0, 25, 25); // x,y,width,height
             if (newRow) {
                 [btn setBackgroundImage:[UIImage imageNamed:@"icon_223.png"] forState:UIControlStateNormal];
             } else {
@@ -361,7 +353,8 @@ UIButton *btn;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20;
+    if (section == 0) return 0;
+    return 25;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)path
