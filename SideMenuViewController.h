@@ -7,7 +7,7 @@
 #import <UIKit/UIKit.h>
 #import "MFSideMenu.h"
 
-@interface SideMenuViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UISearchBarDelegate>
+@interface SideMenuViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign) MFSideMenu *sideMenu;
 @property (nonatomic, assign) BOOL search;
