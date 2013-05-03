@@ -46,7 +46,7 @@ UIButton *btn;
                                                  name:@"enableTouchNotification"
                                                object:nil];
     
-    return [self initWithStyle:UITableViewStyleGrouped];
+    return [self initWithStyle:UITableViewStylePlain];
 }
 
 -(void)receiveReloadNotification:(NSNotification *)reloadNotification {
@@ -78,6 +78,7 @@ UIButton *btn;
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+
     screenRect = [[UIScreen mainScreen] bounds];
     newRow = NO;
     search = NO;
@@ -92,7 +93,12 @@ UIButton *btn;
     tap = [[UITapGestureRecognizer alloc]
            initWithTarget:self
            action:@selector(hideKeyboard:)];
-    
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor colorWithRed:(202.0f/255.0f) green:(204.0f/255.0f) blue:(182.0f/255.0f) alpha:1.0f];
+    self.tableView.separatorColor = [UIColor colorWithRed:(96/255.0f) green:(120/255.0f) blue:(144/255.0f) alpha:1.0f];
+    //96,120,144
+
+
 }
 
 
@@ -178,18 +184,30 @@ UIButton *btn;
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
                     cell.textLabel.text = c.name;
                     cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+//                    [cell setBorderStyle:UITextBorderStyleNone];
+                    [cell setBackgroundColor:[UIColor clearColor]];
+                    [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+                    [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
+                    [cell setAlpha:1.0f];
 
+                    
                 }
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row];
                 cell.textLabel.text = c.name;
                 cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+                //                    [cell setBorderStyle:UITextBorderStyleNone];
+                [cell setBackgroundColor:[UIColor clearColor]];
+                [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+                [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
+                [cell setAlpha:1.0f];
 
             }
             break;
         case 2:
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Log out";
+                cell.imageView.image = [UIImage imageNamed:@"icon_237.png"];
               //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             break;
@@ -306,9 +324,10 @@ UIButton *btn;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGFloat screenWidth = screenRect.size.width;
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, screenWidth, 44)]; // x,y,width,height
-    
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 100, 40)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)]; // x,y,width,height
+    [headerView setBackgroundColor:[UIColor colorWithRed:(142/255.0f) green:(158/255.0f) blue:(130/255.0f) alpha:1.0f]];
+    //142,158,130
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, -3, 100, 25)];
     lbl.backgroundColor =[UIColor clearColor];
     switch (section) {
         case 0: {
@@ -317,11 +336,11 @@ UIButton *btn;
         case 1: {
             lbl.text = @"Circles";
             btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-            btn.frame = CGRectMake(screenWidth - 100, 0, 30, 30); // x,y,width,height
+            btn.frame = CGRectMake(screenWidth - 80, -3, 25, 25); // x,y,width,height
             if (newRow) {
-                [btn setTitle:@"-" forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"icon_223.png"] forState:UIControlStateNormal];
             } else {
-                [btn setTitle:@"+" forState:UIControlStateNormal];
+                [btn setBackgroundImage:[UIImage imageNamed:@"icon_222.png"] forState:UIControlStateNormal];
             }
             [btn addTarget:self
                     action:@selector(toggleCircleAdd)
@@ -340,6 +359,11 @@ UIButton *btn;
     return headerView;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20;
+}
+
 - (NSIndexPath *)tableView:(UITableView *)tv willSelectRowAtIndexPath:(NSIndexPath *)path
 {
     if ((search) || (path.section == 1 && path.row == 0 && newRow) || (path.section == 0 && path.row == 1)){
@@ -351,7 +375,7 @@ UIButton *btn;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) return 80;
-    return 44.0;
+    return 35;
 }
 
 -(IBAction) toggleCircleAdd{
