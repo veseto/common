@@ -270,12 +270,13 @@ UITextView *scroll;
         NSString *name = ((UILabel *)[inputView viewWithTag:1100 + i]).text;
         NSString *currency = ((LHDropDownControlView *)[inputView viewWithTag:1300]).title;
         
-        //        [text appendString:name];
-        //        [text appendString:@"-"];
-        //        [text appendString:amount.length > 0 ?@"0" :amount];
-        //        [text appendString:currency];
-        //        [text appendString:@" "];
-        //
+        [text appendString:name];
+        [text appendString:@"-"];
+        [text appendString:(amount == nil || amount.length == 0) ?@"0" :amount];
+        [text appendString:@" "];
+        [text appendString:currency];
+        [text appendString:@" "];
+        
         if (amount.length > 0) {
             CEFriendHelper *h = [[CEFriendHelper alloc] initWithName:name];
             h.amount = amount;
@@ -305,7 +306,7 @@ UITextView *scroll;
     
     if (delegate.currentCircle != nil) {
         self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d)", delegate.currentCircle.name, delegate.currentCircle.numberOfFriends.intValue];
-
+        
         if (delegate.currentCircle.numberOfFriends.intValue > 1) {
             UIScrollView *inputView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, screenWidth, screenHeight - 220)];
             inputView.autoresizingMask = (UIViewAutoresizingFlexibleHeight);
@@ -325,13 +326,18 @@ UITextView *scroll;
             currency.delegate = self;
             currency.tag = 1300;
             [inputView addSubview:currency];
+            int sum = 0;
+            for (int i = 0; i < tmp.count; i ++) {
+                Friend *f = [tmp objectAtIndex:i];
+                sum += f.balanceInCircle.doubleValue;
+            }
             
             for (int i = 0; i < tmp.count; i ++) {
                 Friend *f = [tmp objectAtIndex:i];
                 
                 [str appendString:f.friendName];
                 [str appendString:@"  "];
-                [str appendString:[NSString stringWithFormat:@"%0.2f BGN\n", f.balanceInCircle.doubleValue]];
+                [str appendString:[NSString stringWithFormat:@"%0.2f BGN\n", (f.balanceInCircle.doubleValue - sum/delegate.currentCircle.numberOfFriends.doubleValue)]];
                 
                 UILabel *nameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, i*30 + i*20 + 60, 80, 30)];
                 nameLbl.text = f.friendName;
@@ -363,7 +369,7 @@ UITextView *scroll;
             [button setTitle:@"add" forState:UIControlStateNormal];
             button.frame = CGRectMake(290, 20, 30, 30);
             [self.scrollViewContainer addSubview:button];
-
+            
         }
     } else {
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
