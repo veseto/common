@@ -78,7 +78,7 @@ UIButton *btn;
 - (void) viewDidLoad {
     
     [super viewDidLoad];
-
+    
     screenRect = [[UIScreen mainScreen] bounds];
     newRow = NO;
     search = NO;
@@ -97,8 +97,8 @@ UIButton *btn;
     self.tableView.backgroundColor = [UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f];
     self.tableView.separatorColor = [UIColor colorWithRed:(202.0f/255.0f) green:(204.0f/255.0f) blue:(182.0f/255.0f) alpha:1.0f];
     //96,120,144
-
-
+    
+    
 }
 
 
@@ -174,12 +174,12 @@ UIButton *btn;
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
                     cell.textLabel.text = c.name;
                     cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
-//                    [cell setBorderStyle:UITextBorderStyleNone];
+                    //                    [cell setBorderStyle:UITextBorderStyleNone];
                     [cell setBackgroundColor:[UIColor clearColor]];
                     [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
                     [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
                     [cell setAlpha:1.0f];
-
+                    
                     
                 }
             } else {
@@ -191,14 +191,14 @@ UIButton *btn;
                 [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
                 [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
                 [cell setAlpha:1.0f];
-
+                
             }
             break;
         case 2:
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Log out";
                 cell.imageView.image = [UIImage imageNamed:@"icon_237.png"];
-              //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             break;
         default:
@@ -236,11 +236,11 @@ UIButton *btn;
         {
             CircleDefinition *c = [circles objectAtIndex:indexPath.row];
             delegate.currentCircle = c;
-            UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
-            self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
-            [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
-            [self.sideMenu setMenuState:MFSideMenuStateClosed];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
+                UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
+                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
+                [self.sideMenu setMenuState:MFSideMenuStateClosed];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         }
             break;
         case 2:
@@ -261,21 +261,21 @@ UIButton *btn;
     self.sideMenu.navigationController.viewControllers = controllers;
     [nav pushViewController:home animated:YES];
     [self.sideMenu setMenuState:MFSideMenuStateClosed];
-
-
+    
+    
 }
 
 #pragma mark - UISearchBarDelegate
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     int row = indexPath.row;
-//    if (newRow) {
-//        [self cancelAdd];
-//        row -= 1;
-//    }
-//    if (search) {
-//        [self toggleSearch];
-//    }
+    //    if (newRow) {
+    //        [self cancelAdd];
+    //        row -= 1;
+    //    }
+    //    if (search) {
+    //        [self toggleSearch];
+    //    }
     if (indexPath.section == 1) {
         CircleDefinition *d = [circles objectAtIndex:row];
         if (delegate.currentCircle == d) {
@@ -412,9 +412,8 @@ UIButton *btn;
             [name becomeFirstResponder];
         } else {
             CEUser *user = delegate.currentUser;
-            NSArray *friends = [[NSArray alloc] initWithObjects:user.userName, nil];
             CEDBConnector *connector = [CEDBConnector new];
-            delegate.currentCircle = [connector createCircle:friends :user.userId :name.text :nil];
+            delegate.currentCircle = [connector createCircle :user :name.text];
             newRow = NO;
             
             [self.tableView beginUpdates];

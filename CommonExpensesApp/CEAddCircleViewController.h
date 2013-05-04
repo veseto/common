@@ -9,16 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface CEAddCircleViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-@property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet UITextField *friendName;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIButton *okButton;
 @property (strong, nonatomic) IBOutlet UILabel *circleNameLbl;
 @property (strong, nonatomic) IBOutlet UIButton *plusButton;
 @property (strong, nonatomic) IBOutlet UILabel *friendNameLbl;
-@property (strong, nonatomic) IBOutlet UINavigationItem *navItem;
 - (IBAction)add:(id)sender;
 - (IBAction)createCircle:(id)sender;
-- (IBAction)submitName:(id)sender;
 
 @end

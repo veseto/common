@@ -19,17 +19,13 @@
 @end
 
 @implementation CEAddCircleViewController
-@synthesize name = _name;
 @synthesize friendName = _friendName;
 @synthesize tableView = _tableView;
 @synthesize friendNameLbl = _friendNameLbl;
 @synthesize plusButton = _plusButton;
-@synthesize okButton = _okButton;
 @synthesize circleNameLbl = _circleNameLbl;
-@synthesize navItem = _navItem;
 
 NSMutableArray *friends;
-KeyboardBar *bar;
 CEAppDelegate *delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -43,22 +39,8 @@ CEAppDelegate *delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    bar = [KeyboardBar new];
     delegate =[[UIApplication sharedApplication] delegate];
-    _friendName.inputAccessoryView = bar;
-    _name.inputAccessoryView = bar;
-    bar.fields = [[NSMutableArray alloc] initWithObjects:_name, nil];
-    bar.field = _name;
-    bar.index = 0;
-    [_name becomeFirstResponder];
     friends = [[NSMutableArray alloc] init];
-    _navItem.title = @"Create new circle";
-    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"Cancel"
-                                   style:UIBarButtonItemStyleBordered
-                                   target:self
-                                   action:@selector(cancel)];
-    _navItem.rightBarButtonItem = flipButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,53 +113,18 @@ CEAppDelegate *delegate;
         [alert show];
         
     } else {
-        CEUser *user = ((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser;
-        [friends insertObject:user.userName atIndex:0];
+        CEUser *user = delegate.currentUser;
         CEDBConnector *connector = [CEDBConnector new];
-        CircleDefinition *def = [connector createCircle:friends :user.userId :_name.text :nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableNotification" object:self];
-        delegate.currentCircle = def;
+        
+        [connector updateCircle:friends :user.userId :delegate.currentCircle.name];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     
 }
 
-- (IBAction)submitName:(id)sender {
-    if (_name.text.length > 0) {
-        CEDBConnector *connector = [CEDBConnector new];
-        
-        if ([connector circleExistsForUser:_name.text :((CEAppDelegate *)[[UIApplication sharedApplication] delegate]).currentUser.userId]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Circle exists"
-                                                            message:[NSString stringWithFormat:@"Circle with name %@ already exists", _name.text]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-        } else {
-            [_circleNameLbl setEnabled:NO];
-            [_name setEnabled:NO];
-            [_okButton setEnabled:NO];
-            [_friendNameLbl setHidden:NO];
-            [_friendName setHidden:NO];
-            [_friendName setUserInteractionEnabled:YES];
-            [_plusButton setHidden:NO];
-            [_plusButton setUserInteractionEnabled:YES];
-            [_okButton setHidden:YES];
-            [_friendName becomeFirstResponder];
-        }
-    } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty name"
-                                                        message:@"You have to provide circle name"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [bar setField:textField];
-    bar.index = [bar.fields indexOfObject:textField];
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 @end

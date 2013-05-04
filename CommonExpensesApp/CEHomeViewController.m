@@ -356,6 +356,14 @@ UITextView *scroll;
             UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
             l.text = @"You are the only one in circle";
             [self.scrollViewContainer addSubview:l];
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            [button addTarget:self
+                       action:@selector(showAddFriendsView)
+             forControlEvents:UIControlEventTouchDown];
+            [button setTitle:@"add" forState:UIControlStateNormal];
+            button.frame = CGRectMake(290, 20, 30, 30);
+            [self.scrollViewContainer addSubview:button];
+
         }
     } else {
         UILabel *l = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 25)];
@@ -477,4 +485,10 @@ UITextView *scroll;
     return YES;
 }
 
+-(void) showAddFriendsView {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"addCircle"];
+    [home setModalPresentationStyle:UIModalPresentationCurrentContext];
+    [self presentViewController:home animated:YES completion:nil];
+}
 @end
