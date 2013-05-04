@@ -180,7 +180,7 @@ UIButton *btn, *ok;
                 } else {
                     CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                     cell.textLabel.text = c.name;
-                    cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+                    cell.imageView.image = [UIImage imageNamed:@"icon_180green.png"];
                     //                    [cell setBorderStyle:UITextBorderStyleNone];
                     [cell setBackgroundColor:[UIColor clearColor]];
                     [cell.textLabel setTextColor:[UIColor colorWithRed:(72.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
@@ -191,7 +191,7 @@ UIButton *btn, *ok;
             } else {
                 CircleDefinition *c = [circles objectAtIndex:indexPath.row];
                 cell.textLabel.text = c.name;
-                cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
+                cell.imageView.image = [UIImage imageNamed:@"icon_180green.png"];
                 //                    [cell setBorderStyle:UITextBorderStyleNone];
                 [cell setBackgroundColor:[UIColor clearColor]];
                 [cell.textLabel setTextColor:[UIColor colorWithRed:(72.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
@@ -217,7 +217,7 @@ UIButton *btn, *ok;
     }
     cell.accessoryView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
     if (indexPath.section == 1 && indexPath.row < count) {
-        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 35, screenRect.size.width, 1)];
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 39, screenRect.size.width, 1)];
         line.backgroundColor = [UIColor colorWithRed:(202/255.0f) green:(204/255.0f) blue:(182/255.0f) alpha:1.0f];
         //202,204,182
         [cell addSubview:line];
@@ -387,9 +387,9 @@ UIButton *btn, *ok;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0) return 80;
+    if (indexPath.section == 0 && indexPath.row == 0) return 100;
     if (search && indexPath.section == 0 && indexPath.row == 1) return 44;
-    return 36;
+    return 40;
 }
 
 -(IBAction) toggleCircleAdd{
