@@ -195,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "103"
          endingLineNumber = "103"
-         landmarkName = "-createCircle::::"
+         landmarkName = "-createCircle::"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1400,8 +1400,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "415"
          endingLineNumber = "415"
-         landmarkName = "@implementation SideMenuViewController"
-         landmarkType = "3">
+         landmarkName = "-toggleCircleAdd"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1426,7 +1426,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "442"
          endingLineNumber = "442"
-         landmarkName = "-openSettingsView"
+         landmarkName = "-saveCircleInDB"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1439,7 +1439,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "449"
          endingLineNumber = "449"
-         landmarkName = "-openSettingsView"
+         landmarkName = "-saveCircleInDB"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1543,8 +1543,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "69"
          endingLineNumber = "69"
-         landmarkName = "-enableTouch:"
-         landmarkType = "5">
+         landmarkName = "@implementation SideMenuViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1556,7 +1556,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "73"
          endingLineNumber = "73"
-         landmarkName = "-disableTouch:"
+         landmarkName = "-enableTouch:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

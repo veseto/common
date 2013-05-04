@@ -11,6 +11,7 @@
 #import "CEDBConnector.h"
 #import "CircleDefinition.h"
 #import "CESearchViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation SideMenuViewController
 
@@ -26,7 +27,8 @@ CESearchViewController *resListView;
 BOOL newRow;
 int count;
 CGRect screenRect;
-UIButton *btn;
+UIButton *btn, *ok;
+
 
 - (id) init {
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -65,11 +67,11 @@ UIButton *btn;
     }
 }
 
--(void)enableTouch:(NSNotification *)hideKeyboardNotification {
+-(void)enableTouch:(NSNotification *)enableTouchNotification {
     [self.tableView setUserInteractionEnabled:YES];
     
 }
--(void)disableTouch:(NSNotification *)hideKeyboardNotification {
+-(void)disableTouch:(NSNotification *)disableTouchNotification {
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView setEditing:NO animated:NO];
     
@@ -93,9 +95,11 @@ UIButton *btn;
     tap = [[UITapGestureRecognizer alloc]
            initWithTarget:self
            action:@selector(hideKeyboard:)];
+    tap.delegate = self;
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor colorWithRed:(242.0f/255.0f) green:(240.0f/255.0f) blue:(223.0f/255.0f) alpha:1.0f];
     self.tableView.separatorColor = [UIColor colorWithRed:(202.0f/255.0f) green:(204.0f/255.0f) blue:(182.0f/255.0f) alpha:1.0f];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     //96,120,144
     
     
@@ -147,6 +151,7 @@ UIButton *btn;
                 if (search) {
                     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"searchCell" owner:self options:nil];
                     cell = [topLevelObjects objectAtIndex:0];
+                    cell.contentView.frame = CGRectMake(0, 0, 44, 340);
                     UISearchBar *searchBar = (UISearchBar *)[cell viewWithTag:5000];
                     searchBar.delegate = self;
                 }
@@ -165,21 +170,22 @@ UIButton *btn;
                     [name addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
                     
                     [name becomeFirstResponder];
-                    UIButton *ok = (UIButton *)[cell viewWithTag:3200];
+                    ok = (UIButton *)[cell viewWithTag:3200];
                     [ok setEnabled:(name.text.length > 0)];
                     [ok setHidden:(name.text.length < 1)];
-                    [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchUpInside];
+                    [ok.layer setCornerRadius:3.0f];
+
+                    [ok addTarget:self action:@selector(saveCircleInDB) forControlEvents:UIControlEventTouchDown];
                     
                 } else {
-                    CircleDefinition *c = [circles objectAtIndex:indexPath.row + 1];
+                    CircleDefinition *c = [circles objectAtIndex:indexPath.row - 1];
                     cell.textLabel.text = c.name;
                     cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
                     //                    [cell setBorderStyle:UITextBorderStyleNone];
                     [cell setBackgroundColor:[UIColor clearColor]];
-                    [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+                    [cell.textLabel setTextColor:[UIColor colorWithRed:(72.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
                     [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
                     [cell setAlpha:1.0f];
-                    
                     
                 }
             } else {
@@ -188,7 +194,7 @@ UIButton *btn;
                 cell.imageView.image = [UIImage imageNamed:@"icon_180.png"];
                 //                    [cell setBorderStyle:UITextBorderStyleNone];
                 [cell setBackgroundColor:[UIColor clearColor]];
-                [cell.textLabel setTextColor:[UIColor colorWithRed:(142.0f/255.0f) green:(158.0f/255.0f) blue:(130.0f/255.0f) alpha:1.0f]];
+                [cell.textLabel setTextColor:[UIColor colorWithRed:(72.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
                 [cell.textLabel setFont:([UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0])];
                 [cell setAlpha:1.0f];
                 
@@ -198,7 +204,9 @@ UIButton *btn;
             if (indexPath.row == 0) {
                 cell.textLabel.text = @"Log out";
                 cell.imageView.image = [UIImage imageNamed:@"icon_237.png"];
-                //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
+                [cell.textLabel setTextColor:[UIColor colorWithRed:(186.0f/255.0f) green:(42.0f/255.0f) blue:(41.0f/255.0f) alpha:1.0f]];
+              //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             break;
         default:
@@ -207,7 +215,16 @@ UIButton *btn;
     if (search) {
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     }
-    cell.accessoryView = [UIView new];
+    cell.accessoryView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    if (indexPath.section == 1 && indexPath.row < count) {
+        UIImageView *line = [[UIImageView alloc] initWithFrame:CGRectMake(0, 35, screenRect.size.width, 1)];
+        line.backgroundColor = [UIColor colorWithRed:(202/255.0f) green:(204/255.0f) blue:(182/255.0f) alpha:1.0f];
+        //202,204,182
+        [cell addSubview:line];
+        UIImageView *line2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenRect.size.width, 1)];
+        line2.backgroundColor = [UIColor clearColor];
+        [cell addSubview:line2];
+    }
     return cell;
 }
 
@@ -314,21 +331,22 @@ UIButton *btn;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGFloat screenWidth = screenRect.size.width;
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, screenWidth, 24)]; // x,y,width,height
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, screenWidth, 30)]; // x,y,width,height
     headerView.bounds = CGRectInset(headerView.frame,0.0f,4.0f);
-    [headerView setBackgroundColor:[UIColor colorWithRed:(142/255.0f) green:(158/255.0f) blue:(130/255.0f) alpha:1.0f]];
+    [headerView setBackgroundColor:[UIColor colorWithRed:(202/255.0f) green:(204/255.0f) blue:(182/255.0f) alpha:1.0f]];
     [headerView setAutoresizesSubviews:YES];
     [headerView setClipsToBounds:YES];
     //142,158,130
-    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, 100, headerView.frame.size.height)];
-    [lbl setFont:[UIFont fontWithName:@"HelveticaNeue" size:12.0]];
+    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(8, 5, 100, headerView.frame.size.height)];
+    [lbl setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:13.0]];
+    [lbl setTextColor:[UIColor colorWithRed:(72.0f/255.0f) green:(66.0f/255.0f) blue:(61.0f/255.0f) alpha:1.0f]];
     lbl.backgroundColor =[UIColor clearColor];
     switch (section) {
         case 0: {
             return nil;
         }
         case 1: {
-            lbl.text = @"Circles";
+            lbl.text = @"CIRCLES";
             btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             btn.frame = CGRectMake(screenWidth - 78, 0, 32, 32); // x,y,width,height
             if (newRow) {
@@ -344,7 +362,7 @@ UIButton *btn;
         }
             break;
         case 2:
-            lbl.text = @"---";
+            lbl.text = @"";
             break;
         default:
             break;
@@ -370,7 +388,8 @@ UIButton *btn;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0 && indexPath.row == 0) return 80;
-    return 35;
+    if (search && indexPath.section == 0 && indexPath.row == 1) return 44;
+    return 36;
 }
 
 -(IBAction) toggleCircleAdd{
@@ -381,7 +400,9 @@ UIButton *btn;
         [self.view addGestureRecognizer:tap];
         newRow = YES;
         count += 1;
-        [self.tableView beginUpdates];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+        [self.tableView beginUpdates];        
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
         
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationLeft];
@@ -524,6 +545,12 @@ UIButton *btn;
 
 - (IBAction)handleTapGesture:(id)sender {
     [self toggleSearch];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    
+    
+    return YES;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {

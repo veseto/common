@@ -205,7 +205,7 @@
 		F2364AFF172811F500257196 /* LHDropDownControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHDropDownControlView.h; sourceTree = "<group>"; };
 		F2364B00172811F500257196 /* LHDropDownControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHDropDownControlView.m; sourceTree = "<group>"; };
 		F2364B04172812CE00257196 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		F2364B131729314D00257196 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		F2364B131729314D00257196 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrow.png; path = CommonExpensesApp/arrow.png; sourceTree = "<group>"; };
 		F2513543170997A400800E55 /* HistoryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryRecord.h; sourceTree = "<group>"; };
 		F2513544170997A400800E55 /* HistoryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryRecord.m; sourceTree = "<group>"; };
 		F25E136216DFAB1E0086DE2B /* CELogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CELogin.h; sourceTree = "<group>"; };
@@ -304,6 +304,7 @@
 		D94ECE421701A481006EB9F0 /* artwork */ = {
 			isa = PBXGroup;
 			children = (
+				F2364B131729314D00257196 /* arrow.png */,
 				D9C122111731C21300459097 /* icon_222@2x.png */,
 				D9C122121731C21300459097 /* icon_223@2x.png */,
 				D9C1220D1731C1E500459097 /* icon_222.png */,
@@ -529,7 +530,6 @@
 		F2BD8EF516EA02B9008DEF8A /* common */ = {
 			isa = PBXGroup;
 			children = (
-				F2364B131729314D00257196 /* arrow.png */,
 				F2364AFC172811F400257196 /* LHDropDownControlView */,
 				F2E31A631722B102006D36BA /* uiFramework */,
 				F21625C216F5D62900324637 /* MFSideMenu */,
@@ -822,8 +822,8 @@
 		F20B327F16D0094C00B70559 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
@@ -843,8 +843,8 @@
 		F20B328016D0094C00B70559 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Vesela Popova (AA86BH29NS)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vesela Popova (AA86BH29NS)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Deniz Murat (QWJJ5E48H6)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../FacebookSDK\"",
