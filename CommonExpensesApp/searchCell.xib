@@ -41,10 +41,10 @@
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUISearchBar" id="449180896">
 								<reference key="NSNextResponder" ref="540989048"/>
-								<int key="NSvFlags">294</int>
-								<string key="NSFrameSize">{277, 44}</string>
+								<int key="NSvFlags">303</int>
+								<string key="NSFrameSize">{341, 44}</string>
 								<reference key="NSSuperview" ref="540989048"/>
-								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">2</int>
@@ -67,9 +67,8 @@
 								</array>
 							</object>
 						</array>
-						<string key="NSFrameSize">{266, 44}</string>
+						<string key="NSFrameSize">{341, 44}</string>
 						<reference key="NSSuperview" ref="804667176"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="449180896"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -83,9 +82,8 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{266, 45}</string>
+				<string key="NSFrameSize">{341, 45}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="540989048"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">

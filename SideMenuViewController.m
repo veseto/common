@@ -168,8 +168,11 @@ UIButton *btn, *ok;
                 if (search) {
                     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"searchCell" owner:self options:nil];
                     cell = [topLevelObjects objectAtIndex:0];
-                    cell.contentView.frame = CGRectMake(0, 0, 44, 340);
+                    [cell.contentView setFrame:CGRectMake(0, 0, 44, 340)];
+                    [cell setFrame:CGRectMake(0, 0, 44, 340)];
                     UISearchBar *searchBar = (UISearchBar *)[cell viewWithTag:5000];
+                    searchBar.frame = CGRectMake(0, 0, 44, 340);
+
                     searchBar.delegate = self;
                 }
             }
