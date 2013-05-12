@@ -1382,11 +1382,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "417"
-         endingLineNumber = "417"
+         startingLineNumber = "412"
+         endingLineNumber = "412"
          landmarkName = "-toggleCircleAdd"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1395,11 +1395,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390039502.780114"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "70"
-         endingLineNumber = "70"
+         startingLineNumber = "69"
+         endingLineNumber = "69"
          landmarkName = "-hideKeyboard:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1408,11 +1408,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "446"
-         endingLineNumber = "446"
+         startingLineNumber = "441"
+         endingLineNumber = "441"
          landmarkName = "-saveCircleInDB"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1421,11 +1421,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "453"
-         endingLineNumber = "453"
+         startingLineNumber = "448"
+         endingLineNumber = "448"
          landmarkName = "-saveCircleInDB"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1434,11 +1434,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "195"
-         endingLineNumber = "195"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1447,11 +1447,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "208"
-         endingLineNumber = "208"
+         startingLineNumber = "204"
+         endingLineNumber = "204"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1525,24 +1525,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390039502.780114"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
-         landmarkName = "@implementation SideMenuViewController"
-         landmarkType = "3">
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-hideKeyboard:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036379.601749"
+         timestampString = "390039502.780114"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "78"
-         endingLineNumber = "78"
+         startingLineNumber = "77"
+         endingLineNumber = "77"
          landmarkName = "-enableTouch:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1655,12 +1655,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SideMenuViewController.m"
-         timestampString = "390036541.884343"
+         timestampString = "390040077.60659"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "266"
-         endingLineNumber = "266"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SideMenuViewController.m"
+         timestampString = "390040077.60659"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "570"
+         endingLineNumber = "570"
+         landmarkName = "-handleTapGesture:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SideMenuViewController.m"
+         timestampString = "390040077.60659"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "430"
+         endingLineNumber = "430"
+         landmarkName = "-textFieldShouldReturn:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
