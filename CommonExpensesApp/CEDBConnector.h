@@ -19,7 +19,7 @@
 -(NSArray *) getCirclesForUser: (NSNumber *) userId;
 -(CircleDefinition *) createCircle:(CEUser *) owner :(NSString *) circleName;
 
--(void) updateCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName ;
+-(CircleDefinition *) updateCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName ;
 
 
 -(void) createCircleFromServer: (NSArray *) friends :(NSArray *) history :(NSNumber *) ownerId :(NSString *) circleName  :(NSNumber *) circleId :(NSNumber *) lastRevision;

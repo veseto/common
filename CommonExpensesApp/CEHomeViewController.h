@@ -30,7 +30,7 @@
 @property (nonatomic, copy) NSString *textPull;
 @property (nonatomic, copy) NSString *textRelease;
 @property (nonatomic, copy) NSString *textLoading;
-@property (nonatomic, retain) SideMenuViewController *sideMenu;
+@property (nonatomic, strong) SideMenuViewController *sideMenu;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollViewContainer;
 
 - (IBAction)sync:(id)sender;

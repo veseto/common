@@ -121,7 +121,7 @@ NSManagedObjectContext *context;
     return nil;
 }
 
--(void) updateCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName{
+-(CircleDefinition *) updateCircle: (NSArray *) friends :(NSNumber *) ownerId :(NSString *) circleName{
     for (int i = 0; i < friends.count; i ++) {
         Friend *f = [NSEntityDescription insertNewObjectForEntityForName:@"Friend" inManagedObjectContext:context];
         f.circleName = circleName;
@@ -142,6 +142,7 @@ NSManagedObjectContext *context;
     circleDef.numberOfFriends = [NSNumber numberWithInt: friends.count + 1];
     circleDef.lastUpdated = [NSDate date];
     [context save:&error];
+    return circleDef;
 
 }
 

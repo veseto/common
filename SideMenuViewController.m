@@ -15,7 +15,7 @@
 
 @implementation SideMenuViewController
 
-@synthesize sideMenu;
+@synthesize sideMenu = _sideMenu;
 @synthesize search;
 @synthesize tap;
 
@@ -48,6 +48,11 @@ UIButton *btn, *ok;
                                                  name:@"enableTouchNotification"
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showHistoryView:)
+                                                 name:@"ShowHistoryViewNotification"
+                                               object:nil];
+
     return [self initWithStyle:UITableViewStylePlain];
 }
 
@@ -74,6 +79,15 @@ UIButton *btn, *ok;
 -(void)disableTouch:(NSNotification *)disableTouchNotification {
     [self.tableView setUserInteractionEnabled:NO];
     [self.tableView setEditing:NO animated:NO];
+    
+}
+
+-(void)showHistoryView:(NSNotification *)showHistoryViewNotification {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"history"];
+    _sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+    [_sideMenu.navigationController popToRootViewControllerAnimated:YES];
+    [_sideMenu setMenuState:MFSideMenuStateClosed];
     
 }
 
@@ -146,6 +160,9 @@ UIButton *btn, *ok;
                 [searchBtn addTarget:self action:@selector(toggleSearch) forControlEvents:UIControlEventTouchUpInside];
                 
                 [settings addTarget:self action:@selector(openSettingsView) forControlEvents:UIControlEventTouchUpInside];
+                UIButton *profilePic = (UIButton *)[cell1 viewWithTag:4400];
+                [profilePic addTarget:self action:@selector(openStatsView) forControlEvents:UIControlEventTouchUpInside];
+
                 return cell1;
             } else if (indexPath.row == 1) {
                 if (search) {
@@ -206,7 +223,7 @@ UIButton *btn, *ok;
                 cell.imageView.image = [UIImage imageNamed:@"icon_237.png"];
                 [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0]];
                 [cell.textLabel setTextColor:[UIColor colorWithRed:(186.0f/255.0f) green:(42.0f/255.0f) blue:(41.0f/255.0f) alpha:1.0f]];
-              //  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             }
             break;
         default:
@@ -242,21 +259,15 @@ UIButton *btn, *ok;
     
     switch (indexPath.section) {
         case 0:
-            if (indexPath.row == 0){
-                UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"statistics"];
-                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
-                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
-            }
-            [self.sideMenu setMenuState:MFSideMenuStateClosed];
             break;
         case 1:
         {
             CircleDefinition *c = [circles objectAtIndex:indexPath.row];
             delegate.currentCircle = c;
-                UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
-                self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
-                [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
-                [self.sideMenu setMenuState:MFSideMenuStateClosed];
+            UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"home"];
+            _sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+            [_sideMenu.navigationController popToRootViewControllerAnimated:NO];
+            [_sideMenu setMenuState:MFSideMenuStateClosed];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         }
             break;
@@ -271,13 +282,13 @@ UIButton *btn, *ok;
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     delegate.currentUser = nil;
     [connector removeDefaultUser];
-    self.sideMenu.openMenuEnabled = NO;
+    _sideMenu.openMenuEnabled = NO;
     UIViewController *home = [sb instantiateViewControllerWithIdentifier:@"CELogin"];
     UINavigationController *nav = ((CEHomeViewController *)[sb instantiateViewControllerWithIdentifier:@"home"]).navigationController;
     NSArray *controllers = [NSArray arrayWithObject:home];
-    self.sideMenu.navigationController.viewControllers = controllers;
+    _sideMenu.navigationController.viewControllers = controllers;
     [nav pushViewController:home animated:YES];
-    [self.sideMenu setMenuState:MFSideMenuStateClosed];
+    [_sideMenu setMenuState:MFSideMenuStateClosed];
     
     
 }
@@ -400,13 +411,14 @@ UIButton *btn, *ok;
         [self.view addGestureRecognizer:tap];
         newRow = YES;
         count += 1;
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
         [self.tableView beginUpdates];        
         NSIndexPath *row1 = [NSIndexPath indexPathForRow:0 inSection:1];
         
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:row1,nil] withRowAnimation:UITableViewRowAnimationLeft];
         [self.tableView endUpdates];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
     } else {
         [self cancelAdd];
     }
@@ -481,10 +493,20 @@ UIButton *btn, *ok;
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
     
     UIViewController *settings = [sb instantiateViewControllerWithIdentifier:@"settings"];
-    self.sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:settings
+    _sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:settings
                                                           , nil];
-    [self.sideMenu.navigationController popToRootViewControllerAnimated:NO];
-    [self.sideMenu setMenuState:MFSideMenuStateClosed];
+    [_sideMenu.navigationController popToRootViewControllerAnimated:NO];
+    [_sideMenu setMenuState:MFSideMenuStateClosed];
+    
+    
+}
+
+-(void) openStatsView {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    UIViewController *stats = [sb instantiateViewControllerWithIdentifier:@"statistics"];
+    _sideMenu.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
+    [_sideMenu.navigationController popToRootViewControllerAnimated:NO];
+    [_sideMenu setMenuState:MFSideMenuStateClosed];
     
     
 }

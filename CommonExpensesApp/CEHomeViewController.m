@@ -71,10 +71,6 @@ UITextView *scroll;
                                              selector:@selector(receiveReloadNotification:)
                                                  name:@"ReloadHomeViewNotification"
                                                object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(showStatsView:)
-                                                 name:@"ShowStatsViewNotification"
-                                               object:nil];
     __weak CEHomeViewController *weakSelf = self;
     // if you want to listen for menu open/close events
     // this is useful, for example, if you want to change a UIBarButtonItem when the menu closes
@@ -208,16 +204,6 @@ UITextView *scroll;
     [self createHomeView];
 }
 
--(void) showStatsView: (NSNotification *) notification {
-    [self showStatView];
-}
-
--(void) showStatView{
-    UIViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"statistics"];
-    [self.navigationController pushViewController:stats animated:YES];
-    
-}
-
 #pragma action handling private methods
 
 - (IBAction)sync:(id)sender {
@@ -255,10 +241,9 @@ UITextView *scroll;
 }
 
 - (IBAction)showHistoryView:(id)sender {
-    CEHistoryViewController *stats = [self.storyboard instantiateViewControllerWithIdentifier:@"history"];
-    self.navigationController.viewControllers = [[NSArray alloc] initWithObjects:stats, nil];
-    [self.navigationController popToRootViewControllerAnimated:NO];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ShowHistoryViewNotification" object:self];
+
 }
 
 -(IBAction) addHistoryRecords:(UIButton *) sender {
@@ -345,6 +330,7 @@ UITextView *scroll;
                 [inputView addSubview:nameLbl];
                 
                 UITextField *amount = [[UITextField alloc] initWithFrame:CGRectMake(120, i*30 + i*20 + 60, 70, 30)];
+                [amount setKeyboardType:UIKeyboardTypeDecimalPad];
                 amount.borderStyle = UITextBorderStyleRoundedRect;
                 amount.tag = 1200 + i;
                 amount.delegate = self;

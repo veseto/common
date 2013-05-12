@@ -116,7 +116,7 @@ CEAppDelegate *delegate;
         CEUser *user = delegate.currentUser;
         CEDBConnector *connector = [CEDBConnector new];
         
-        [connector updateCircle:friends :user.userId :delegate.currentCircle.name];
+        delegate.currentCircle = [connector updateCircle:friends :user.userId :delegate.currentCircle.name];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadHomeViewNotification" object:self userInfo:nil];
         [self dismissViewControllerAnimated:YES completion:nil];
     }

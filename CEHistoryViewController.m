@@ -17,6 +17,7 @@
 
 @implementation CEHistoryViewController
 @synthesize tableView = _tableView;
+@synthesize sideMenu = _sideMenu;
 
 NSArray *history;
 CEDBConnector *connector;
@@ -37,10 +38,7 @@ CEAppDelegate *delegate;
     connector = [CEDBConnector new];
     delegate = [[UIApplication sharedApplication] delegate];
     history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(receiveReloadNotification:)
-                                                 name:@"ReloadHomeViewNotification"
-                                               object:nil];
+
     self.navigationController.sideMenu.openMenuEnabled = YES;
     self.navigationItem.title = delegate.currentCircle.name;
     [self setupMenuBarButtonItems];
@@ -64,11 +62,6 @@ CEAppDelegate *delegate;
             action:@selector(toggleLeftSideMenu)];
 }
 
-
-- (void) receiveReloadNotification:(NSNotification *) notification {
-    history = [[NSArray alloc] initWithArray:[connector getHistoryRecords:delegate.currentCircle.name :delegate.currentCircle.ownerId]];
-    [_tableView reloadData];
-}
 
 - (void)didReceiveMemoryWarning
 {
